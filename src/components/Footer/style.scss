@@ -1,6 +1,14 @@
 .footer{
     height: 6vh;
-    background-color: wheat;
+    background-color: #495aaa;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+
+    &-link{
+        color: #f3F3F3;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+    
 }

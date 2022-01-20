@@ -1,10 +1,10 @@
-import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 const Footer = () => (
   <div className="footer">
-    <p>A propos</p>
-    <p>Mentions légales</p>
+    <NavLink to="/about" className="footer-link">A Propos de nous</NavLink>
+    <NavLink to="/legals" className="footer-link">Mentions légales</NavLink>
   </div>
 );
 

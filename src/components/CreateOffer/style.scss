@@ -1,9 +1,6 @@
-.home{
+.createOffer{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    &-button{
-        margin: 5rem;
-    }
 }

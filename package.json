@@ -50,6 +50,7 @@
   "dependencies": {
     "prop-types": "*",
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "react-router-dom": "^6.2.1"
   }
 }

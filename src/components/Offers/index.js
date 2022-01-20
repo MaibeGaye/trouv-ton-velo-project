@@ -1,9 +1,8 @@
-import React from 'react';
 import './style.scss';
 
 const Offers = () => (
-  <div className="container Offers">
-    <h1>Composant Offers</h1>
+  <div className="container offers">
+    <h1>Page Des Offres</h1>
   </div>
 );
 

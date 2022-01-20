@@ -1,8 +1,7 @@
-import React from 'react';
 import './style.scss';
 
 const Details = () => (
-  <div>
+  <div className="container detail">
     <h1>Composant Details Offert</h1>
   </div>
 );

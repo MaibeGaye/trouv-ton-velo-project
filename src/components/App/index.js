@@ -10,6 +10,8 @@ import About from '../About';
 import NotFound from '../NotFound';
 import Legals from '../Legals';
 import CreateOffer from '../CreateOffer';
+import Details from '../DetailOffers';
+import Profile from '../Profile';
 
 // Style scss
 import '../../styles/index.scss';
@@ -25,6 +27,8 @@ const App = () => (
       <Route path="/about" element={<About />} />
       <Route path="/legals" element={<Legals />} />
       <Route path="/create" element={<CreateOffer />} />
+      <Route path="/detail" element={<Details />} />
+      <Route path="/dashboard" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
     <Footer />

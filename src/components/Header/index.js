@@ -6,7 +6,9 @@ const Header = () => (
     <h3 className="header-title">Trouv ton vélo</h3>
     <div className="header-links">
       <NavLink to="/" className="header-link">Accueil</NavLink>
+      <NavLink to="/offers" className="header-link">Nos Offres</NavLink>
       <NavLink to="/register" className="header-link">Inscription</NavLink>
+      <NavLink to="/dashboard" className="header-link">Mon Profil</NavLink>
     </div>
   </div>
 );

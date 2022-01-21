@@ -1,8 +1,6 @@
 -- Deploy apo-velo:init to pg
 
 BEGIN;
-
-BEGIN;
 CREATE TABLE "user" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "username" VARCHAR(64) NOT NULL UNIQUE DEFAULT '',
@@ -31,6 +29,4 @@ CREATE TABLE "offer" (
     "lender_id" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
     "borrower_id" INTEGER REFERENCES "user"("id")
 );
-COMMIT;
-
 COMMIT;

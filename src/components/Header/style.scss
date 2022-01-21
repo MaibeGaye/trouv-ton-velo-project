@@ -1,9 +1,10 @@
 .header{
     height: 10vh;
-    background-color: #495aaa;
     display: flex;
+    background-color: #1976d2;
     justify-content: space-between;
     align-items: center;
+    padding: 2rem;
     
     &-title{
         margin: 2rem;
@@ -13,6 +14,9 @@
         color: #f3F3F3;
         margin: 2rem;
         text-transform: uppercase;
+    }
+    &-button{
+        border: none;
     }
 }
 .active{

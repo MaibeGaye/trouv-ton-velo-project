@@ -8,6 +8,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
 import { InputLabel, FormControl, Button } from '@mui/material';
+import axios from 'axios';
 
 const Register = () => {
   // Create states from all inputs by default empty
@@ -36,9 +37,20 @@ const Register = () => {
   };
     // Function to submit the form and redirect to home
 
-  const submitRegister = (event) => {
-    event.preventDefault();
-    console.log('submit', firstname, lastname, userName, email, zipCode, password, confirmPassword);
+  const submitRegister = () => {
+    axios({
+      method: 'get',
+      url: 'https://api-apo-velo.herokuapp.com/getAllOffers',
+    })
+      .then((res) => {
+        console.log(res.data);
+        res.data.map((element) => (
+          console.log(element)
+        ));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="container register">

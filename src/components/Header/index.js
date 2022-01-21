@@ -1,7 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-// import des composant pour la modale
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -30,7 +28,7 @@ const Header = ({ logged, connect }) => {
   const connection = (event) => {
     event.preventDefault();
     if (email && password) {
-      // console.log('test ok');
+      connect();
       setEmail('');
       setPassword('');
       closeModal();
@@ -44,15 +42,7 @@ const Header = ({ logged, connect }) => {
     <div className="header">
       <h3 className="header-title">Trouv ton vélo</h3>
       <div className="header-links">
-        {/* {logged && <button type="button" onClick={connect}>Se Deconnecter</button>} */}
-        <Button type="button" onClick={openModal}>Se connecter</Button>
         <NavLink to="/" className="header-link">Accueil</NavLink>
-        {logged
-      && <NavLink to="/offers" className="header-link">Nos Offres</NavLink>}
-        {logged
-      && <NavLink to="/dashboard" className="header-link">Mon Profil</NavLink>}
-        {!logged
-      && <NavLink to="/register" className="header-link">Inscription</NavLink>}
         <Dialog open={showModal} onClose={closeModal}>
           <DialogTitle>Connexion</DialogTitle>
           <DialogContent>
@@ -85,10 +75,15 @@ const Header = ({ logged, connect }) => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={closeModal}>Retour</Button>
-            <Button type="submit" onClick={connection}>Connexion</Button>
+            <Button className="btn-test" variant="outlined" onClick={closeModal}>Annuler</Button>
+            <Button variant="outlined" onClick={connection}>Valider</Button>
           </DialogActions>
         </Dialog>
+        {logged && <NavLink to="/detail" className="header-link">details</NavLink>}
+        {logged && <NavLink to="/dashboard" className="header-link">Mon Profil</NavLink>}
+        {!logged && <NavLink to="/register" className="header-link">Inscription</NavLink>}
+        {!logged && <button className="header-button" type="button" onClick={openModal}>Se connecter</button>}
+        {logged && <button className="header-button" type="button" onClick={connect}>Se deconnecter</button>}
       </div>
     </div>
   );

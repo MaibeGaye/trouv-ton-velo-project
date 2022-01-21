@@ -1,6 +1,26 @@
 .legals{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    text-align: center;
+
+   &-title{
+       margin: 4rem;
+       font-size: 3rem;
+       font-weight: bold;
+       text-transform: uppercase;
+   }
+   &-one{
+       width: 50%;
+       margin: 2rem;
+   }
+   &-two{
+       width: 50%;
+       margin: 2rem;
+   }
+   &-three{
+    width: 50%;
+    margin: 2rem;
+    
+   }
 }

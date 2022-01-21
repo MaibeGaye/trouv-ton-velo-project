@@ -2,11 +2,9 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './style.scss';
 
-const Header = ({ logged, connect, name }) => (
+const Header = ({ logged, connect }) => (
   <div className="header">
     <h3 className="header-title">Trouv ton vélo</h3>
-    {logged
-      && <p className="header-link">Bonjour {name}</p>}
     <div className="header-links">
       {logged
       && <button type="button" onClick={connect}>Se Deconnecter</button>}

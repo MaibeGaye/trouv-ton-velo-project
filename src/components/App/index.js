@@ -19,14 +19,13 @@ import '../../styles/index.scss';
 
 const App = () => {
   const [isLogged, setIsLogged] = useState(false);
-  const [userName, SetUserName] = useState('Alex');
 
   const toConnect = () => {
     setIsLogged(!isLogged);
   };
   return (
     <div className="app">
-      <Header logged={isLogged} connect={toConnect} name={userName} />
+      <Header logged={isLogged} connect={toConnect} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />

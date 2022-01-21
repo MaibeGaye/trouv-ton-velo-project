@@ -3,7 +3,7 @@ const express = require('express');
 
 const router = require('./app/router');
 
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
 
@@ -55,14 +55,14 @@ firstFunction(options);
 
 //pas d'object de config pour régler finement les droits d'entrée
 //on ne met pas de limitation d'accès, welcome everybody
-app.use(cors());
+// app.use(cors());
 
 
 
 //on prévient express qu'il peut recevoir des infos au format json dans le body de la request
 app.use(express.json());
 
-app.use('/v1', router);
+app.use(router);
 
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);

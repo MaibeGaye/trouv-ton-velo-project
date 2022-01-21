@@ -1,7 +1,6 @@
 const  {Router} = require('express');
 
-const postController = require('./controllers/postController');
-const categoryController = require('./controllers/categoryController');
+const userController = require('./controllers/userController');
 
 // joi
 // const postSchema = require('./schemas/postSchema');
@@ -12,6 +11,9 @@ const categoryController = require('./controllers/categoryController');
 
 const router = Router();
 
+router.get('/test', userController.findAll);
+
+
 /**
  * GET /v1/posts
  * @summary Responds with all posts in database
@@ -19,7 +21,7 @@ const router = Router();
  * @tags Posts
  * @returns {array<Post>} 200 - An array of posts
  */
-router.get('/posts', cache, postController.findAll);
+// router.get('/posts', cache, postController.findAll);
 
 
 /**
@@ -29,7 +31,7 @@ router.get('/posts', cache, postController.findAll);
  * @tags Categories
  * @returns {array<Category>} 200 - An array of categories
  */
-router.get('/categories', cache, categoryController.findAll);
+// router.get('/categories', cache, categoryController.findAll);
 
 /**
  * GET /v1/posts/{id}
@@ -41,7 +43,7 @@ router.get('/categories', cache, categoryController.findAll);
  * @returns {string} 404 - An error message
  * 
  */
-router.get('/posts/:id(\\d+)', cache, postController.findOne);
+// router.get('/posts/:id(\\d+)', cache, postController.findOne);
 
 /**
  * GET /v1/posts/categories/{id}
@@ -51,7 +53,7 @@ router.get('/posts/:id(\\d+)', cache, postController.findOne);
  * @param {number} id.path.required The id of the desired category
  * @returns {array<Post>} 200 - An array of posts with a specific category, can be empty
  */
-router.get('/posts/categories/:id(\\d+)', cache, postController.findByCategory)
+// router.get('/posts/categories/:id(\\d+)', cache, postController.findByCategory)
 
 
 /**
@@ -78,7 +80,7 @@ router.get('/posts/categories/:id(\\d+)', cache, postController.findByCategory)
 
 // joi + redis
 // router.post('/posts', myCustomMiddleware, flush, postController.addPost);
-router.post('/posts', postController.addPost);
+// router.post('/posts', postController.addPost);
 
 
 module.exports = router;

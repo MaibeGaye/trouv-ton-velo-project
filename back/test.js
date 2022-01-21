@@ -18,16 +18,16 @@ reçu de l'utilisateur d'une source de data
 require('dotenv').config();
 const client = require('./app/database');
 
-client.query('SELECT * FROM post', (error, result) => {
+client.query('SELECT * FROM "user"', (error, result) => {
     if (error) {
         console.log(error);
     } else {
-        console.log('Nb rows', result.rows.length);
+        console.log(result.rows);
     }
 })
 
 
 
-MaClass.maMethode();
+// MaClass.maMethode();
 
-new MaClass().maMethode()
+// new MaClass().maMethode()

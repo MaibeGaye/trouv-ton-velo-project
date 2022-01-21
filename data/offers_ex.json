@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Mon super vélo",
+        "infos": "très peu servi",
+        "model": "VTT",
+        "size": "Adulte",
+        "helmet": false,
+        "lamps": true,
+        "safety_lock": true,
+        "photo": "urlphoto",
+        "address": "valueadresslender",
+        "zip_code": "lend",
+        "validity_start_date": "2022-01-21 14:24:27.351914+01",
+        "validity_end_date": "2022-01-21 14:24:27.351914+01",
+        "lender_id": 1,
+        "borrower_id": 1
+    }
+]

@@ -16,11 +16,11 @@ const importData = async () => {
     //on insère les catégories et on remplit l'object usersIds
     for (const user of users) {
         //avec RETURNING, on demande explicitement à Postgres de nous renvoyer dans le code l'id de l'enregistrement fraichement créé
-        const {rows} = await client.query('INSERT INTO "user"(username, name, firstname, email, password, address, zip_code) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, name, firstname', [user.username, user.name, user.firstname, user.email, user.password, user.address, user.zip_code]);
+        const {rows} = await client.query('INSERT INTO "user"(username, lastname, firstname, email, password, address, zip_code) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, lastname, firstname', [user.username, user.lastname, user.firstname, user.email, user.password, user.address, user.zip_code]);
         //on stocke cet id en l'associant au label de la catégorie
         // usersIds[user.label] = rows[0].id;
         // console.log(usersIds);
-        console.log(`insert user '${rows[0].name} ${rows[0].firstname}' (id ${rows[0].id})`);
+        console.log(`insert user '${rows[0].lastname} ${rows[0].firstname}' (id ${rows[0].id})`);
     }
 
     for (const offer of offers) {

@@ -1,6 +1,7 @@
 const  {Router} = require('express');
 
 const userController = require('./controllers/userController');
+const offerController = require('./controllers/offerController');
 
 // joi
 // const postSchema = require('./schemas/postSchema');
@@ -11,7 +12,8 @@ const userController = require('./controllers/userController');
 
 const router = Router();
 
-router.get('/test', userController.findAll);
+router.get('/getAllUsers', userController.findAll);
+router.get('/getAllOffers', offerController.findAll);
 
 
 /**

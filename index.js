@@ -3,7 +3,7 @@ const express = require('express');
 
 const router = require('./app/router');
 
-// const cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 
@@ -55,7 +55,7 @@ firstFunction(options);
 
 //pas d'object de config pour régler finement les droits d'entrée
 //on ne met pas de limitation d'accès, welcome everybody
-// app.use(cors());
+app.use(cors());
 
 
 

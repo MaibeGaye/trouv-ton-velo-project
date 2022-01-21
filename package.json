@@ -1,0 +1,20 @@
+{
+  "name": "projet-08-trouv-ton-velo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "back/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node-dev back/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-XIII/projet-08-trouv-ton-velo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-XIII/projet-08-trouv-ton-velo/issues"
+  },
+  "homepage": "https://github.com/O-clock-XIII/projet-08-trouv-ton-velo#readme"
+}

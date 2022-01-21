@@ -1,5 +1,11 @@
 [
     {
-        
+        "username": "Bob",
+        "name": "Data",
+        "firstname": "Bobby",
+        "email": "bob@gmail.com",
+        "password": "mdp",
+        "address": "1 rue bob",
+        "zip_code": "77777"
     }
 ]

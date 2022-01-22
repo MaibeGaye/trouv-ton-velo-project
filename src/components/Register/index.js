@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
-import { InputLabel, FormControl, Button } from '@mui/material';
+import { InputLabel, FormControl } from '@mui/material';
 import axios from 'axios';
 
 const Register = () => {
@@ -160,7 +160,7 @@ const Register = () => {
             )}
             />
           </FormControl>
-          <Button onClick={submitRegister}>Inscription</Button>
+          <button type="submit" className="register-btn" onClick={submitRegister}>Inscription</button>
         </div>
       </Box>
     </div>

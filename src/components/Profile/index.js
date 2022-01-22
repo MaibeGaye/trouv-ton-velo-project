@@ -1,17 +1,15 @@
 import './style.scss';
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { UserContext } from '../Context';
 
-const Profile = ({ logged }) => (
-  <div className="container profile">
-    {
-        logged && <h1>Voici votre profil</h1>
-    }
-    {
-        !logged && <h1>Retourner à l'accueil</h1>
-      }
-  </div>
-);
-Profile.propTypes = {
-  logged: PropTypes.bool.isRequired,
-}.isRequired;
+const Profile = () => {
+  const { user } = useContext(UserContext);
+  return (
+
+    <div className="container profile">
+      <h1>Hello Profil {user.name} </h1>
+    </div>
+  );
+};
+
 export default Profile;

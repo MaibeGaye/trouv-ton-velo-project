@@ -1,6 +1,10 @@
 .createOffer{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #18B7BE;
+    background-image: url("../../assets/createoffer.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

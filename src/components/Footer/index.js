@@ -1,10 +1,17 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './style.scss';
 
 const Footer = () => (
   <div className="footer">
-    <NavLink to="/about" className="footer-link">A propos</NavLink>
-    <NavLink to="/legals" className="footer-link">Mentions légales</NavLink>
+    <div className="footer-fakediv" />
+    <div className="footer-links">
+      <Link to="/about" className="footer-link">A propos</Link>
+      <Link to="/legals" className="footer-link">Mentions légales</Link>
+    </div>
+    {/* <div className="footer-medias">
+      <i className="fab fa-facebook" />
+      <i className="fab fa-instagram" />
+    </div> */}
   </div>
 );
 

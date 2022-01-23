@@ -15,12 +15,6 @@ const Legals = () => (
       Mail : trouvtonvelo@gmail.com
       Directeur de publication : ???
     </p>
-    <p className="legals-two">Hébergeur du site
-      ??? au capital de ??? €
-      RCS ???
-      TVA n°: ????
-      Siège social : ??? – France.
-    </p>
     <p className="legals-three">Les marques, logos, photos, textes, médias, documents et plus
       généralement la totalité des contenus
       du site internet

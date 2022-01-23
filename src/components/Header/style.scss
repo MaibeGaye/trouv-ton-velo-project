@@ -1,9 +1,11 @@
+@use '../../styles/vars';
+
 .header{
     height: 8vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #F9F7F0;
+    background-color: vars.$first-color;
 
     &-logo{
         height: 100%;
@@ -14,12 +16,12 @@
 
         & i {
             font-size: 2rem;
-            color: #072A40;
+            color: vars.$four-color;
         }
 
         &-title{
             font-size: 2rem;
-            color: #178CA4;
+            color: vars.$second-color;
             margin: 0.5rem;
         }
     }
@@ -40,7 +42,7 @@
         &-link{
             font-size: 1.9rem;
             margin: 0 1rem;
-            color: #072A40;
+            color: vars.$four-color;
         }
         &-buttons{
             height: 100%;
@@ -63,94 +65,35 @@
 }
 
 .loggin{
-    background-color: #178ca4;
-    color: #F9F7F0;
+    background-color: vars.$second-color;
+    color: vars.$first-color;
     font-size: 1.5rem;
    
 }
 .logout{
-    background-color: #178ca4;
-    color: #F9F7F0;
+    background-color:  vars.$second-color;
+    color: vars.$first-color;
     font-size: 1.5rem;
     
 }
 
 
+@media screen and (max-width: 767.98px) {
 
+    .header-logo-title{
+        display: none;
+    }
 
+    .header-nav-link{
+        font-size: 1.5rem;
+        margin: 0.5;
+    }
+    .header-nav-button{
+        font-size: 1rem;
+        margin: 0.5rem;
+    }
+    .loggin{
+        font-size: 1rem;
+    }
 
-
-
-
-
-
-
-
-
-
-// .header{
-//     height: 8vh;
-//     display: flex;
-//     background-color: #F9F7F0;
-
-//     &-logo{
-//         // display: flex;
-//         // // align-items: center;
-//         // // justify-content: center;
-//     }
-//     &-logo i {
-//         font-size: 2.5rem;
-//         margin: 0 2rem;
-//         color: #072A40;
-//     }
-//     &-title{
-//         font-size: 2rem;
-//         font-weight: bold;
-//         color: #178CA4;
-//     }
-//     &-nav{
-//         // display: flex;
-//         // justify-content: center;
-//         // align-items: center;
-//     }
-//     &-link{
-//         color: #072A40;
-//         font-size: 1.8rem;
-//         margin: 0 1rem;
-//         text-transform: uppercase;
-//         font-weight: bold;
-//         // align-self: center;
-//     }
-//     // &-button{
-//     //     border: none;
-//     //     // font-weight: bold;
-//     //     // padding: 0.8rem;
-//     //     border-radius: 0.7rem;
-//     //     // margin: 0 1rem;
-//     //     // color: #F9F7F0;
-//     //     font-size: 1.2rem;
-//     //     text-transform: uppercase;
-
-//     // }
-// }
-// .loggin{
-//     background-color: turquoise;
-// }
-// .register{
-//     background-color: transparent;
-//     color: #072A40;
-// }
-// .logout{
-//     background-color: turquoise;
-// }
-
-// .nav{
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
-// .button{
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
+}

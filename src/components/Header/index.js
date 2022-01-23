@@ -94,7 +94,7 @@ const Header = () => {
   };
 
   return (
-    <section className="header">
+    <header className="header">
       <div className="header-logo">
         <Link to="/"><i className="fas fa-biking" /></Link>
         <h3 className="header-logo-title">Trouv ton vélo</h3>
@@ -271,7 +271,7 @@ const Header = () => {
         <div className="header-nav-links">
           <NavLink to="/offers" className="header-nav-link">Louer</NavLink>
           {user.auth && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
-          {user.auth && <NavLink to="/dashboard" className="header-nav-link">Mon Profil</NavLink>}
+          {user.auth && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
         </div>
         <div className="header-nav-buttons">
           {!user.auth && <button className="header-nav-button register " type="button" onClick={openRegisterModal}>S'inscrire</button>}
@@ -279,7 +279,7 @@ const Header = () => {
           {user.auth && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 

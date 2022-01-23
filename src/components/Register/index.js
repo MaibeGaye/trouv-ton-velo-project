@@ -12,6 +12,7 @@ import axios from 'axios';
 
 const Register = () => {
   // Create states from all inputs by default empty
+
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [userName, setUserName] = useState('');
@@ -21,6 +22,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   // Function to see your password
+
   const showPassword = () => {
     setPassword({
       ...password,
@@ -29,13 +31,15 @@ const Register = () => {
   };
 
   // Function to see your Confirm password
+
   const showConfirmPassword = () => {
     setConfirmPassword({
       ...confirmPassword,
       showConfirmPassword: !confirmPassword.showConfirmPassword,
     });
   };
-    // Function to submit the form and redirect to home
+
+  // Function to submit the form and redirect to home
 
   const submitRegister = () => {
     axios({

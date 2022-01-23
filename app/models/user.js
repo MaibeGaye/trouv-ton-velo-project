@@ -1,21 +1,22 @@
 const client = require('../database');
 
 /**
- * An entity representing a blog post
+ * An entity representing a user
  * @typedef {Object} User
  * @property {number} id
- * @property {string} slug
- * @property {string} title
- * @property {string} excerpt
- * @property {string} content
- * @property {string} category
- * @property {number} category_id
+ * @property {string} username
+ * @property {string} lastname
+ * @property {string} firstname
+ * @property {string} email
+ * @property {string} password
+ * @property {string} address
+ * @property {string} zip_code
  */
 
 
 
 /**
- * A model representing a blog post
+ * A model representing a user
  * @class User
  */
 class User {
@@ -31,7 +32,7 @@ class User {
     }
 
     /**
-     * Fetches all posts from the database
+     * Fetches all users from the database
      * @returns {Array<User>}
      * @static
      * @async

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 // const cache = require('../services/cache');
 
 
@@ -15,18 +16,26 @@ module.exports = {
     },
 
     handleSignup: async (request, response) => {
-      console.log('handleSignup');
-      //on va créer une instance de User à partir des infos de request.body
-      const formData = request.body;
+      console.log(request.body.password);
+      const hashedPwd = await bcrypt.hash(request.body.password, 10);
+      console.log(hashedPwd);
 
-      const user = new User(formData);
+      const newUser = new User({
+        username: request.body.username,
+        lastname: request.body.lastname,
+        firstname: request.body.firstname,
+        email: request.body.email,
+        password: hashedPwd,
+        address: request.body.address,
+        zip_code: request.body.zip_code
+      });
 
       try {
           //on appelle la méthode save de cette instance pour sauvegarder en BDD
-          await user.save();
+          await newUser.save();
 
           //on répond au front avec le status qui va bien et l'instance mise à jour avec l'id créé par postgres
-          response.status(201).json(user);
+          response.status(201).json(newUser);
       } catch(error) {
           response.status(500).json(error.message);
       }

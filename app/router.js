@@ -16,6 +16,9 @@ router.get('/getAllUsers', userController.findAll);
 router.get('/getAllOffers', offerController.findAll);
 router.get('/getUserTest', userController.findOne);
 
+router.post('/signup', userController.handleSignup);
+router.post('/login', userController.handleLogin);
+
 
 /**
  * GET /v1/posts

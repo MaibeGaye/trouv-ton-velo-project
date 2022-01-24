@@ -5,9 +5,9 @@ const Offer = require('../models/offer');
 module.exports = {
     findAll: async (_, response) => {
         console.log('Data depuis Postgres');
-        const posts = await Offer.findAll();
+        const offers = await Offer.findAll();
         console.log('Appel de response.json');
-        response.json(posts);
+        response.json(offers);
     },
 
     findOne: async (_, response) => {

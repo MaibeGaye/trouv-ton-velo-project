@@ -39,14 +39,6 @@ class User {
     static async findAll() {
         const {rows} = await client.query('SELECT * FROM "user"');
         return rows.map(row => new User(row));
-        /*
-        const posts = [];
-        for (const row of rows) {
-            const post = new Post(row);
-            posts.push(post);
-        }
-        return posts;
-        */
     }
 
     /**
@@ -56,7 +48,7 @@ class User {
      * @static
      * @async
      */
-     static async findOne(id) {
+    static async findOne(id) {
         const {rows} = await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
         //on vérifie qu'on a bien obtenu des data de la BDD
         if (rows[0]) { // if (rows[0] !== undefined)
@@ -90,22 +82,25 @@ class User {
     }
 
     async save() {
-        if (this.id) {
-            //TODO : code the update of an existing offer
-        } else {
-            try {
-                const {rows} = await client.query('INSERT INTO "user"(username, lastname, firstname, email, password, address, zip_code) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id', [
-                    this.username,
-                    this.lastname,
-                    this.firstname,
-                    this.email,
-                    this.password,
-                    this.address,
-                    this.zip_code
-                ]);
+        try {
+            if (this.id) {
+                await client.query('SELECT * FROM update_user($1)', [this]);
+            } else {
+                const {rows} =  await client.query('SELECT * FROM add_user($1)', [this]);
                 this.id = rows[0].id;
-    
-            } catch (error) {
+                return this;
+                // const {rows} = await client.query('INSERT INTO "user"(username, lastname, firstname, email, password, address, zip_code) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id', [
+                //     this.username,
+                //     this.lastname,
+                //     this.firstname,
+                //     this.email,
+                //     this.password,
+                //     this.address,
+                //     this.zip_code
+                // ]);
+                // this.id = rows[0].id;
+            } 
+        } catch (error) {
                 console.log(error);
                 if (error.detail) {
                     throw new Error('On a eu un gros pépin c\'est la misère !!!' + error.detail);
@@ -113,7 +108,6 @@ class User {
                 throw error;
             }
         }
-    }
-}
+}    
 
 module.exports = User;

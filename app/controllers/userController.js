@@ -43,7 +43,6 @@ module.exports = {
     handleLogin: async (request, response) => {
       //on va créer une instance de User à partir des infos de request.body
         const user = await User.getByEmail(request.body.email);
-        console.log(user);
         try {
           if (!user) { // if (user === undefined || user === null || user === 0 || user ===false || user === '')
             //on n'a trouvé aucun user enregistré avec cet email

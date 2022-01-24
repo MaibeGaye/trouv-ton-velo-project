@@ -2,3 +2,4 @@
 %project=apo-velo
 
 init 2022-01-21T11:01:17Z oscarlienard <lienard.oscar@gmail.com> # création des tables
+integrity 2022-01-24T13:21:32Z oscarlienard <lienard.oscar@gmail.com> # Création domaines & contraintes

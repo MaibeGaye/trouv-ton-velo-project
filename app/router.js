@@ -4,20 +4,27 @@ const userController = require('./controllers/userController');
 const offerController = require('./controllers/offerController');
 
 // joi
-// const postSchema = require('./schemas/postSchema');
-// const {validateBody} = require('./middlewares/validator');
+// const offerSchema = require('./schemas/offerSchema');
+// const userSchema = require('./schemas/userSchema');
+const loginSchema = require('./schemas/loginSchema');
+const signupSchema = require('./schemas/signupSchema');
+const {validateBody} = require('./middlewares/validator');
 
 // redis
 // const {cache, flush} = require('./services/cache');
 
 const router = Router();
 
+// joi
+const loginMiddleware = validateBody(loginSchema);
+const signupMiddleware = validateBody(signupSchema);
+
 router.get('/getAllUsers', userController.findAll);
 router.get('/getAllOffers', offerController.findAll);
 router.get('/getUserTest', userController.findOne);
 
-router.post('/signup', userController.handleSignup);
-router.post('/login', userController.handleLogin);
+router.post('/signup', signupMiddleware, userController.handleSignup);
+router.post('/login', loginMiddleware, userController.handleLogin);
 
 
 /**
@@ -80,9 +87,6 @@ router.post('/login', userController.handleLogin);
  * @returns {Post} 201 - The newly created post
  * @returns {string} 500 - An error message
  */
-
-// joi
-// const myCustomMiddleware = validateBody(postSchema);
 
 // joi + redis
 // router.post('/posts', myCustomMiddleware, flush, postController.addPost);

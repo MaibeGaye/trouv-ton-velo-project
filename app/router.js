@@ -19,22 +19,70 @@ const router = Router();
 const loginMiddleware = validateBody(loginSchema);
 const signupMiddleware = validateBody(signupSchema);
 
-router.get('/getAllUsers', userController.findAll);
-router.get('/getAllOffers', offerController.findAll);
+
 router.get('/getUserTest', userController.findOne);
 
-router.post('/signup', signupMiddleware, userController.handleSignup);
-router.post('/login', loginMiddleware, userController.handleLogin);
+/**
+ * GET /getAllUsers
+ * @summary Responds with all users in database
+ * @route GET /getAllUsers
+ * @tags Users
+ * @returns {array<User>} 200 - An array of users
+ */
+router.get('/getAllUsers', userController.findAll);
+
+/**
+ * GET /getAllOffers
+ * @summary Responds with all offers in database
+ * @route GET /getAllOffers
+ * @tags Offers
+ * @returns {array<Offer>} 200 - An array of offers
+ */
+router.get('/getAllOffers', offerController.findAll);
+// router.get('/posts', cache, postController.findAll);
+
+/**
+ * GET /getOneOffer/{id}
+ * @summary Responds with one offer from database
+ * @route GET /getOneOffer/{id}
+ * @tags Offers
+ * @param {number} id.path.required The id of the offer to fetch
+ * @returns {Offer} 200 - A single offer identified by its id
+ * @returns {string} 404 - An error message
+ * 
+ */
+router.get('/getOneOffer/:id(\\d+)', offerController.findOne);
 
 
 /**
- * GET /v1/posts
- * @summary Responds with all posts in database
- * @route GET /v1/posts
- * @tags Posts
- * @returns {array<Post>} 200 - An array of posts
+ * Expected json object in request.body
+ * @typedef {object} UserJson
+ * @property {number} id
+ * @property {string} username
+ * @property {string} lastname
+ * @property {string} firstname
+ * @property {string} email
+ * @property {string} password
+ * @property {string} address
+ * @property {string} zip_code
  */
-// router.get('/posts', cache, postController.findAll);
+
+/**
+ * POST /signup
+ * @summary Adds a new user in database
+ * @tags Users
+ * @param {UserJson} request.body.required User info to add in database
+ * @returns {User} 201 - The newly created user
+ * @returns {string} 500 - An error message
+ */
+router.post('/signup', signupMiddleware, userController.handleSignup);
+
+// TODO add jsdoc for the /login route
+router.post('/login', loginMiddleware, userController.handleLogin);
+
+
+
+//---------------------- Oblog JSdoc + routes --------------------------
 
 
 /**

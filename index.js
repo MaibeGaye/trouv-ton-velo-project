@@ -11,13 +11,13 @@ const port = process.env.PORT || 5000;
 
 
 const expressJSDocSwagger = require('express-jsdoc-swagger');
-const { urlencoded } = require('express');
+
 
 const options = {
   info: {
     version: '1.0.0',
-    title: 'Oblog',
-    description: 'A blog REST API',
+    title: 'Trouv ton velo',
+    description: 'A bike renting app REST API',
     license: {
       name: 'MIT',
     },

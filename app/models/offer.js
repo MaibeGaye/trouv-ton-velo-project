@@ -43,37 +43,44 @@ class Offer {
      * @returns {Array<Offer>}
      * @static
      * @async
+     * @throws {Error} An error
      */
     static async findAll() {
-        const {rows} = await client.query('SELECT * FROM "offer"');
-        return rows.map(row => new Offer(row));
-        /*
-        const posts = [];
-        for (const row of rows) {
-            const post = new Post(row);
-            posts.push(post);
+        try {
+            const {rows} = await client.query('SELECT * FROM "offer"');
+            return rows.map(row => new Offer(row));
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
         }
-        return posts;
-        */
     }
 
     /**
      * Fetches a single offer from the database
      * @param {number} id 
-     * @returns {Offer|null} null if no offer matches the id in database
+     * @returns {Offer|null} null if no offer matches the id in database, null if no record was found
      * @static
      * @async
+     * @throws {Error} An error
      */
-     static async findOne(id) {
-        const {rows} = await client.query('SELECT * FROM offer WHERE id=$1', [id]);
-        if (rows[0]) {
-            return new Offer(rows[0]);
-        } else {
-            console.log(`No offer found for id ${id}`);
-            return null;
+    static async findOne(id) {
+        try {
+            const {rows} = await client.query('SELECT * FROM offer WHERE id=$1', [id]);
+            if (rows[0]) {
+                return new Offer(rows[0]);
+            } else {
+                console.log(`No offer found for id ${id}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
         }
     }
-
     /**
      * Adds an offer to the database
      * @returns {Offer} the newly created offer
@@ -82,6 +89,7 @@ class Offer {
      async save() {
         if (this.id) {
             //TODO : code the update of an existing offer
+            await client.query('SELECT * FROM update_offer($1)', [this]);
         } else {
             try {
                 const {rows} = await client.query('INSERT INTO offer(title, infos, model, size, helmet, lamps, safety_lock, photo, address, zip_code, validity_start_date, validity_end_date, lender_id, borrower_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id', [
@@ -109,6 +117,17 @@ class Offer {
                 }
                 throw error;
             }
+        }
+    }
+
+    async delete() {
+        try {
+            await client.query('DELETE FROM offer WHERE id=$1', [this.id]);
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
         }
     }
 }

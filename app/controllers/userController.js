@@ -8,7 +8,11 @@ module.exports = {
         const posts = await User.findAll();
         console.log('Appel de response.json');
         response.json(posts);
-    }
+    },
+    findOne: async (_, response) => {
+      const posts = await User.findOne(0);
+      response.json(posts);
+  },
 
 
 }

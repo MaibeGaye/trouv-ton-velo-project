@@ -14,6 +14,7 @@ const router = Router();
 
 router.get('/getAllUsers', userController.findAll);
 router.get('/getAllOffers', offerController.findAll);
+router.get('/getUserTest', userController.findOne);
 
 
 /**

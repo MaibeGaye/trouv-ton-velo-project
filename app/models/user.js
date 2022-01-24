@@ -49,6 +49,24 @@ class User {
         return posts;
         */
     }
+
+    /**
+     * Fetches a single user from the database
+     * @param {number} id 
+     * @returns {Post|null} null if no post matches the id in database
+     * @static
+     * @async
+     */
+     static async findOne(id) {
+        const {rows} = await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
+        //on vérifie qu'on a bien obtenu des data de la BDD
+        if (rows[0]) { // if (rows[0] !== undefined)
+            return new User(rows[0]);
+        } else {
+            console.log(`No user found for id ${id}`);
+            return null;
+        }
+    }
 }
 
 module.exports = User;

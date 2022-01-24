@@ -73,7 +73,7 @@ class User {
         if (rows[0]) { // if (rows[0] !== undefined)
             return new User(rows[0]);
         } else {
-            console.log(`No user found for id ${id}`);
+            console.log(`No user found for email ${email}`);
             return null;
         }
     }

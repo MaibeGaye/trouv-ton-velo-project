@@ -10,7 +10,7 @@ module.exports = {
         response.json(posts);
     },
     findOne: async (_, response) => {
-      const posts = await User.findOne(0);
+      const posts = await User.findOne(1);
       response.json(posts);
   },
 

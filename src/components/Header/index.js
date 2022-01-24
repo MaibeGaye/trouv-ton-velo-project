@@ -16,7 +16,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { InputLabel, FormControl, LinearProgress } from '@mui/material';
 import Box from '@mui/material/Box';
-
 import { UserContext } from '../Context';
 
 const Header = () => {
@@ -29,6 +28,7 @@ const Header = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState({
     email: false,
     password: false,
@@ -42,15 +42,14 @@ const Header = () => {
   });
 
   const [registerValue, setRegisterValue] = useState({
-    firstName: '',
-    lastName: '',
-    userName: '',
+    firstname: '',
+    lastname: '',
+    username: '',
     email: '',
-    zipCode: '',
+    address: '',
+    zip_code: '',
     password: '',
     passwordConfirm: '',
-    showPassword: false,
-
   });
 
   // Function to Open/Close Login/Register modals
@@ -58,13 +57,14 @@ const Header = () => {
   const registerModal = () => {
     setShowRegisterModal(!showRegisterModal);
     setRegisterValue({
-      firstName: '',
-      lastName: '',
-      userName: '',
+      username: '',
+      lastname: '',
+      firstname: '',
       email: '',
-      zipCode: '',
       password: '',
       passwordConfirm: '',
+      address: '',
+      zip_code: '',
     });
   };
 
@@ -89,14 +89,7 @@ const Header = () => {
     });
   };
 
-  // Function for change Register state // A GARDER AU CAS OU ...
-
-  // const RegisterHandleChange = (event) => {
-  //   setRegisterValue({
-  //     ...registerValue,
-  //     [event.target.id]: event.target.value,
-  //   });
-  // };
+  // Function for change Register state
 
   const RegisterHandleChange = (prop) => (event) => {
     setRegisterValue({ ...registerValue, [prop]: event.target.value });
@@ -109,38 +102,17 @@ const Header = () => {
     setLoader(true);
 
     axios({
-      method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/getUserTest',
+      method: 'post',
+      url: 'https://api-apo-velo.herokuapp.com/login',
+      data: loginValue,
     })
       .then((res) => {
-        if (loginValue.email === res.data.email) {
-          setTimeout(() => {
-            setUser({
-              infos: res.data,
-              auth: true,
-            });
-            loginModal();
-          }, 1000);
-        }
-        else {
-          console.log('pas email correspondant');
-          if (loginValue.email && loginValue.password) {
-            setTimeout(() => {
-              setError({
-                email: false,
-                password: false,
-              });
-            }, 1000);
-          }
-          else {
-            setTimeout(() => {
-              setError({
-                email: !loginValue.email,
-                password: !loginValue.password,
-              });
-            }, 1000);
-          }
-        }
+        setTimeout(() => {
+          setUser({
+            infos: res.data,
+          });
+          loginModal();
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -152,23 +124,35 @@ const Header = () => {
       });
   };
 
-  // Futur axios request for add a new user in the database
+  // Axios request for add a new user in the database
 
   const createAccount = (event) => {
     event.preventDefault();
     setLoader(true);
-    setTimeout(() => {
-      console.log(" j'ai submit inscription");
-      setLoader(false);
-      registerModal();
-    }, 1000);
+    axios({
+      method: 'post',
+      url: 'https://api-apo-velo.herokuapp.com/signup',
+      data: registerValue,
+    })
+      .then((res) => {
+        console.log(res.data);
+        setTimeout(() => {
+          setLoader(false);
+          registerModal();
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setLoader(false);
+        }, 1000);
+      });
   };
 
   const handleShowPassword = () => {
-    setRegisterValue({
-      ...registerValue,
-      showPassword: !registerValue.showPassword,
-    });
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -194,7 +178,6 @@ const Header = () => {
           )}
           <TextField
             required
-            error={error.email}
             autoFocus
             margin="dense"
             id="email"
@@ -231,7 +214,7 @@ const Header = () => {
         <DialogContent>
           { loader && (
           <Box sx={{ width: '50%', margin: 'auto' }}>
-            <LinearProgress />
+            <LinearProgress sx={{ backgroundColor: '#18B7BE' }} />
           </Box>
           )}
           <TextField
@@ -239,31 +222,31 @@ const Header = () => {
             autoFocus
             fullWidth
             margin="dense"
-            id="firstName"
+            id="firstname"
             label="Prénom"
             variant="standard"
-            value={registerValue.firstName}
-            onChange={RegisterHandleChange('firstName')}
+            value={registerValue.firstname}
+            onChange={RegisterHandleChange('firstname')}
           />
           <TextField
             required
             fullWidth
             margin="dense"
-            id="lastName"
+            id="lastname"
             label="Nom"
             variant="standard"
-            value={registerValue.lastName}
-            onChange={RegisterHandleChange('lastName')}
+            value={registerValue.lastname}
+            onChange={RegisterHandleChange('lastname')}
           />
           <TextField
             required
             fullWidth
             margin="dense"
-            id="userName"
+            id="username"
             label="Pseudo"
             variant="standard"
-            value={registerValue.userName}
-            onChange={RegisterHandleChange('userName')}
+            value={registerValue.username}
+            onChange={RegisterHandleChange('username')}
           />
           <TextField
             required
@@ -278,14 +261,25 @@ const Header = () => {
           />
           <TextField
             required
+            autoFocus
+            fullWidth
+            margin="dense"
+            id="address"
+            label="Adresse"
+            variant="standard"
+            value={registerValue.adress}
+            onChange={RegisterHandleChange('address')}
+          />
+          <TextField
+            required
             fullWidth
             margin="dense"
             type="number"
-            id="zipCode"
+            id="zip_code"
             label="Code Postal"
             variant="standard"
-            value={registerValue.zipCode}
-            onChange={RegisterHandleChange('zipCode')}
+            value={registerValue.zip_code}
+            onChange={RegisterHandleChange('zip_code')}
           />
           <FormControl sx={{ width: '50ch', margin: '2ch' }} variant="standard">
             <InputLabel htmlFor="password">
@@ -293,7 +287,7 @@ const Header = () => {
             </InputLabel>
             <Input
               id="password"
-              type={registerValue.showPassword ? 'text' : 'password'}
+              type={showPassword ? 'text' : 'password'}
               value={registerValue.password}
               onChange={RegisterHandleChange('password')}
               endAdornment={(
@@ -302,7 +296,7 @@ const Header = () => {
                     aria-label="toggle password visibility"
                     onClick={handleShowPassword}
                   >
-                    {registerValue.showPassword ? <VisibilityOff /> : <Visibility />}
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               )}
@@ -314,9 +308,19 @@ const Header = () => {
             </InputLabel>
             <Input
               id="password-confirm"
-              type={registerValue.showPassword ? 'text' : 'password'}
-              value={registerValue.confirmPassword}
+              type={showPassword ? 'text' : 'password'}
+              value={registerValue.passwordConfirm}
               onChange={RegisterHandleChange('passwordConfirm')}
+              endAdornment={(
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleShowPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              )}
             />
           </FormControl>
         </DialogContent>
@@ -331,13 +335,13 @@ const Header = () => {
       <div className="header-nav">
         <div className="header-nav-links">
           <NavLink to="/offers" className="header-nav-link">Louer</NavLink>
-          {user.auth && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
-          {user.auth && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
+          {user.infos.auth && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
+          {user.infos.auth && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
         </div>
         <div className="header-nav-buttons">
-          {!user.auth && <button className="header-nav-button register " type="button" onClick={registerModal}>S'inscrire</button>}
-          {!user.auth && <button className="header-nav-button loggin" type="button" onClick={loginModal}>Connexion</button>}
-          {user.auth && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
+          {!user.infos.auth && <button className="header-nav-button register " type="button" onClick={registerModal}>S'inscrire</button>}
+          {!user.infos.auth && <button className="header-nav-button loggin" type="button" onClick={loginModal}>Connexion</button>}
+          {user.infos.auth && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
         </div>
       </div>
     </header>

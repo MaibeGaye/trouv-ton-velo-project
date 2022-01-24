@@ -10,21 +10,10 @@ const UserProvider = ({ children }) => {
       username: '',
       email: '',
       zip_code: '',
+      auth: false,
     },
-    auth: false,
   });
 
-  // const login = () => {
-  //   setUser(() => ({
-  //     ...user,
-  //     firstname: 'Alex',
-  //     lastname: 'Rousseau',
-  //     username: 'Cyko92',
-  //     email: 'alex@test.fr',
-  //     zip_code: 78220,
-  //     auth: true,
-  //   }));
-  // };
   const logout = () => {
     setUser(() => ({
       infos: {
@@ -35,8 +24,8 @@ const UserProvider = ({ children }) => {
         zip_code: '',
         address: '',
         password: '',
+        auth: false,
       },
-      auth: false,
     }));
   };
   return (

@@ -13,8 +13,8 @@ const Profile = () => {
   return (
 
     <section className="container profile">
-      {user.auth && <h1 className="profile-title">Mon profil</h1>}
-      {user.auth && (
+      {user.infos.auth && <h1 className="profile-title">Mon profil</h1>}
+      {user.infos.auth && (
       <div className="profile-user">
         <div className="left-profile">
           <h2 className="left-profile-title">Mes informations <i className="far fa-address-card" /></h2>
@@ -40,7 +40,7 @@ const Profile = () => {
         </div>
       </div>
       )}
-      {!user.auth && (
+      {!user.infos.auth && (
         <h2 className="profile-title">Merci de se connecter pour pouvoir consulter votre profil</h2>
       )}
 

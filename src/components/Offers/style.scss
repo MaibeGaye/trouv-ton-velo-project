@@ -1,9 +1,110 @@
+@use '../../styles/vars';
+
 .offers{
+    position: relative;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     background-image: url("../../assets/checkoffers.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
+    &-form{
+        background-color: vars.$second-color;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+        border-radius: 10px;
+        width: 50vw;
+        height: 50vh;
+        text-align: center;
+
+        &-title{
+            font-size: 3rem;
+            padding: 10px;
+
+        }
+    }
 }
+.btn{
+    position: absolute;
+    top: 1rem;
+}
+.test{
+    font-size: 3rem;
+    background: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.test-div{
+    background-color: vars.$third-color;
+    opacity: 0.9;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    margin: 1rem;
+}
+.test-div-title{
+   font-size: 2rem;
+}
+.tests{
+    font-size: 2rem;
+    
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: vars.$first-color;
+    margin: 2rem;
+    animation: rotateplane 1.5s infinite ease-in-out;
+}
+  
+  @keyframes rotateplane {
+    0% {
+      transform: perspective(120px) rotateY(0deg) rotateY(0deg);
+    }
+    50% {
+      transform: perspective(120px) rotateY(-180.1deg) rotateY(0deg);
+    }
+    100% {
+      transform: perspective(120px) rotateY(-180deg) rotateY(-179.9deg);
+    }
+  }
+  .offers-form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-title{
+      margin: 1rem;
+    }
+  }
+  .offers-form-inputs{
+    display: flex;
+    flex-direction: column;
+  }
+  label{
+    font-size: 2rem;
+    // margin: 1rem;
+  }
+  p{
+    font-size: 2rem;
+    color: vars.$first-color;
+    margin: 1rem;
+  }
+  .btn-modal{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: vars.$third-color;
+    color: vars.$first-color;
+  }

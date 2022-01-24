@@ -5,12 +5,11 @@ import { UserContext } from '../Context';
 const Profile = () => {
   const { user } = useContext(UserContext);
   const [fakeBike, setFakeBike] = useState(0);
-  console.log('Connecté sur profil ?', user.auth);
 
   const addBike = () => {
     setFakeBike(fakeBike + 1);
   };
-  console.log(fakeBike);
+
   return (
 
     <section className="container profile">
@@ -20,11 +19,11 @@ const Profile = () => {
         <div className="left-profile">
           <h2 className="left-profile-title">Mes informations <i className="far fa-address-card" /></h2>
           <div className="left-profile-infos">
-            <p>Nom : {user.firstname}</p>
-            <p>Prénom : {user.lastname}</p>
-            <p>Pseudo : {user.username}</p>
-            <p>Email : {user.email}</p>
-            <p>Code postal : {user.zip_code}</p>
+            <p>Nom : {user.infos.firstname}</p>
+            <p>Prénom : {user.infos.lastname}</p>
+            <p>Pseudo : {user.infos.username}</p>
+            <p>Email : {user.infos.email}</p>
+            <p>Code postal : {user.infos.zip_code}</p>
           </div>
           <button className="left-profile-button" type="button">Modifier mes informations</button>
         </div>

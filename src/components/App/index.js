@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Header from '../Header';
 import Home from '../Home';
 import Offers from '../Offers';
@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/legals" element={<Legals />} />
         <Route path="/create" element={<CreateOffer />} />
-        <Route path="/detail" element={<Details />} />
+        <Route path="/detail/:offerId" element={<Details />} />
         <Route path="/dashboard" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

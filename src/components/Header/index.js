@@ -1,6 +1,6 @@
 import './style.scss';
 import { NavLink, Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Button from '@mui/material/Button';
@@ -52,6 +52,17 @@ const Header = () => {
     passwordConfirm: '',
   });
 
+  // useEffect(() => {
+  //   const backUpLog = localStorage.getItem('infos');
+  //   if (backUpLog) {
+  //     const backUpSession = JSON.parse(backUpLog);
+  //     setUser({
+  //       ...user,
+  //       infos: backUpSession,
+  //     });
+  //   }
+  // }, []);
+
   // Function to Open/Close Login/Register modals
 
   const registerModal = () => {
@@ -80,7 +91,7 @@ const Header = () => {
     });
   };
 
-  // Function for change Login state
+  // Function for change  state
 
   const LoginHandleChange = (event) => {
     setLoginValue({
@@ -89,18 +100,15 @@ const Header = () => {
     });
   };
 
-  // Function for change Register state
-
   const RegisterHandleChange = (prop) => (event) => {
     setRegisterValue({ ...registerValue, [prop]: event.target.value });
   };
 
   // Axios request for connect the user
 
-  const ConnectUser = (event) => {
+  const connectUser = (event) => {
     event.preventDefault();
     setLoader(true);
-
     axios({
       method: 'post',
       url: 'https://api-apo-velo.herokuapp.com/login',
@@ -109,8 +117,11 @@ const Header = () => {
       .then((res) => {
         setTimeout(() => {
           setUser({
+            ...user,
             infos: res.data,
           });
+          // const backUp = JSON.stringify(res.data);
+          // localStorage.setItem('infos', backUp);
           loginModal();
         }, 1000);
       })
@@ -136,9 +147,9 @@ const Header = () => {
     })
       .then((res) => {
         console.log(res.data);
+
         setTimeout(() => {
-          setLoader(false);
-          registerModal();
+          loginModal();
         }, 1000);
       })
       .catch((err) => {
@@ -203,7 +214,7 @@ const Header = () => {
         </DialogContent>
         <DialogActions>
           <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} className="btn-test" variant="outlined" onClick={loginModal}>Annuler</Button>
-          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} variant="outlined" onClick={ConnectUser}>Valider</Button>
+          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} variant="outlined" onClick={connectUser}>Valider</Button>
         </DialogActions>
       </Dialog>
 
@@ -312,7 +323,7 @@ const Header = () => {
               value={registerValue.passwordConfirm}
               onChange={RegisterHandleChange('passwordConfirm')}
               endAdornment={(
-                <InputAdornment position="end">
+                <InputAdornment position="end" sx={{ display: 'none' }}>
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleShowPassword}

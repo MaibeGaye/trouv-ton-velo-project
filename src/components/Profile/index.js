@@ -1,14 +1,14 @@
 import './style.scss';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 import { UserContext } from '../Context';
 
 const Profile = () => {
   const { user } = useContext(UserContext);
-  const [fakeBike, setFakeBike] = useState(0);
 
-  const addBike = () => {
-    setFakeBike(fakeBike + 1);
-  };
+  if (!user.infos.auth) {
+    return <Navigate to="/" />;
+  }
 
   return (
 
@@ -23,6 +23,7 @@ const Profile = () => {
             <p>Prénom : {user.infos.lastname}</p>
             <p>Pseudo : {user.infos.username}</p>
             <p>Email : {user.infos.email}</p>
+            <p>Adresse : {user.infos.address}</p>
             <p>Code postal : {user.infos.zip_code}</p>
           </div>
           <button className="left-profile-button" type="button">Modifier mes informations</button>
@@ -34,9 +35,7 @@ const Profile = () => {
             <p>Réservation n° : 5 </p>
             <p>Titre de l'annonce : VTT Homme</p>
             <p>Rendre le vélo le : 24/01/2022</p>
-            {fakeBike >= 1 ? <h3 className="profile-infos-title">j'ai {fakeBike} {fakeBike > 1 ? 'vélos' : 'vélo'}</h3> : <h3 className="profile-infos-title">Pas de vélos </h3> }
           </div>
-          <button type="button" onClick={addBike}>Ajouter</button>
         </div>
       </div>
       )}

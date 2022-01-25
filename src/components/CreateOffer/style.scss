@@ -1,10 +1,18 @@
-.createOffer{
+@use '../../styles/vars';
+
+.create-offer{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: #18B7BE;
     background-image: url("../../assets/createoffer.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
+    &-title{
+        font-size: 5rem;
+        color: vars.$first-color;
+        margin: 2rem;
+    }
 }

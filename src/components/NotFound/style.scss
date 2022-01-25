@@ -1,6 +1,18 @@
-.notFound{
+@use '../../styles/vars';
+
+.not-found{
     background-image: url("../../assets/roadbikes.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    &-title{
+        font-size: 3rem;
+        color: vars.$second-color;
+        margin: 5rem;
+    }
 }

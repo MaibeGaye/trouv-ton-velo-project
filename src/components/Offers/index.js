@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import './style.scss';
 
@@ -27,6 +28,7 @@ const Offers = () => {
       url: 'https://api-apo-velo.herokuapp.com/getAllOffers/',
     })
       .then((res) => {
+        console.log(res.data);
         setOffers(res.data);
       })
       .catch((err) => {
@@ -47,12 +49,15 @@ const Offers = () => {
     });
   };
 
+  const ID = useParams();
+  const foundOffer = offers.find((element) => element.id === ID);
+  console.log(foundOffer);
   return (
     <div className="container offers">
       {modal && (
       <div className="offers-form">
-        <h1 className="offers-form-title">Recherche</h1>
-        {spinner && <div className="spinner" />}
+        <h2 className="offers-form-title">Recherche</h2>
+        { spinner && <div className="spinner" />}
         <button type="button" className="btn-modal" onClick={handleModal}>X</button>
         <div className="offers-form-inputs">
           <div className="offers-form-input">
@@ -76,7 +81,7 @@ const Offers = () => {
             <label htmlFor="option4">Non</label>
           </div>
         </div>
-        <button type="button" onClick={searchOffers}>Rechercher</button>
+        <button type="button" className="button-research" onClick={searchOffers}>Rechercher</button>
       </div>
       )}
       {!modal && (
@@ -88,11 +93,12 @@ const Offers = () => {
             <h1 className="test-div-title">{title}</h1>
             <p className="tests">{infos}</p>
             <p className="tests">{size}</p>
+            <Link to={`/detail/${id}`}>Détails</Link>
           </div>
         ))}
       </div>
       )}
-      {!modal && <button type="button" className="btn" onClick={handleModal}>Ouvrir la recherche</button>}
+      {!modal && <button type="button" className="btn" onClick={handleModal}>Faire une recherche</button>}
     </div>
   );
 };

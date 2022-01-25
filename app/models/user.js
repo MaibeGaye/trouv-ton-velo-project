@@ -37,8 +37,15 @@ class User {
      * @async
      */
     static async findAll() {
-        const {rows} = await client.query('SELECT * FROM "user"');
-        return rows.map(row => new User(row));
+        try {
+            const {rows} = await client.query('SELECT * FROM "user"');
+            return rows.map(row => new User(row));
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
     }
 
     /**
@@ -49,35 +56,55 @@ class User {
      * @async
      */
     static async findOne(id) {
-        const {rows} = await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
-        //on vérifie qu'on a bien obtenu des data de la BDD
-        if (rows[0]) { // if (rows[0] !== undefined)
-            return new User(rows[0]);
-        } else {
-            console.log(`No user found for id ${id}`);
-            return null;
+        try {
+            const {rows} = await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
+            if (rows[0]) {
+                return new User(rows[0]);
+            } else {
+                console.log(`No user found for id ${id}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
         }
     }
 
     static async getByEmail(email) {
-        const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [email]);
-        //on vérifie qu'on a bien obtenu des data de la BDD
-        if (rows[0]) { // if (rows[0] !== undefined)
-            return new User(rows[0]);
-        } else {
-            console.log(`user model : no user found for email ${email}`);
-            return null;
+        try {
+            const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [email]);
+            //on vérifie qu'on a bien obtenu des data de la BDD
+            if (rows[0]) { // if (rows[0] !== undefined)
+                return new User(rows[0]);
+            } else {
+                console.log(`user model : no user found for email ${email}`);
+                return null;
+            } 
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
         }
     }
 
     static async getCredentialsById(id) {
-        const {rows} = await client.query('SELECT email, password FROM "user" WHERE id=$1', [id]);
-        //on vérifie qu'on a bien obtenu des data de la BDD
-        if (rows[0]) { // if (rows[0] !== undefined)
-            return new User(rows[0]);
-        } else {
-            console.log(`No user found for id ${id}`);
-            return null;
+        try {
+            const {rows} = await client.query('SELECT email, password FROM "user" WHERE id=$1', [id]);
+            //on vérifie qu'on a bien obtenu des data de la BDD
+            if (rows[0]) { // if (rows[0] !== undefined)
+                return new User(rows[0]);
+            } else {
+                console.log(`No user found for id ${id}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
         }
     }
 

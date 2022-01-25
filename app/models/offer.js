@@ -94,28 +94,11 @@ class Offer {
                 const {rows} = await client.query('SELECT * FROM add_offer($1)', [this]);
                 this.id = rows[0].id;
                 return this;
-                // const {rows} = await client.query('INSERT INTO offer(title, infos, model, size, helmet, lamps, safety_lock, photo, address, zip_code, validity_start_date, validity_end_date, lender_id, borrower_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id', [
-                //     this.title,
-                //     this.infos,
-                //     this.model,
-                //     this.size,
-                //     this.helmet,
-                //     this.lamps,
-                //     this.safety_lock,
-                //     this.photo,
-                //     this.address,
-                //     this.zip_code,
-                //     this.validity_start_date,
-                //     this.validity_end_date,
-                //     this.lender_id,
-                //     this.borrower_id
-                // ]);
-                // this.id = rows[0].id;
             }
         } catch (error) {
                 console.log(error);
                 if (error.detail) {
-                    throw new Error('On a eu un gros pépin c\'est la misère !!!' + error.detail);
+                    throw new Error('On a une erreur SQL : ' + error.detail);
                 }
                 throw error;
             }

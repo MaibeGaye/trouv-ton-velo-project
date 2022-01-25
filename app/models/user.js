@@ -103,7 +103,7 @@ class User {
         } catch (error) {
                 console.log(error);
                 if (error.detail) {
-                    throw new Error('On a eu un gros pépin c\'est la misère !!!' + error.detail);
+                    throw new Error('On a une erreur SQL : ' + error.detail);
                 }
                 throw error;
             }

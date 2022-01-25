@@ -1,4 +1,5 @@
 const client = require('../database');
+const bcrypt = require('bcrypt');
 
 /**
  * An entity representing a user
@@ -72,16 +73,22 @@ class User {
         }
     }
 
-    static async getByEmail(email) {
+    static async getByEmail(email, password) {
         try {
             const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [email]);
             //on vérifie qu'on a bien obtenu des data de la BDD
-            if (rows[0]) { // if (rows[0] !== undefined)
-                return new User(rows[0]);
-            } else {
-                console.log(`user model : no user found for email ${email}`);
-                return null;
-            } 
+            if (!rows[0]) {
+                throw new Error('email non reconnu ' + error.detail);
+            }
+
+            //on check si le mot de passe en clair dans le formulaire matche avec la version chiffrée stockée en BDD
+            const isPwdValid = await bcrypt.compare(password, rows[0].password)
+            if (isPwdValid === false) {
+                return console.log('email ok mais mdp incorrect');
+            }
+
+            // on crée une nouvelle instance pour la retourner au front à la validation du login
+            return new User(rows[0]);
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -110,22 +117,17 @@ class User {
 
     async save() {
         try {
+            //prend pas en compte le hash du pwd
             if (this.id) {
                 await client.query('SELECT * FROM update_user($1)', [this]);
             } else {
+                const hashedPwd = await bcrypt.hash(this.password, 10);
+                this.password = hashedPwd;
+
                 const {rows} =  await client.query('SELECT * FROM add_user($1)', [this]);
                 this.id = rows[0].id;
+
                 return this;
-                // const {rows} = await client.query('INSERT INTO "user"(username, lastname, firstname, email, password, address, zip_code) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id', [
-                //     this.username,
-                //     this.lastname,
-                //     this.firstname,
-                //     this.email,
-                //     this.password,
-                //     this.address,
-                //     this.zip_code
-                // ]);
-                // this.id = rows[0].id;
             } 
         } catch (error) {
                 console.log(error);

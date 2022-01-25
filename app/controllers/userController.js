@@ -18,6 +18,13 @@ module.exports = {
     handleSignup: async (request, response) => {
         try {
             const user = await new User(request.body).save();
+
+
+            // let machin = req.body - passconf
+            // const user = await new User(machin).save();
+            
+            
+            // user.passwordConfirm = "";
             response.status(201).json(user);
         } catch(error) {
             response.status(500).json(error.message);

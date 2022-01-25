@@ -117,7 +117,6 @@ class User {
 
     async save() {
         try {
-            //prend pas en compte le hash du pwd
             if (this.id) {
                 await client.query('SELECT * FROM update_user($1)', [this]);
             } else {
@@ -125,6 +124,13 @@ class User {
                 this.password = hashedPwd;
 
                 const {rows} =  await client.query('SELECT * FROM add_user($1)', [this]);
+
+                // pour pas donner aux fronteux la confirm inutile
+                if (this.passwordConfirm) {
+                  delete this.passwordConfirm;
+                }
+
+                // pour donner aux fronteux l'id du user
                 this.id = rows[0].id;
 
                 return this;

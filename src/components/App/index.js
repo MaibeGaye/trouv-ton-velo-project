@@ -1,11 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import Header from '../Header';
 import Home from '../Home';
 import Offers from '../Offers';
 import CreateOffer from '../CreateOffer';
-import Offer from '../Offer';
 import OfferDetails from '../OfferDetails';
 import Profile from '../Profile';
 import About from '../About';
@@ -15,25 +14,29 @@ import NotFound from '../NotFound';
 import '../../styles/index.scss';
 import { UserContext } from '../Context';
 
-
 const App = () => {
   const { user } = useContext(UserContext);
   const [offers, setOffers] = useState([]);
+  // const [loader, setLoader] = useState(false);
+  const [filteredOffer, setfilteredOffer] = useState([]);
+  const [modal, setModal] = useState(true);
 
-  const [findOffers, setFindOffers] = useState([{
-    size: '',
-    light: '',
-    lock: '',
-  }]);
+  const handleModal = () => {
+    setModal(!modal);
+  };
 
-  const searchOffers = (event) => {
+  const GetOffersFiltered = (event) => {
     event.preventDefault();
     axios({
       method: 'get',
       url: 'https://api-apo-velo.herokuapp.com/getAllOffers/',
     })
       .then((res) => {
-        setOffers(res.data);
+        setTimeout(() => {
+          setOffers(res.data);
+          // setModal(false);
+          handleModal();
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -41,13 +44,16 @@ const App = () => {
       .finally(() => {
       });
   };
+
+  const resetOffers = () => {
+    setOffers([]);
+  };
   const handleChange = (event) => {
-    setFindOffers({
-      ...findOffers,
+    setfilteredOffer({
+      ...filteredOffer,
       [event.target.name]: event.target.value,
     });
   };
-
   return (
     <div className="app">
       <Header />
@@ -55,8 +61,19 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Profile />} />
         <Route path="/create" element={<CreateOffer />} />
-        <Route path="/offers" element={<Offers offers={offers} searchOffers={searchOffers} handleChange={handleChange} />} />
-        {/* <Route path="/offer" element={<Offer />} /> */}
+        <Route
+          path="/offers"
+          element={(
+            <Offers
+              offers={offers}
+              searchOffers={GetOffersFiltered}
+              handleChange={handleChange}
+              test={filteredOffer}
+              displayModal={modal}
+              reset={resetOffers}
+            />
+)}
+        />
         <Route path="/offer/:id/details" element={<OfferDetails offerDetail={offers} />} />
         <Route path="/about" element={<About />} />
         <Route path="/legals" element={<Legals />} />

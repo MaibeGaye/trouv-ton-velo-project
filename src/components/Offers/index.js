@@ -1,90 +1,179 @@
-import axios from 'axios';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
 import Offer from '../Offer';
 import './style.scss';
 
-const Offers = ({ offers, handleChange, searchOffers }) => {
-  const [modal, setModal] = useState(false);
-  const [spinner, setSpinner] = useState(false);
-
-  const handleModal = () => {
-    setModal(!modal);
-  };
+const Offers = ({
+  offers, handleChange, searchOffers, reset,
+}) => {
+  const [zip, setZip] = useState();
 
   return (
     <section className="container offers">
       <div className="offers-form">
-        <h2 className="offers-form-title">Recherche</h2>
-        <div className="offers-form-inputs">
-          <div className="offers-form-input">
-            <input type="radio" id="ville" name="size" value="ville" onChange={handleChange} />
+        <h1 className="offers-form-title">Recherche</h1>
+        {/* <div className="offers-form-inputs"> */}
+        <div className="offers-form-input">
+          <label htmlFor="option1">Ville</label>
+          <input
+            type="tel"
+            maxLength={5}
+            id="option1"
+            name="zip_code"
+            onChange={handleChange}
+            placeholder="Code Postal"
+            value={zip}
+          />
+        </div>
+        <div className="offers-form-input">
+          <h2>Modèle</h2>
+          <div className="test">
+            <input
+              type="radio"
+              id="option2"
+              name="size"
+              value="Adult"
+              onChange={handleChange}
+            />
+            <label htmlFor="option2">Adulte</label>
+            <input
+              type="radio"
+              id="option3"
+              name="size"
+              value="Children"
+              onChange={handleChange}
+            />
+            <label htmlFor="option3">Enfant</label>
+          </div>
+        </div>
+        <div className="offers-form-input">
+          <h2>Type</h2>
+          <div className="test">
+            <input
+              type="radio"
+              id="ville"
+              name="model"
+              value="City"
+              onChange={handleChange}
+            />
             <label htmlFor="ville">Ville</label>
-            <input type="radio" id="vtt" name="size" value="vtt" onChange={handleChange} />
+            <input
+              type="radio"
+              id="vtt"
+              name="model"
+              value="Vtt"
+              onChange={handleChange}
+            />
             <label htmlFor="vtt">Vtt</label>
           </div>
-          {/* <div className="offers-form-input">
-            <p>Lumières</p>
-            <input type="radio" id="option2" name="light" value onChange={handleChange} />
-            <label htmlFor="option2">Oui</label>
-            <input type="radio" id="option1" name="light" value="false" onChange={handleChange} />
-            <label htmlFor="option1">Non</label>
-          </div>
-          <div className="offers-form-input">
-            <p>Anti vol</p>
-            <input type="radio" id="option3" name="lock" value="true" onChange={handleChange} />
-            <label htmlFor="option3">Oui</label>
-            <input type="radio" id="option4" name="lock" value="false" onChange={handleChange} />
-            <label htmlFor="option4">Non</label>
-          </div> */}
-          <button type="button" className="button-research" onClick={searchOffers}>Rechercher</button>
         </div>
-        <div className="test">
-          {offers.map((test) => (
-            <div className="test-div" key={test.id}>
-              <Offer {...test} />
-            </div>
-          ))}
+        <div className="offers-form-input">
+          <h2>Lumières</h2>
+          <div className="test">
+            <input
+              type="radio"
+              id="option4"
+              name="lamps"
+              value="true"
+              onChange={handleChange}
+            />
+            <label htmlFor="option4">Oui</label>
+            <input
+              type="radio"
+              id="option5"
+              name="lamps"
+              value="false"
+              onChange={handleChange}
+            />
+            <label htmlFor="option5">Non</label>
+          </div>
         </div>
-      </div>
-      {/* <div className="offers-form">
-        <h2 className="offers-form-title">Recherche</h2>
-        {/* { spinner && <div className="spinner" />} */}
-      {/* <button type="button" className="btn-modal" onClick={handleModal}>X</button>
-        <div className="offers-form-inputs">
-          <div className="offers-form-input">
-            <input type="radio" id="ville" name="size" value="ville" onChange={handleChange} />
-            <label htmlFor="ville">Ville</label>
-            <input type="radio" id="vtt" name="size" value="vtt" onChange={handleChange} />
-            <label htmlFor="vtt">Vtt</label>
+        <div className="offers-form-input">
+          <h2>Anti vol</h2>
+          <div className="test">
+            <input
+              type="radio"
+              id="option6"
+              name="safety_lock"
+              value="true"
+              onChange={handleChange}
+            />
+            <label htmlFor="option6">Oui</label>
+            <input
+              type="radio"
+              id="option7"
+              name="safety_lock"
+              value="false"
+              onChange={handleChange}
+            />
+            <label htmlFor="option7">Non</label>
           </div>
-          <div className="offers-form-input">
-            <p>Lumières</p>
-            <input type="radio" id="option2" name="light" value onChange={handleChange} />
-            <label htmlFor="option2">Oui</label>
-            <input type="radio" id="option1" name="light" value="false" onChange={handleChange} />
-            <label htmlFor="option1">Non</label>
-          </div>
-          <div className="offers-form-input">
-            <p>Anti vol</p>
-            <input type="radio" id="option3" name="lock" value="true" onChange={handleChange} />
-            <label htmlFor="option3">Oui</label>
-            <input type="radio" id="option4" name="lock" value="false" onChange={handleChange} />
-            <label htmlFor="option4">Non</label>
-          </div>
-        </div> */}
-      {/* <button type="button" className="button-research" onClick={searchOffers}>Rechercher</button>
-      </div>
+        </div>
 
-      <div className="test">
-        {offers.map((test) => (
-          <div className="test-div" key={test.id}>
-            <Offer {...test} />
+        <div className="offers-form-input">
+          <h2>Casque</h2>
+          <div className="test">
+            <input
+              type="radio"
+              id="option8"
+              name="helmet"
+              value="true"
+              onChange={handleChange}
+            />
+            <label htmlFor="option8">Oui</label>
+            <input
+              type="radio"
+              id="option9"
+              name="helmet"
+              value="false"
+              onChange={handleChange}
+            />
+            <label htmlFor="option9">Non</label>
+          </div>
+        </div>
+        <div className="offers-form-input-date">
+          <label htmlFor="option10">Début</label>
+          <input
+            type="date"
+            id="option10"
+            name="validity_start_date"
+            onChange={handleChange}
+          />
+          <label htmlFor="option11">Fin</label>
+          <input
+            type="date"
+            id="option11"
+            name="validity_end_date"
+            onChange={handleChange}
+          />
+        </div>
+        {/*
+
+           */}
+        {/* </div> */}
+        <div className="offers-form-buttons">
+          <button className="offers-form-button" type="submit" onClick={reset}>Reset</button>
+          <button className="offers-form-button" type="submit" onClick={searchOffers}>GO !</button>
+        </div>
+      </div>
+      <div className="offer-form-result">
+        {offers.map((offer) => (
+          <div className="test-div" key={offer.id}>
+            <Offer {...offer} />
           </div>
         ))}
       </div>
-      <button type="button" className="btn" onClick={handleModal}>Faire une recherche</button> */} */}
     </section>
   );
+};
+
+Offers.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  })).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  searchOffers: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 export default Offers;

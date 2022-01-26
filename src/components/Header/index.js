@@ -1,6 +1,6 @@
 import './style.scss';
 import { NavLink, Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 
 import Button from '@mui/material/Button';
@@ -51,6 +51,9 @@ const Header = () => {
     password: '',
     passwordConfirm: '',
   });
+  const toto = () => {
+    console.log('requete toto');
+  }
 
   // useEffect(() => {
   //   const backUpLog = localStorage.getItem('infos');
@@ -116,6 +119,7 @@ const Header = () => {
     })
       .then((res) => {
         setTimeout(() => {
+          console.log(res.data)
           setUser({
             ...user,
             infos: res.data,
@@ -243,7 +247,6 @@ const Header = () => {
             onChange={RegisterHandleChange('firstname')}
           />
           <TextField
-            required
             fullWidth
             margin="dense"
             id="lastname"
@@ -253,7 +256,6 @@ const Header = () => {
             onChange={RegisterHandleChange('lastname')}
           />
           <TextField
-            required
             fullWidth
             margin="dense"
             id="username"
@@ -263,7 +265,6 @@ const Header = () => {
             onChange={RegisterHandleChange('username')}
           />
           <TextField
-            required
             fullWidth
             margin="dense"
             type="email"
@@ -274,8 +275,6 @@ const Header = () => {
             onChange={RegisterHandleChange('email')}
           />
           <TextField
-            required
-            autoFocus
             fullWidth
             margin="dense"
             id="address"
@@ -285,7 +284,6 @@ const Header = () => {
             onChange={RegisterHandleChange('address')}
           />
           <TextField
-            required
             fullWidth
             margin="dense"
             type="number"
@@ -350,7 +348,7 @@ const Header = () => {
         <div className="header-nav-links">
           <NavLink to="/offers" className="header-nav-link">Louer</NavLink>
           {user.infos.auth && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
-          {user.infos.auth && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
+          {user.infos.auth && <NavLink to="/dashboard" className="header-nav-link" onClick={toto}>Profil</NavLink>}
         </div>
         <div className="header-nav-buttons">
           {!user.infos.auth && <button className="header-nav-button register " type="button" onClick={registerModal}>S'inscrire</button>}

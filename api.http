@@ -22,3 +22,7 @@ Content-Type: application/json
     "email": "vbcghdfulizer@email.com",
     "password": "bdekzbdfqej7854658"
 }
+
+### Get infos
+GET {{host}}/infos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDMyMDU0ODAsImV4cCI6MTY0MzIwNTc4MH0.nbnaYv1_i4LY1syz2wRCIzuDKiVGZ6AOx_O-fksTr2Y

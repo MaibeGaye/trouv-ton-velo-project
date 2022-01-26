@@ -73,22 +73,25 @@ class User {
         }
     }
 
-    static async getByEmail(email, password) {
+    async getByEmail() {
         try {
-            const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [email]);
+            const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [this.email]);
             //on vérifie qu'on a bien obtenu des data de la BDD
             if (!rows[0]) {
-                throw new Error('email non reconnu ' + error.detail);
+                throw new Error('email non reconnu ');
             }
 
             //on check si le mot de passe en clair dans le formulaire matche avec la version chiffrée stockée en BDD
-            const isPwdValid = await bcrypt.compare(password, rows[0].password)
+            const isPwdValid = await bcrypt.compare(this.password, rows[0].password)
             if (isPwdValid === false) {
-                return console.log('email ok mais mdp incorrect');
+                throw new Error('email ok mais mdp incorrect');
             }
 
             // on crée une nouvelle instance pour la retourner au front à la validation du login
-            return new User(rows[0]);
+            this.id = rows[0].id;
+            this.email = rows[0].email;
+            this.password = rows[0].password;
+            return this;
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -97,23 +100,6 @@ class User {
         }
     }
 
-    static async getCredentialsById(id) {
-        try {
-            const {rows} = await client.query('SELECT email, password FROM "user" WHERE id=$1', [id]);
-            //on vérifie qu'on a bien obtenu des data de la BDD
-            if (rows[0]) { // if (rows[0] !== undefined)
-                return new User(rows[0]);
-            } else {
-                console.log(`No user found for id ${id}`);
-                return null;
-            }
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
 
     async save() {
         try {

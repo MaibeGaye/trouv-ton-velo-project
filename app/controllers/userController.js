@@ -43,6 +43,7 @@ module.exports = {
             const infos = {
                 message: 'Après vérif d\'où vient la requête'
             };
+            // console.log(request.userId);
             response.setHeader('Authorization', jwt.makeToken(request.userId));
             response.status(200).json(infos);
         } catch(error) {

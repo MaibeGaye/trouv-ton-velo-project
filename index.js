@@ -54,9 +54,7 @@ firstFunction(options);
 
 //pas d'object de config pour régler finement les droits d'entrée
 //on ne met pas de limitation d'accès, welcome everybody
-app.use(cors({
-  origin: 'localhost'
-}));
+app.use(cors());
 
 //on prévient express qu'il peut recevoir des infos au format json dans le body de la request
 app.use(express.json());

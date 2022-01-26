@@ -149,7 +149,10 @@ const Header = () => {
         console.log(res.data);
 
         setTimeout(() => {
-          loginModal();
+          registerModal();
+          setTimeout(() => {
+            loginModal();
+          }, 1000);
         }, 1000);
       })
       .catch((err) => {

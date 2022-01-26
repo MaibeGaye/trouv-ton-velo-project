@@ -9,6 +9,7 @@ const offerController = require('./controllers/offerController');
 const loginSchema = require('./schemas/loginSchema');
 const signupSchema = require('./schemas/signupSchema');
 const {validateBody} = require('./middlewares/validator');
+const jwtMW = require('./middlewares/jwtMW');
 
 // redis
 // const {cache, flush} = require('./services/cache');
@@ -79,6 +80,7 @@ router.post('/signup', signupMiddleware, userController.handleSignup);
 // TODO add jsdoc for the /login route
 router.post('/login', loginMiddleware, userController.handleLogin);
 
+router.get('/infos', jwtMW, userController.getInfos);
 
 // redis
 // router.post('/posts', myCustomMiddleware, flush, postController.addPost);

@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
+const jwt = require('../services/jwt');
 // const cache = require('../services/cache');
 
 
@@ -11,26 +11,44 @@ module.exports = {
         response.json(users);
     },
     findOne: async (_, response) => {
-        const user = await User.findOne(1);
+        const id = parseInt(request.params.id, 10);
+        const user = await User.findOne(id);
         response.json(user);
     },
 
     handleSignup: async (request, response) => {
         try {
             const user = await new User(request.body).save();
+            const token = jwt.makeToken(user.id);
+            response.setHeader('Authorization', token)
             response.status(201).json(user);
         } catch(error) {
+            console.log(error);
             response.status(500).json(error.message);
         }
     },
     handleLogin: async (request, response) => {
         try {
-            const user = await User.getByEmail(request.body.email, request.body.password);
-            user.auth = "true";
-            response.status(201).json(user);
+            const user = await new User(request.body).getByEmail();
+            const token = jwt.makeToken(user.id);
+            response.setHeader('Authorization', token)
+            response.status(200).json(user);
         } catch(error) {
+            console.log(error);
             response.status(500).json(error.message);
         }
+    },
+    getInfos: (request, response) => {
+        try {
+            const infos = {
+                message: 'Après vérif d\'où vient la requête'
+            };
+            response.setHeader('Authorization', jwt.makeToken(request.userId));
+            response.status(200).json(infos);
+        } catch(error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        } 
     }
 
 }

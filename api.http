@@ -1,0 +1,24 @@
+@host=http://localhost:5555
+
+### Add a user
+POST {{host}}/signup
+Content-Type: application/json
+
+{
+    "username": "ghjfvdgvfw",
+    "lastname": "fzszaqsdpomikl",
+    "firstname": "pmoiujydrfzsdxc",
+    "email": "vbcghdfulizer@email.com",
+    "password" : "bdekzbdfqej7854658",
+    "address": "4 left street",
+    "zip_code": "56203"
+}
+
+### Login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "email": "vbcghdfulizer@email.com",
+    "password": "bdekzbdfqej7854658"
+}

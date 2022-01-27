@@ -5,13 +5,14 @@ POST {{host}}/signup
 Content-Type: application/json
 
 {
-    "username": "ghjfvdgvfw",
-    "lastname": "fzszaqsdpomikl",
-    "firstname": "pmoiujydrfzsdxc",
-    "email": "vbcghdfulizer@email.com",
-    "password" : "bdekzbdfqej7854658",
-    "address": "4 left street",
-    "zip_code": "56203"
+    "address": "5 avenue de la liberté",
+    "email": "monemail1@mail.com",
+    "firstname": "myfirstname",
+    "lastname": "myname",
+    "password": "hjfdklgbnfdxc",
+    "passwordConfirm": "hjfdklgbnfdxc",
+    "username": "monpseudo",
+    "zip_code": "67000"
 }
 
 ### Login
@@ -19,10 +20,10 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-    "email": "vbcghdfulizer@email.com",
-    "password": "bdekzbdfqej7854658"
+    "email": "monemail1@mail.com",
+    "password": "hjfdklgbnfdxc"
 }
 
 ### Get infos
 GET {{host}}/infos
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDMyMDU0ODAsImV4cCI6MTY0MzIwNTc4MH0.nbnaYv1_i4LY1syz2wRCIzuDKiVGZ6AOx_O-fksTr2Y
+Authorization: 

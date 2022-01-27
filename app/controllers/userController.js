@@ -19,8 +19,8 @@ module.exports = {
     handleSignup: async (request, response) => {
         try {
             const user = await new User(request.body).save();
-            const token = jwt.makeToken(user.id);
-            response.setHeader('Authorization', token)
+            const token = jwt.makeToken(user);
+            response.setHeader('Authorization', 'Bearer' + token)
             response.setHeader('Access--Control-Expose-Headers', 'Authorization')
             response.status(201).json(user);
         } catch(error) {
@@ -31,8 +31,8 @@ module.exports = {
     handleLogin: async (request, response) => {
         try {
             const user = await new User(request.body).getByEmail();
-            const token = jwt.makeToken(user.id);
-            response.setHeader('Authorization', token)
+            const token = jwt.makeToken(user);
+            response.setHeader('Authorization', 'Bearer' + token)
             response.setHeader('Access--Control-Expose-Headers', 'Authorization')
             response.status(200).json(user);
         } catch(error) {

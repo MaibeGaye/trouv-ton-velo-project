@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import Offer from '../Offer';
 import './style.scss';
+import Offer from '../Offer';
 
 const Offers = ({
-  offers, handleChange, searchOffers, reset,
+  offers, handleChange, searchOffers, reset, displayLoader,
 }) => {
   const [zip, setZip] = useState();
 
@@ -158,7 +158,12 @@ const Offers = ({
         </div>
       </div>
       <div className="offer-form-result">
-        {offers.map((offer) => (
+        {displayLoader
+        && (
+        <div className="spinner" />
+        )}
+        {!displayLoader
+        && offers.map((offer) => (
           <div className="test-div" key={offer.id}>
             <Offer {...offer} />
           </div>
@@ -175,5 +180,6 @@ Offers.propTypes = {
   handleChange: PropTypes.func.isRequired,
   searchOffers: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
+  displayLoader: PropTypes.bool.isRequired,
 };
 export default Offers;

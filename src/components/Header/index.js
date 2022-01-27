@@ -29,10 +29,6 @@ const Header = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [loader, setLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState({
-    email: false,
-    password: false,
-  });
 
   // Initial Login/Register state
 
@@ -51,9 +47,6 @@ const Header = () => {
     password: '',
     passwordConfirm: '',
   });
-  const toto = () => {
-    console.log('requete toto');
-  }
 
   // useEffect(() => {
   //   const backUpLog = localStorage.getItem('infos');
@@ -119,7 +112,7 @@ const Header = () => {
     })
       .then((res) => {
         setTimeout(() => {
-          console.log(res.data)
+          console.log(res.data);
           setUser({
             ...user,
             infos: res.data,
@@ -208,7 +201,6 @@ const Header = () => {
           />
           <TextField
             required
-            error={error.password}
             margin="dense"
             id="password"
             label="Mot de passe"
@@ -348,7 +340,7 @@ const Header = () => {
         <div className="header-nav-links">
           <NavLink to="/offers" className="header-nav-link">Louer</NavLink>
           {user.infos.auth && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
-          {user.infos.auth && <NavLink to="/dashboard" className="header-nav-link" onClick={toto}>Profil</NavLink>}
+          {user.infos.auth && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
         </div>
         <div className="header-nav-buttons">
           {!user.infos.auth && <button className="header-nav-button register " type="button" onClick={registerModal}>S'inscrire</button>}

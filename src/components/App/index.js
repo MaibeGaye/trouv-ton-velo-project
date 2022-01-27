@@ -19,24 +19,25 @@ const App = () => {
   const [offers, setOffers] = useState([]);
   // const [loader, setLoader] = useState(false);
   const [filteredOffer, setfilteredOffer] = useState([]);
-  const [modal, setModal] = useState(true);
+  const [spinner, setSpinner] = useState(false);
 
-  const handleModal = () => {
-    setModal(!modal);
-  };
+  // const handleModal = () => {
+  //   setSpinner(!modal);
+  // };
 
   const GetOffersFiltered = (event) => {
     event.preventDefault();
+    setSpinner(true);
     axios({
       method: 'get',
       url: 'https://api-apo-velo.herokuapp.com/getAllOffers/',
     })
       .then((res) => {
         setTimeout(() => {
+          console.log('Options choisies :', filteredOffer);
           setOffers(res.data);
-          // setModal(false);
-          handleModal();
-        }, 1000);
+          setSpinner(false);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
@@ -68,8 +69,7 @@ const App = () => {
               offers={offers}
               searchOffers={GetOffersFiltered}
               handleChange={handleChange}
-              test={filteredOffer}
-              displayModal={modal}
+              displayLoader={spinner}
               reset={resetOffers}
             />
 )}

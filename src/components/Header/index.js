@@ -81,10 +81,6 @@ const Header = () => {
       email: '',
       password: '',
     });
-    setError({
-      email: false,
-      password: false,
-    });
   };
 
   // Function for change  state
@@ -339,13 +335,13 @@ const Header = () => {
       <div className="header-nav">
         <div className="header-nav-links">
           <NavLink to="/offers" className="header-nav-link">Louer</NavLink>
-          {user.infos.auth && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
-          {user.infos.auth && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
+          {user.infos.id && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
+          {user.infos.id && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
         </div>
         <div className="header-nav-buttons">
-          {!user.infos.auth && <button className="header-nav-button register " type="button" onClick={registerModal}>S'inscrire</button>}
-          {!user.infos.auth && <button className="header-nav-button loggin" type="button" onClick={loginModal}>Connexion</button>}
-          {user.infos.auth && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
+          {!user.infos.id && <button className="header-nav-button register " type="button" onClick={registerModal}>S'inscrire</button>}
+          {!user.infos.id && <button className="header-nav-button loggin" type="button" onClick={loginModal}>Connexion</button>}
+          {user.infos.id && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
         </div>
       </div>
     </header>

@@ -6,15 +6,15 @@ import { UserContext } from '../Context';
 const Profile = () => {
   const { user } = useContext(UserContext);
 
-  if (!user.infos.auth) {
+  if (!user.infos.id) {
     return <Navigate to="/" />;
   }
 
   return (
 
     <section className="container profile">
-      {user.infos.auth && <h1 className="profile-title">Mon profil</h1>}
-      {user.infos.auth && (
+      {user.infos.id && <h1 className="profile-title">Mon profil</h1>}
+      {user.infos.id && (
       <div className="profile-user">
         <div className="left-profile">
           <h2 className="left-profile-title">Mes informations <i className="far fa-address-card" /></h2>
@@ -39,7 +39,7 @@ const Profile = () => {
         </div>
       </div>
       )}
-      {!user.infos.auth && (
+      {!user.infos.id && (
         <h2 className="profile-title">Merci de se connecter pour pouvoir consulter votre profil</h2>
       )}
 

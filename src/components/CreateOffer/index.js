@@ -6,7 +6,7 @@ import { UserContext } from '../Context';
 const CreateOffer = () => {
   const { user } = useContext(UserContext);
 
-  if (!user.infos.auth) {
+  if (!user.infos.id) {
     return <Navigate to="/" />;
   }
 

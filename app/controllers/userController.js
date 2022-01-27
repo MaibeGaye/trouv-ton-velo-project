@@ -21,7 +21,7 @@ module.exports = {
             const user = await new User(request.body).save();
             const token = jwt.makeToken(user);
             response.setHeader('Authorization', token)
-            response.setHeader('Access--Control-Expose-Headers', 'Authorization')
+            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
             response.status(201).json(user);
         } catch(error) {
             console.log(error);

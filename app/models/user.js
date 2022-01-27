@@ -72,22 +72,24 @@ class User {
             throw error;
         }
     }
-
+    /**
+     * Allows a user to login 
+     * @returns {User} the logged in user
+     * @async
+     * @throws {Error} a potential SQL error
+     */
     async getByEmail() {
         try {
             const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [this.email]);
-            //on vérifie qu'on a bien obtenu des data de la BDD
             if (!rows[0]) {
                 throw new Error('email non reconnu ');
             }
 
-            //on check si le mot de passe en clair dans le formulaire matche avec la version chiffrée stockée en BDD
             const isPwdValid = await bcrypt.compare(this.password, rows[0].password)
-            if (isPwdValid === false) {
+            if (!isPwdValid) {
                 throw new Error('email ok mais mdp incorrect');
             }
 
-            // on crée une nouvelle instance pour la retourner au front à la validation du login
             this.id = rows[0].id;
             this.email = rows[0].email;
             this.password = rows[0].password;
@@ -100,7 +102,12 @@ class User {
         }
     }
 
-
+    /**
+     * Updates and adds a user to the database
+     * @returns {User} the newly updated or created user
+     * @async
+     * @throws {Error} a potential SQL error
+     */
     async save() {
         try {
             //prend pas en compte le hash du pwd
@@ -123,6 +130,23 @@ class User {
                 throw error;
             }
         }
+
+    /**
+     * Deletes a user from the database
+     * @returns {void} Nothing to return
+     * @async
+     * @throws {Error} a potential SQL error
+     */
+    async delete(id) {
+        try {
+            await client.query('DELETE FROM "user" WHERE id=$1', [id]);
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
 }    
 
 module.exports = User;

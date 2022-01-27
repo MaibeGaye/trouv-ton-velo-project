@@ -8,8 +8,10 @@ const offerController = require('./controllers/offerController');
 // const userSchema = require('./schemas/userSchema');
 const loginSchema = require('./schemas/loginSchema');
 const signupSchema = require('./schemas/signupSchema');
+const offerSchema = require('./schemas/offerSchema')
 const {validateBody} = require('./middlewares/validator');
 const jwtMW = require('./middlewares/jwtMW');
+const User = require('./models/user');
 
 // redis
 // const {cache, flush} = require('./services/cache');
@@ -19,6 +21,7 @@ const router = Router();
 // joi
 const loginMiddleware = validateBody(loginSchema);
 const signupMiddleware = validateBody(signupSchema);
+const offerMiddleware = validateBody(offerSchema);
 
 
 router.get('/getUserTest', userController.findOne);
@@ -33,25 +36,88 @@ router.get('/getUserTest', userController.findOne);
 router.get('/getAllUsers', userController.findAll);
 
 /**
- * GET /getAllOffers
+ * GET /offers
  * @summary Responds with all offers in database
- * @route GET /getAllOffers
+ * @route GET /offers
  * @tags Offers
  * @returns {array<Offer>} 200 - An array of offers
  */
-router.get('/getAllOffers', offerController.findAll);
+router.get('/offers', offerController.findAll);
 
 /**
- * GET /getOneOffer/{id}
+ * GET /offer/{id}
  * @summary Responds with one offer from database
- * @route GET /getOneOffer/{id}
+ * @route GET /offer/{id}
  * @tags Offers
  * @param {number} id.path.required The id of the offer to fetch
  * @returns {Offer} 200 - A single offer identified by its id
  * @returns {string} 404 - An error message
  * 
  */
-router.get('/getOneOffer/:id(\\d+)', offerController.findOne);
+router.get('/offer/:id(\\d+)', offerController.findOne);
+
+/**
+ * Expected json object in request.body
+ * @typedef {object} OfferJson
+ * @property {number} id
+ * @property {string} title
+ * @property {string} infos
+ * @property {string} model
+ * @property {string} size
+ * @property {string} helmet
+ * @property {string} lamps
+ * @property {string} safety_lock
+ * @property {string} photo
+ * @property {string} address
+ * @property {string} zip_code
+ * @property {string} validity_start_date
+ * @property {string} validity_end_date
+ * @property {number} lender_id
+ * @property {number} borrower_id
+ */
+
+
+/**
+ * POST /create
+ * @summary Adds a new offer in database
+ * @tags Offers
+ * @param {OfferJson} request.body.required User info to add in database
+ * @returns {Offer} 201 - The newly created offer
+ * @returns {string} 500 - An error message
+ */
+router.post('/create', offerMiddleware, offerController.create);
+
+
+/**
+ * PATCH /dashboard/{offerId}/edit
+ * @summary Updates an existing offer in database
+ * @tags Offers
+ * @param {number} id.path.required The id of the offer to fetch
+ * @param {OfferJson} request.body.required User info to add in database
+ * @returns {Offer} 200 - The updated offer
+ * @returns {string} 500 - An error message
+ */
+//router.patch('/dashboard/:offerId/edit', offerController.update);
+
+/**
+ * DELETE /dashboard/{offerId}/delete
+ * @summary Deletes an existing offer in database
+ * @tags Offers
+ * @param {number} id.path.required The id of the offer to fetch
+ * @returns {string} 200 - The deleted offer
+ * @returns {string} 500 - An error message
+ */
+//router.delete('/dashboard/:offerId/delete', offerController.delete);
+
+
+/**
+ * GET /dashboard
+ * @summary Responds with a user info in database
+ * @route GET /dashboard
+ * @tags User
+ * @returns {array<User>} 200 - An array of user info
+ */
+router.get('/dashboard', userController.userDashboard);
 
 
 /**
@@ -77,10 +143,22 @@ router.get('/getOneOffer/:id(\\d+)', offerController.findOne);
  */
 router.post('/signup', signupMiddleware, userController.handleSignup);
 
-// TODO add jsdoc for the /login route
+
+/**
+ * POST /login
+ * @summary Logs in a user in database
+ * @tags Users
+ * @param {UserJson} request.body.required User login info to add in database
+ * @returns {User} 200 - The logged in user
+ * @returns {string} 500 - An error message
+ */
 router.post('/login', loginMiddleware, userController.handleLogin);
 
+
+
 router.get('/infos', jwtMW, userController.getInfos);
+
+
 
 // redis
 // router.post('/posts', myCustomMiddleware, flush, postController.addPost);

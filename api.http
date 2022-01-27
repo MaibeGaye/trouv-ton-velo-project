@@ -26,4 +26,4 @@ Content-Type: application/json
 
 ### Get infos
 GET {{host}}/infos
-Authorization: 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyMSwiaWF0IjoxNjQzMjc4MjU1LCJleHAiOjE2NDMyNzg1NTV9.YHW_L49App6knMuLqeHOWkR4-vJwfACdJkVc8I6ihbw

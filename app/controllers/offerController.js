@@ -1,3 +1,4 @@
+const { request } = require('express');
 const Offer = require('../models/offer');
 // const cache = require('../services/cache');
 
@@ -9,9 +10,47 @@ module.exports = {
     },
 
     findOne: async (request, response) => {
-        const id = parseInt(request.params.id, 10);
-        const offer = await Offer.findOne(id);
-        response.json(offer);
+        try {
+            const id = parseInt(request.params.id, 10);
+            const offer = await Offer.findOne(id);
+            response.json(offer);
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        }
+        
+    },
+
+    create: async (request, response) => {
+        try {
+            const offer = await new Offer(request.body).save();
+            response.status(201).json(offer);   
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);   
+        }
+    },
+
+    update: async (request, response) => {
+        try {
+            const id = parseInt(request.params.id, 10);
+            const offer = await Offer(request.body).save(id);
+            response.status(200).json(offer);   
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);   
+        }
+    },
+
+    delete: async (request, response) => {
+        try {
+            const id = parseInt(request.params.id, 10);
+            await Offer.delete(id);
+            response.status(200).json({msg: "L'annonce a bien été supprimée !"});
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        }
     }
 
 

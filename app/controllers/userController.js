@@ -53,6 +53,14 @@ module.exports = {
             console.log(error);
             response.status(500).json(error.message);
         } 
+    },
+
+    userDashboard: async (request, response) => {
+        try {
+            
+        } catch (error) {
+            
+        }
     }
 
 }

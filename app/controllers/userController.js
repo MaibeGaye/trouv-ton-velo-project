@@ -15,7 +15,6 @@ module.exports = {
         const user = await User.findOne(id);
         response.json(user);
     },
-
     handleSignup: async (request, response) => {
         try {
             const user = await new User(request.body).save();
@@ -40,15 +39,12 @@ module.exports = {
             response.status(500).json(error.message);
         }
     },
-    getInfos: (request, response) => {
+    getInfos: async (request, response) => {
         try {
-            const infos = {
-                message: 'Après vérif d\'où vient la requête'
-            };
-            // console.log(request.userId);
+            const user = await new User(request.body).getUserData(request.userId.id);
             response.setHeader('Authorization', jwt.makeToken(request.userId));
             response.setHeader('Access-Control-Expose-Headers', 'Authorization')
-            response.status(200).json(infos);
+            response.status(200).json(user);
         } catch(error) {
             console.log(error);
             response.status(500).json(error.message);

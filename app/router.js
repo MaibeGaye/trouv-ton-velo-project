@@ -64,12 +64,12 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  * @property {string} infos
  * @property {string} model
  * @property {string} size
- * @property {string} helmet
- * @property {string} lamps
- * @property {string} safety_lock
+ * @property {boolean} helmet
+ * @property {boolean} lamps
+ * @property {boolean} safety_lock
  * @property {string} photo
  * @property {string} address
- * @property {string} zip_code
+ * @property {number} zip_code
  * @property {string} validity_start_date
  * @property {string} validity_end_date
  * @property {number} lender_id
@@ -85,7 +85,7 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  * @returns {Offer} 201 - The newly created offer
  * @returns {string} 500 - An error message
  */
-router.post('/create', offerMiddleware, offerController.create);
+router.post('/create', offerMiddleware, jwtMW, offerController.create);
 
 
 /**
@@ -97,7 +97,7 @@ router.post('/create', offerMiddleware, offerController.create);
  * @returns {Offer} 200 - The updated offer
  * @returns {string} 500 - An error message
  */
-//router.patch('/dashboard/:offerId/edit', offerController.update);
+router.patch('/dashboard/:offerId/edit', offerController.update);
 
 /**
  * DELETE /dashboard/{offerId}/delete
@@ -107,7 +107,7 @@ router.post('/create', offerMiddleware, offerController.create);
  * @returns {string} 200 - The deleted offer
  * @returns {string} 500 - An error message
  */
-//router.delete('/dashboard/:offerId/delete', offerController.delete);
+router.delete('/dashboard/:offerId/delete', offerController.delete);
 
 
 /**

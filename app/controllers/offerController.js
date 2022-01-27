@@ -23,6 +23,8 @@ module.exports = {
 
     create: async (request, response) => {
         try {
+            //on ajoute au contenu de la requête l'id de l'utilisateur ayant effectué la requête
+            request.body.lender_id = request.userId.id;
             const offer = await new Offer(request.body).save();
             response.status(201).json(offer);   
         } catch (error) {

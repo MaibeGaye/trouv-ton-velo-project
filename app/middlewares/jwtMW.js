@@ -3,7 +3,6 @@ const jwt = require('../services/jwt');
 module.exports = (request, response, next) => {
     try {
         let token = request.headers['authorization'];
-        console.log(token);
         if (!token) {
             return response.status(401).json('Invalid token');
         }

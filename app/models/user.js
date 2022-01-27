@@ -147,6 +147,27 @@ class User {
             throw error;
         }
     }
+
+    async getUserData(id) {
+        try {
+            const {rows} =  await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
+            this.id = rows[0].id;
+            // c'est crade, à optimiser
+            this.username = rows[0].username;
+            this.lastname = rows[0].lastname;
+            this.firstname = rows[0].firstname;
+            this.email = rows[0].email;
+            this.password = rows[0].password;
+            this.address = rows[0].address;
+            this.zip_code = rows[0].zip_code;
+            return this;
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
 }    
 
 module.exports = User;

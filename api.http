@@ -6,10 +6,10 @@ Content-Type: application/json
 
 {
     "address": "5 avenue de la liberté",
-    "email": "monemail1@mail.com",
+    "email": "test@test.com",
     "firstname": "myfirstname",
     "lastname": "myname",
-    "password": "hjfdklgbnfdxc",
+    "password": "testtest",
     "passwordConfirm": "hjfdklgbnfdxc",
     "username": "monpseudo",
     "zip_code": "67000"
@@ -20,10 +20,32 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-    "email": "monemail1@mail.com",
-    "password": "hjfdklgbnfdxc"
+    "email": "test@test.com",
+    "password": "testtest"
 }
 
 ### Get infos
 GET {{host}}/infos
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyMSwiaWF0IjoxNjQzMjc4MjU1LCJleHAiOjE2NDMyNzg1NTV9.YHW_L49App6knMuLqeHOWkR4-vJwfACdJkVc8I6ihbw
+
+### Add an offer
+POST {{host}}/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyMSwiaWF0IjoxNjQzMjc4MjU1LCJleHAiOjE2NDMyNzg1NTV9.YHW_L49App6knMuLqeHOWkR4-vJwfACdJkVc8I6ihbw
+
+{
+  "title": "string",
+  "infos": "string",
+  "model": "string",
+  "size": "string",
+  "helmet": true,
+  "lamps": true,
+  "safety_lock": true,
+  "photo": "string",
+  "address": "string",
+  "zip_code": 85000,
+  "validity_start_date": "2022-01-01",
+  "validity_end_date": "2022-01-01",
+  "lender_id": null,
+  "borrower_id": null
+}

@@ -8,12 +8,12 @@ const client = require('../database');
  * @property {string} infos
  * @property {string} model
  * @property {string} size
- * @property {string} helmet
- * @property {string} lamps
- * @property {string} safety_lock
+ * @property {boolean} helmet
+ * @property {boolean} lamps
+ * @property {boolean} safety_lock
  * @property {string} photo
  * @property {string} address
- * @property {string} zip_code
+ * @property {number} zip_code
  * @property {string} validity_start_date
  * @property {string} validity_end_date
  * @property {number} lender_id

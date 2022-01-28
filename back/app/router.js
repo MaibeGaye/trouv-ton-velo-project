@@ -45,6 +45,15 @@ router.get('/getAllUsers', userController.findAll);
 router.get('/offers', offerController.findAll);
 
 /**
+ * POST /offers
+ * @summary Responds with offers filtered in database
+ * @route POST /offers
+ * @tags Offers
+ * @returns {array<Offer>} 200 - An array of offers
+ */
+ router.post('/offers', offerController.findFiltered);
+
+/**
  * GET /offer/{id}
  * @summary Responds with one offer from database
  * @route GET /offer/{id}

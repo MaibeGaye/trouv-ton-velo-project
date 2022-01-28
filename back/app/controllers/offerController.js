@@ -12,8 +12,19 @@ module.exports = {
     findOne: async (request, response) => {
         try {
             const id = parseInt(request.params.id, 10);
-            const offer = await Offer.findOne(id);
+            const offer = await Offer.findOne();
             response.json(offer);
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        }
+        
+    },
+
+    findFiltered: async (request, response) => {
+        try {
+            const filteredOffers = await Offer.filter(request.body);
+            response.json(filteredOffers);
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);

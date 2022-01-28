@@ -81,6 +81,34 @@ class Offer {
             throw error;
         }
     }
+
+    /**
+     * Fetches a single offer from the database
+     * @param {number} id 
+     * @returns {Offer|null} null if no offer matches the id in database, null if no record was found
+     * @static
+     * @async
+     * @throws {Error} An error
+     */
+     static async filter(filters) {
+        try {
+
+            console.log(filters);
+            const {rows} = await client.query('SELECT * FROM offer');
+            if (rows[0]) {
+                return rows.map(row => new Offer(row));
+            } else {
+                console.log(`No offer found`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
     /**
      * Updates and adds an offer to the database
      * @returns {Offer} the newly created offer

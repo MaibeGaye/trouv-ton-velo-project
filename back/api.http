@@ -49,3 +49,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyMSwiaWF0IjoxNjQz
   "lender_id": null,
   "borrower_id": null
 }
+
+### GetFilteredOffers
+POST {{host}}/offers
+Content-Type: application/json
+
+{
+    "city": "5 avenue de la liberté",
+    "size": "test@test.com",
+    "model": "test@test.com",
+    "helmet": "myfirstname",
+    "lamps": "myname",
+    "safety_lock": "testtest"
+}

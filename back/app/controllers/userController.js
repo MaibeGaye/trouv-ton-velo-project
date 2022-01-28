@@ -18,10 +18,10 @@ module.exports = {
     handleSignup: async (request, response) => {
         try {
             const user = await new User(request.body).save();
-            const token = jwt.makeToken(user);
-            response.setHeader('Authorization', token)
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
-            response.status(201).json(user);
+            // const token = jwt.makeToken(user);
+            // response.setHeader('Authorization', token)
+            // response.setHeader('Access-Control-Expose-Headers', 'Authorization')
+            // response.status(201).json(user);
         } catch(error) {
             console.log(error);
             response.status(500).json(error.message);

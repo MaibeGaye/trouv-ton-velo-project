@@ -1,0 +1,6 @@
+%syntax-version=1.0.0
+%project=apo-velo
+
+init 2022-01-21T11:01:17Z oscarlienard <lienard.oscar@gmail.com> # création des tables
+integrity 2022-01-24T13:21:32Z oscarlienard <lienard.oscar@gmail.com> # Création domaines & contraintes
+functions 2022-01-24T22:46:11Z MaibeG <maibe.gaye@gmail.com> # Update/Create offer et user

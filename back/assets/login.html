@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>oCash</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="./css/floating-labels.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+    <header
+        class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-primary text-white border-bottom shadow-sm">
+        <h1 class="h5 my-0 mr-md-auto font-weight-normal">O'cash</h1>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-white" href="/">Accueil</a>
+            <!-- pour vérifier si un utilisateur est connecté, on peut vérifier le contenu de la propriété user en session
+            Si elle vaut false, pas connecté, on affiche les 2 liens s'inscrire et se connecter
+            Si elle vaut autre chose que false, user connecté, on affiche un lien deconnexion -->
+            <!-- <a class="p-2 text-white" href="/logout">Déconnexion</a> -->
+            <a class="p-2 text-white" href="/signup.html">S'inscrire</a>
+            <a class="p-2 text-white" href="/login.html">Se connecter</a>
+        </nav>
+    </header>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h2 class="h1 display-4">Se connecter</h2>
+        <p class="lead">Connectez vous pour utiliser le service!</p>
+    </div>
+
+    <form action="/login" method="POST" class="form-signin">
+        <div class="form-label-group">
+            <input type="email" class="form-control" id="email" name="email"
+                aria-describedby="emailHelp" placeholder="Votre email" value="">
+            <label for="email">Votre email</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="password" class="form-control" id="password" name="password"
+                placeholder="Votre mot de mot de passe" value="">
+            <label for="password">Votre mot de mot de passe</label>
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
+    </form>
+
+    <!-- Chargement de mon fichier JS -->
+    <!-- <script src="./js/app.js"></script>
+    <script src="./js/list.js"></script>
+    <script src="./js/card.js"></script>
+    <script src="./js/label.js"></script> -->
+</body>
+
+</html>

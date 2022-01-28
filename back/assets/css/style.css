@@ -1,0 +1,31 @@
+form.form-example {
+    display: table;
+    border: 1px solid black;
+    margin: 2px;
+    padding: 0.5rem;
+}
+
+div.form-example {
+    display: table-row;
+}
+
+label, input {
+    display: table-cell;
+    margin-bottom: 10px;
+    border: darkblue;
+    border: black solid 1px;
+    padding: 1rem;
+    margin: 0.2rem;
+}
+
+.form-submit {
+    color: white;
+    background-color: cornflowerblue;
+    margin-top: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+label {
+    padding-right: 10px;
+}

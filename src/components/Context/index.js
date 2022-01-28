@@ -10,8 +10,8 @@ const UserProvider = ({ children }) => {
       username: '',
       email: '',
       zip_code: '',
-      auth: false,
     },
+    token: '',
   });
 
   const logout = () => {

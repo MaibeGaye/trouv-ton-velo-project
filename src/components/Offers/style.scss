@@ -98,15 +98,15 @@
 
 @media screen and (max-width: 767.98px) {
     
-    .offers-form{
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
-        // width: 300px;
-        // height: 86vh;
-        // background-color: vars.$second-color;
-        display: none;
-    }
+    // .offers-form{
+    //     // display: flex;
+    //     // align-items: center;
+    //     // justify-content: center;
+    //     // width: 300px;
+    //     // height: 86vh;
+    //     // background-color: vars.$second-color;
+    //     display: none;
+    // }
 }
 .spinner {
     width: 50px;
@@ -127,4 +127,4 @@
     100% {
       transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     }
-  }
+}

@@ -2,7 +2,6 @@ import './style.scss';
 import { NavLink, Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import axios from 'axios';
-
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -27,26 +26,13 @@ const Header = () => {
 
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [loader, setLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loader, setLoader] = useState(false);
 
-  // Initial Login/Register state
+  // Modals state values
 
-  const [loginValue, setLoginValue] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [registerValue, setRegisterValue] = useState({
-    firstname: '',
-    lastname: '',
-    username: '',
-    email: '',
-    address: '',
-    zip_code: '',
-    password: '',
-    passwordConfirm: '',
-  });
+  const [loginModalValue, setLoginModalValue] = useState({});
+  const [registerModalValue, setRegisterModalValue] = useState({});
 
   // useEffect(() => {
   //   const backUpLog = localStorage.getItem('infos');
@@ -57,44 +43,77 @@ const Header = () => {
   //       infos: backUpSession,
   //     });
   //   }
-  // }, []);
+  // }, [])
+
+  const loginHandleChangeValue = (prop) => (event) => {
+    setLoginModalValue({ ...loginModalValue, [prop]: event.target.value });
+  };
+
+  const registerHandleChangeValue = (prop) => (event) => {
+    setRegisterModalValue({ ...registerModalValue, [prop]: event.target.value });
+  };
 
   // Function to Open/Close Login/Register modals
 
-  const registerModal = () => {
+  const handleRegisterModal = () => {
     setShowRegisterModal(!showRegisterModal);
-    setRegisterValue({
-      username: '',
-      lastname: '',
+    setRegisterModalValue({
       firstname: '',
+      lastname: '',
+      username: '',
       email: '',
-      password: '',
-      passwordConfirm: '',
       address: '',
       zip_code: '',
+      password: '',
+      passwordConfirm: '',
     });
   };
 
-  const loginModal = () => {
+  const handleLoginModal = () => {
     setShowLoginModal(!showLoginModal);
-    setLoginValue({
+    setLoginModalValue({
       email: '',
       password: '',
     });
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const showProfil = () => {
+    axios({
+      method: 'get',
+      url: 'https://api-apo-velo.herokuapp.com/infos',
+      headers: {
+        Authorization: user.token,
+      },
+    })
+      .then((res) => {
+        console.log(res.headers.authorization);
+        setUser({
+          ...user,
+          infos: res.data,
+          token: res.headers.authorization,
+        });
+        // const backUp = JSON.stringify(res.data);
+        // localStorage.setItem('infos', backUp);
+        // loginModal();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+      });
   };
 
   // Function for change  state
-
-  const LoginHandleChange = (event) => {
-    setLoginValue({
-      ...loginValue,
-      [event.target.id]: event.target.value,
-    });
-  };
-
-  const RegisterHandleChange = (prop) => (event) => {
-    setRegisterValue({ ...registerValue, [prop]: event.target.value });
-  };
+  // const LoginHandleChangeValue = (event) => {
+  //   setLoginValue({
+  //     ...loginValue,
+  //     [event.target.id]: event.target.value,
+  //   });
+  // };
 
   // Axios request for connect the user
 
@@ -104,20 +123,22 @@ const Header = () => {
     axios({
       method: 'post',
       url: 'https://api-apo-velo.herokuapp.com/login',
-      data: loginValue,
+      data: loginModalValue,
     })
       .then((res) => {
         setTimeout(() => {
-          console.log(res.data);
+          console.log(res.headers.authorization);
           setUser({
             ...user,
             infos: res.data,
+            token: res.headers.authorization,
           });
+          handleLoginModal();
           // const backUp = JSON.stringify(res.data);
           // localStorage.setItem('infos', backUp);
-          loginModal();
         }, 1000);
       })
+
       .catch((err) => {
         console.log(err);
       })
@@ -136,15 +157,15 @@ const Header = () => {
     axios({
       method: 'post',
       url: 'https://api-apo-velo.herokuapp.com/signup',
-      data: registerValue,
+      data: registerModalValue,
     })
       .then((res) => {
         console.log(res.data);
 
         setTimeout(() => {
-          registerModal();
+          handleRegisterModal();
           setTimeout(() => {
-            loginModal();
+            handleLoginModal();
           }, 1000);
         }, 1000);
       })
@@ -158,10 +179,6 @@ const Header = () => {
       });
   };
 
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <header className="header">
       <div className="header-logo">
@@ -171,7 +188,7 @@ const Header = () => {
 
       {/* MODAL LOGIN */}
 
-      <Dialog open={showLoginModal} onClose={loginModal}>
+      <Dialog open={showLoginModal} onClose={handleLoginModal}>
         <DialogTitle sx={{
           color: '#18B7BE', fontSize: '7ch', textTransform: 'uppercase', textAlign: 'center',
         }}
@@ -179,9 +196,9 @@ const Header = () => {
         </DialogTitle>
         <DialogContent>
           { loader && (
-          <Box sx={{ width: '50%', margin: 'auto' }}>
-            <LinearProgress />
-          </Box>
+            <Box sx={{ width: '50%', margin: 'auto' }}>
+              <LinearProgress />
+            </Box>
           )}
           <TextField
             required
@@ -192,8 +209,8 @@ const Header = () => {
             type="email"
             fullWidth
             variant="standard"
-            value={loginValue.email}
-            onChange={LoginHandleChange}
+            value={loginModalValue.email}
+            onChange={loginHandleChangeValue('email')}
           />
           <TextField
             required
@@ -203,25 +220,25 @@ const Header = () => {
             type="password"
             fullWidth
             variant="standard"
-            value={loginValue.password}
-            onChange={LoginHandleChange}
+            value={loginModalValue.password}
+            onChange={loginHandleChangeValue('password')}
           />
         </DialogContent>
         <DialogActions>
-          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} className="btn-test" variant="outlined" onClick={loginModal}>Annuler</Button>
+          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} className="btn-test" variant="outlined" onClick={handleLoginModal}>Annuler</Button>
           <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} variant="outlined" onClick={connectUser}>Valider</Button>
         </DialogActions>
       </Dialog>
 
       {/* MODAL REGISTER */}
 
-      <Dialog sx={{ textAlign: 'center' }} open={showRegisterModal} onClose={registerModal}>
+      <Dialog sx={{ textAlign: 'center' }} open={showRegisterModal} onClose={handleRegisterModal}>
         <DialogTitle sx={{ color: '#18B7BE', fontSize: '7ch', textTransform: 'uppercase' }}>Inscription</DialogTitle>
         <DialogContent>
           { loader && (
-          <Box sx={{ width: '50%', margin: 'auto' }}>
-            <LinearProgress sx={{ backgroundColor: '#18B7BE' }} />
-          </Box>
+            <Box sx={{ width: '50%', margin: 'auto' }}>
+              <LinearProgress sx={{ backgroundColor: '#18B7BE' }} />
+            </Box>
           )}
           <TextField
             required
@@ -231,8 +248,8 @@ const Header = () => {
             id="firstname"
             label="Prénom"
             variant="standard"
-            value={registerValue.firstname}
-            onChange={RegisterHandleChange('firstname')}
+            value={registerModalValue.firstname}
+            onChange={registerHandleChangeValue('firstname')}
           />
           <TextField
             fullWidth
@@ -240,8 +257,8 @@ const Header = () => {
             id="lastname"
             label="Nom"
             variant="standard"
-            value={registerValue.lastname}
-            onChange={RegisterHandleChange('lastname')}
+            value={registerModalValue.lastname}
+            onChange={registerHandleChangeValue('lastname')}
           />
           <TextField
             fullWidth
@@ -249,8 +266,8 @@ const Header = () => {
             id="username"
             label="Pseudo"
             variant="standard"
-            value={registerValue.username}
-            onChange={RegisterHandleChange('username')}
+            value={registerModalValue.username}
+            onChange={registerHandleChangeValue('username')}
           />
           <TextField
             fullWidth
@@ -259,8 +276,8 @@ const Header = () => {
             id="email"
             label="Email"
             variant="standard"
-            value={registerValue.email}
-            onChange={RegisterHandleChange('email')}
+            value={registerModalValue.email}
+            onChange={registerHandleChangeValue('email')}
           />
           <TextField
             fullWidth
@@ -268,8 +285,8 @@ const Header = () => {
             id="address"
             label="Adresse"
             variant="standard"
-            value={registerValue.adress}
-            onChange={RegisterHandleChange('address')}
+            value={registerModalValue.adress}
+            onChange={registerHandleChangeValue('address')}
           />
           <TextField
             fullWidth
@@ -278,8 +295,8 @@ const Header = () => {
             id="zip_code"
             label="Code Postal"
             variant="standard"
-            value={registerValue.zip_code}
-            onChange={RegisterHandleChange('zip_code')}
+            value={registerModalValue.zip_code}
+            onChange={registerHandleChangeValue('zip_code')}
           />
           <FormControl sx={{ width: '50ch', margin: '2ch' }} variant="standard">
             <InputLabel htmlFor="password">
@@ -288,8 +305,8 @@ const Header = () => {
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
-              value={registerValue.password}
-              onChange={RegisterHandleChange('password')}
+              value={registerModalValue.password}
+              onChange={registerHandleChangeValue('password')}
               endAdornment={(
                 <InputAdornment position="end">
                   <IconButton
@@ -309,8 +326,8 @@ const Header = () => {
             <Input
               id="password-confirm"
               type={showPassword ? 'text' : 'password'}
-              value={registerValue.passwordConfirm}
-              onChange={RegisterHandleChange('passwordConfirm')}
+              value={registerModalValue.passwordConfirm}
+              onChange={registerHandleChangeValue('passwordConfirm')}
               endAdornment={(
                 <InputAdornment position="end" sx={{ display: 'none' }}>
                   <IconButton
@@ -325,7 +342,7 @@ const Header = () => {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} className="btn-test" variant="outlined" onClick={registerModal}>Annuler</Button>
+          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} className="btn-test" variant="outlined" onClick={handleRegisterModal}>Annuler</Button>
           <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} variant="outlined" onClick={createAccount}>Valider</Button>
         </DialogActions>
       </Dialog>
@@ -336,11 +353,11 @@ const Header = () => {
         <div className="header-nav-links">
           <NavLink to="/offers" className="header-nav-link">Louer</NavLink>
           {user.infos.id && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
-          {user.infos.id && <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>}
+          {user.infos.id && <NavLink to="/dashboard" className="header-nav-link" onClick={showProfil}>Profil</NavLink>}
         </div>
         <div className="header-nav-buttons">
-          {!user.infos.id && <button className="header-nav-button register " type="button" onClick={registerModal}>S'inscrire</button>}
-          {!user.infos.id && <button className="header-nav-button loggin" type="button" onClick={loginModal}>Connexion</button>}
+          {!user.infos.id && <button className="header-nav-button register " type="button" onClick={handleRegisterModal}>S'inscrire</button>}
+          {!user.infos.id && <button className="header-nav-button loggin" type="button" onClick={handleLoginModal}>Connexion</button>}
           {user.infos.id && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
         </div>
       </div>

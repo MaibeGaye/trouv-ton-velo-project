@@ -43,6 +43,7 @@ const App = () => {
         console.log(err);
       })
       .finally(() => {
+        setSpinner(false);
       });
   };
 

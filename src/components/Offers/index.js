@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import './style.scss';
 import Offer from '../Offer';
 
 const Offers = ({
   offers, handleChange, searchOffers, reset, displayLoader,
 }) => {
-  const [zip, setZip] = useState();
+  console.log('j\'accède aux offres');
 
   return (
     <section className="container offers">
@@ -23,7 +22,6 @@ const Offers = ({
             name="zip_code"
             onChange={handleChange}
             placeholder="Code Postal"
-            value={zip}
           />
         </div>
         <div className="offers-form-input">

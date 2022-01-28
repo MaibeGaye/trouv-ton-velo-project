@@ -1,6 +1,6 @@
 import './style.scss';
 import { NavLink, Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -34,14 +34,40 @@ const Header = () => {
   const [loginModalValue, setLoginModalValue] = useState({});
   const [registerModalValue, setRegisterModalValue] = useState({});
 
+  useEffect(() => {
+    // if (backUpToken) {
+
+    //   setUser({
+    //     ...user,
+    //     token: backUp,
+    //   });
+    // }
+    const backUpSession = localStorage.getItem('logged');
+    const backUpToken = localStorage.getItem('token');
+    if (backUpSession && backUpToken) {
+      const backupLog = JSON.parse(backUpSession);
+      const backUp = JSON.parse(backUpToken);
+      setUser({
+        ...user,
+        infos: {
+          ...user.infos,
+          id: backupLog,
+        },
+        token: backUp,
+      });
+    }
+  }, []);
   // useEffect(() => {
-  //   const backUpLog = localStorage.getItem('infos');
-  //   if (backUpLog) {
-  //     const backUpSession = JSON.parse(backUpLog);
+  //   const backUpSession = localStorage.getItem('logged');
+  //   if (backUpSession) {
+  //     const backupLog = JSON.parse(backUpSession)
   //     setUser({
   //       ...user,
-  //       infos: backUpSession,
-  //     });
+  //       infos :{
+  //         ...user.infos,
+  //         id: backupLog,
+  //       },
+  //     })
   //   }
   // }, [])
 
@@ -134,13 +160,18 @@ const Header = () => {
             token: res.headers.authorization,
           });
           handleLoginModal();
-          // const backUp = JSON.stringify(res.data);
-          // localStorage.setItem('infos', backUp);
+          const backUp = JSON.stringify(res.headers.authorization);
+          localStorage.setItem('token', backUp);
+          const test = JSON.stringify(res.data.id);
+          localStorage.setItem('logged', test);
         }, 1000);
       })
 
       .catch((err) => {
         console.log(err);
+        setTimeout(() => {
+          setLoader(false);
+        }, 1000);
       })
       .finally(() => {
         setTimeout(() => {
@@ -171,6 +202,9 @@ const Header = () => {
       })
       .catch((err) => {
         console.log(err);
+        setTimeout(() => {
+          setLoader(false);
+        }, 1000);
       })
       .finally(() => {
         setTimeout(() => {

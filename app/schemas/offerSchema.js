@@ -10,11 +10,12 @@ const schema = Joi.object({
     safety_lock : Joi.boolean(),
     photo: Joi.string().max(256).required(),
     address: Joi.string().max(256).required(),
-    zip_code: Joi.number().min(3).max(5).required(),
+    // zip_code: Joi.number().min(3).max(5).required(),
+    zip_code: Joi.number().required(),
     validity_start_date: Joi.date().iso(),
     validity_end_date: Joi.date().iso(),
-    lender_id: Joi.number().integer().required(),
-    borrower_id: Joi.number().integer()
+    lender_id: Joi.number().integer().allow(null),
+    borrower_id: Joi.number().integer().allow(null)
 });
 
 module.exports = schema;

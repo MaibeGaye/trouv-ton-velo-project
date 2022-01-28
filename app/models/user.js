@@ -72,23 +72,28 @@ class User {
             throw error;
         }
     }
-
-    static async getByEmail(email, password) {
+    /**
+     * Allows a user to login 
+     * @returns {User} the logged in user
+     * @async
+     * @throws {Error} a potential SQL error
+     */
+    async getByEmail() {
         try {
-            const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [email]);
-            //on vérifie qu'on a bien obtenu des data de la BDD
+            const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [this.email]);
             if (!rows[0]) {
-                throw new Error('email non reconnu ' + error.detail);
+                throw new Error('email non reconnu ');
             }
 
-            //on check si le mot de passe en clair dans le formulaire matche avec la version chiffrée stockée en BDD
-            const isPwdValid = await bcrypt.compare(password, rows[0].password)
-            if (isPwdValid === false) {
-                return console.log('email ok mais mdp incorrect');
+            const isPwdValid = await bcrypt.compare(this.password, rows[0].password)
+            if (!isPwdValid) {
+                throw new Error('email ok mais mdp incorrect');
             }
 
-            // on crée une nouvelle instance pour la retourner au front à la validation du login
-            return new User(rows[0]);
+            this.id = rows[0].id;
+            this.email = rows[0].email;
+            this.password = rows[0].password;
+            return this;
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -97,24 +102,12 @@ class User {
         }
     }
 
-    static async getCredentialsById(id) {
-        try {
-            const {rows} = await client.query('SELECT email, password FROM "user" WHERE id=$1', [id]);
-            //on vérifie qu'on a bien obtenu des data de la BDD
-            if (rows[0]) { // if (rows[0] !== undefined)
-                return new User(rows[0]);
-            } else {
-                console.log(`No user found for id ${id}`);
-                return null;
-            }
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
-
+    /**
+     * Updates and adds a user to the database
+     * @returns {User} the newly updated or created user
+     * @async
+     * @throws {Error} a potential SQL error
+     */
     async save() {
         try {
             if (this.id) {
@@ -143,6 +136,44 @@ class User {
                 throw error;
             }
         }
+
+    /**
+     * Deletes a user from the database
+     * @returns {void} Nothing to return
+     * @async
+     * @throws {Error} a potential SQL error
+     */
+    async delete(id) {
+        try {
+            await client.query('DELETE FROM "user" WHERE id=$1', [id]);
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
+    async getUserData(id) {
+        try {
+            const {rows} =  await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
+            this.id = rows[0].id;
+            // c'est crade, à optimiser
+            this.username = rows[0].username;
+            this.lastname = rows[0].lastname;
+            this.firstname = rows[0].firstname;
+            this.email = rows[0].email;
+            this.password = rows[0].password;
+            this.address = rows[0].address;
+            this.zip_code = rows[0].zip_code;
+            return this;
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
 }    
 
 module.exports = User;

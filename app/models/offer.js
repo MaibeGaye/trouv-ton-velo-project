@@ -8,12 +8,12 @@ const client = require('../database');
  * @property {string} infos
  * @property {string} model
  * @property {string} size
- * @property {string} helmet
- * @property {string} lamps
- * @property {string} safety_lock
+ * @property {boolean} helmet
+ * @property {boolean} lamps
+ * @property {boolean} safety_lock
  * @property {string} photo
  * @property {string} address
- * @property {string} zip_code
+ * @property {number} zip_code
  * @property {string} validity_start_date
  * @property {string} validity_end_date
  * @property {number} lender_id
@@ -82,8 +82,9 @@ class Offer {
         }
     }
     /**
-     * Adds an offer to the database
+     * Updates and adds an offer to the database
      * @returns {Offer} the newly created offer
+     * @async
      * @throws {Error} a potential SQL error
      */
     async save() {
@@ -105,10 +106,15 @@ class Offer {
             
         }
    
-
-    async delete() {
+ /**
+     * Deletes an offer from the database
+     * @returns {void} Nothing to return
+     * @async
+     * @throws {Error} a potential SQL error
+     */
+    async delete(id) {
         try {
-            await client.query('DELETE FROM offer WHERE id=$1', [this.id]);
+            await client.query('DELETE FROM offer WHERE id=$1', [id]);
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);

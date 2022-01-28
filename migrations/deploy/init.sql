@@ -26,7 +26,7 @@ CREATE TABLE "offer" (
     "zip_code" VARCHAR(5) NOT NULL DEFAULT '',
     "validity_start_date" TIMESTAMPTZ NOT NULL,
     "validity_end_date" TIMESTAMPTZ NOT NULL,
-    "lender_id" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "lender_id" INTEGER REFERENCES "user"("id") ON DELETE CASCADE,
     "borrower_id" INTEGER REFERENCES "user"("id")
 );
 COMMIT;

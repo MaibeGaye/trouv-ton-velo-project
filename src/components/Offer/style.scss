@@ -1,0 +1,40 @@
+@use '../../styles/vars';
+
+
+.offer{
+    background-color: vars.$first-color;
+    margin: 1rem;
+    height: auto;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+
+    &-title{
+        font-size: 2rem;
+        color: vars.$third-color
+
+    }
+
+    &-infos{
+        font-size: 1.5rem;
+        margin: 1rem;
+    }
+    &-link{
+        text-align: center;
+        font-size: 1.8rem;
+        color: vars.$second-color;
+        font-weight: bold;
+        width: 50%;
+        margin: 1rem;
+
+    }
+
+    & img{
+        width: 300px;
+        border-radius: 10px 10px 0 0;
+        
+    }
+}

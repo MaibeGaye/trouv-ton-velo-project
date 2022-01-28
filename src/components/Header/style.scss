@@ -1,0 +1,87 @@
+@use '../../styles/vars';
+
+.header{
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: vars.$first-color;
+
+    &-logo{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 1rem;
+
+        & i {
+            font-size: 2rem;
+            color: vars.$four-color;
+        }
+
+        &-title{
+            font-size: 2rem;
+            color: vars.$second-color;
+            margin: 0.5rem;
+        }
+    }
+
+    &-nav{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0 1rem;
+        height: 100%;
+
+        &-links{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        &-link{
+            font-size: 1.9rem;
+            margin: 0 1rem;
+            color: vars.$four-color;
+        }
+        &-buttons{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        &-buttons{
+            display: flex;
+        }
+        &-button{
+            font-family: 'Dongle', sans-serif;
+            border: none;
+            background-color: transparent;
+            font-size: 1.9rem;
+            border-radius: 0.7rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
+    }
+
+}
+
+.loggin{
+    background-color: vars.$second-color;
+    color: vars.$first-color;
+    font-size: 1.5rem;
+   
+}
+.logout{
+    background-color:  vars.$second-color;
+    color: vars.$first-color;
+    font-size: 1.5rem;
+    
+}
+
+.active{
+    text-decoration: underline;
+}
+

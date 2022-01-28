@@ -1,0 +1,130 @@
+@use '../../styles/vars';
+
+
+.offers{
+    // background-image: url("../../assets/checkoffers.jpg");
+    // background-position: center;
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    background-color: vars.$third-color;
+    display: flex;
+
+    &-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 350px;
+        height: 86vh;
+        background-color: vars.$second-color;
+
+        & label {
+            color: vars.$third-color;
+            margin: 0 0.5rem;
+            font-size: 1.8rem;
+        }
+
+       & h2 {
+           font-size: 1.8rem;
+       }
+
+        &-title{
+            color: vars.$first-color;
+            font-size: 2rem;
+            margin: 0.5rem;
+        }
+        &-input{
+           background-color: vars.$first-color;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           border-radius: 10px;
+           font-size: 2rem;
+           padding: 1rem;
+           margin: 1rem;
+           width: 90%;
+
+           & label{
+            color: vars.$four-color;
+
+           }
+           & input{
+               border: 1px solid vars.$second-color;
+               border-radius: 10px;
+               padding: 0.5rem;
+           }
+            
+        }
+        &-button{
+            margin: 1rem;
+            border-radius: 50px;
+            height: 3rem;
+            width: 3rem;
+            border: none;
+            background-color: vars.$first-color;
+            color: vars.$four-color;
+            font-weight: bold;
+        }
+
+    }
+}
+.offers-form-input-date{
+    display: flex;
+    flex-direction: column;
+}
+.offers-form-input-date input{
+    font-size: 1rem;
+    margin: 0.5rem;
+    border-radius: 10px;
+    border: none;
+    padding: 0.5rem;
+    color: vars.$four-color;
+}
+.offers-form-input-date label{
+    color: vars.$four-color;
+    text-decoration: underline;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.offer-form-result{
+    width: calc(100vw - 350px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+@media screen and (max-width: 767.98px) {
+    
+    // .offers-form{
+    //     // display: flex;
+    //     // align-items: center;
+    //     // justify-content: center;
+    //     // width: 300px;
+    //     // height: 86vh;
+    //     // background-color: vars.$second-color;
+    //     display: none;
+    // }
+}
+.spinner {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: vars.$first-color;
+    
+    animation: rotateplane 1.5s infinite ease-in-out;
+  }
+  
+  @keyframes rotateplane {
+    0% {
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+    100% {
+      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+}

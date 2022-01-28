@@ -1,0 +1,34 @@
+@use '../../styles/vars';
+
+.legals{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: vars.$third-color;
+    color: vars.$first-color;
+    text-align: center;
+
+   &-title{
+       margin: 2rem;
+       font-size: 4rem;
+       font-weight: bold;
+       text-transform: uppercase;
+   }
+   &-one{
+       width: 50%;
+       font-size: 2rem;
+       margin: 2rem;
+   }
+   &-two{
+       width: 50%;
+       margin: 2rem;
+       font-size: 2rem;
+   }
+   &-three{
+    width: 50%;
+    margin: 2rem;
+    font-size: 2rem;
+    
+   }
+}

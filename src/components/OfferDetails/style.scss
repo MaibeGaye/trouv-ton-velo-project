@@ -1,0 +1,12 @@
+@use '../../styles/vars';
+.offer-details{
+    background-color: vars.$third-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-title{
+        font-size: 3rem;
+    }
+}

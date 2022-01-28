@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "address": "5 avenue de la liberté",
-    "email": "test@testtttt.com",
+    "email": "test@testttttz.com",
     "firstname": "myfirstname",
     "lastname": "myname",
     "password": "testtest",
@@ -33,7 +33,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 
 ### Delete current user
 DELETE {{host}}/dashboard/delete
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkcUJBcmx6aEpDU2I4QkgwTW9RL0RiZTlnY3dMUGp4aG13cmlDeTlZblJYNnFodGVZRHVLbWUiLCJpZCI6MjUsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzM5ODMyMywiZXhwIjoxNjQzNDAwMTIzfQ.i5Wsf2z2c6pFKHXHbN5MLEAC5URbQb5_eDz7GYF2zPo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV01QUG9QdXdaWTZWNDJCc1NtRzNpLkY0b3cxTEhtUnloaWM4Szl1VXJWVEdVb2VpQW1kcjYiLCJpZCI6MjcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzM5ODYzNSwiZXhwIjoxNjQzNDAwNDM1fQ.SaRKrwseHoCXwIOO2tFnxpCUWd8fSRcYZcrB06_KGpA
 
 ### Get infos of current user
 GET {{host}}/infos

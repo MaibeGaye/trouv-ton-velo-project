@@ -68,7 +68,7 @@ module.exports = {
             } else { // si l'annonce possède un id loueur, on interdit la modif
                 // à voir si pas mieux de filer l'info "editable: false" direct au GET /dashboard (via la returnborid) pour genre qu'ils grisent le bouton modifier, avec un tooltip attendez que l'utilisateur rende le vélo
                 response.status(500).json({
-                    msg:`Modification annulée, l'annonce présente un borrower_id, réessayez lorsque le vélosera rendu !`,
+                    msg:`Modification annulée, l'annonce possède un borrower_id, réessayez lorsque le vélo sera rendu !`,
                     editable:false
                 });
                 //request.body.borrower_id = borrowerId
@@ -82,10 +82,19 @@ module.exports = {
     delete: async (request, response) => {
         try {
             const id = parseInt(request.params.offerId, 10);
-            await Offer.delete(id);
-            response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
-            response.status(200).json({msg: `L'annonce ${id} a bien été supprimée !`});
+            const borrowerId = await Offer.returnBorrowerId(id);
+            if (!borrowerId) {
+                await Offer.delete(id);
+                response.setHeader('Authorization', jwt.makeToken(request.userId));
+                response.setHeader('Access-Control-Expose-Headers', 'Authorization')
+                response.status(200).json({msg: `L'annonce ${id} a bien été supprimée !`});
+            } else { // si l'annonce possède un id locataire, on interdit la modif
+                // à voir si pas mieux de filer l'info "editable: false" direct au GET /dashboard (via la returnborid) pour genre qu'ils grisent le bouton modifier, avec un tooltip attendez que l'utilisateur rende le vélo
+                response.status(500).json({
+                    msg:`Suppression annulée, l'annonce possède un borrower_id, réessayez lorsque le vélo sera rendu !`,
+                    editable:false
+                });
+            }
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);

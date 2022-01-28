@@ -93,6 +93,7 @@ class User {
             this.id = rows[0].id;
             this.email = rows[0].email;
             this.password = rows[0].password;
+            this.logged = true;
             return this;
         } catch (error) {
             if (error.detail) {

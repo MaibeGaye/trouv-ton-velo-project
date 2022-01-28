@@ -94,7 +94,7 @@ class Offer {
         try {
 
             console.log(filters);
-            const {rows} = await client.query('SELECT * FROM offer');
+            const {rows} = await client.query('SELECT * FROM offer WHERE id=2');
             if (rows[0]) {
                 return rows.map(row => new Offer(row));
             } else {

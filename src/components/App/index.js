@@ -73,7 +73,7 @@ const App = () => {
               displayLoader={spinner}
               reset={resetOffers}
             />
-)}
+      )}
         />
         <Route path="/offer/:id/details" element={<OfferDetails offerDetail={offers} />} />
         <Route path="/about" element={<About />} />
@@ -82,7 +82,7 @@ const App = () => {
       </Routes>
       <Footer />
     </div>
-  );
+);
 };
 
 export default App;

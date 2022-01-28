@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import Header from '../Header';
 import Home from '../Home';
@@ -12,50 +12,51 @@ import Legals from '../Legals';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
 import '../../styles/index.scss';
-import { UserContext } from '../Context';
 
 const App = () => {
-  const { user } = useContext(UserContext);
-  const [offers, setOffers] = useState([]);
-  // const [loader, setLoader] = useState(false);
-  const [filteredOffer, setfilteredOffer] = useState([]);
-  const [spinner, setSpinner] = useState(false);
+  const [receivedOffers, setReceivedOffers] = useState([]);
+  const [inputValues, setInputValues] = useState([]);
+  const [loader, setLoader] = useState(false);
 
-  // const handleModal = () => {
-  //   setSpinner(!modal);
-  // };
+  // Axios POST request to display filtered offers from inputs values
 
-  const GetOffersFiltered = (event) => {
+  const getOffersFiltered = (event) => {
     event.preventDefault();
-    setSpinner(true);
+    setLoader(true);
+
     axios({
-      method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/getAllOffers/',
+      method: 'post',
+      url: 'https://api-apo-velo.herokuapp.com/offers',
+      data: inputValues,
     })
       .then((res) => {
-        setTimeout(() => {
-          console.log('Options choisies :', filteredOffer);
-          setOffers(res.data);
-          setSpinner(false);
-        }, 2000);
+        setReceivedOffers(res.data);
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setSpinner(false);
+        setTimeout(() => {
+          setLoader(false);
+        }, 2000);
       });
   };
 
+  // Function to reset offers from state
+
   const resetOffers = () => {
-    setOffers([]);
+    setReceivedOffers([]);
   };
-  const handleChange = (event) => {
-    setfilteredOffer({
-      ...filteredOffer,
+
+  // Function to change inputs values
+
+  const handleChangeInputValues = (event) => {
+    setInputValues({
+      ...inputValues,
       [event.target.name]: event.target.value,
     });
   };
+
   return (
     <div className="app">
       <Header />
@@ -67,22 +68,22 @@ const App = () => {
           path="/offers"
           element={(
             <Offers
-              offers={offers}
-              searchOffers={GetOffersFiltered}
-              handleChange={handleChange}
-              displayLoader={spinner}
+              offers={receivedOffers}
+              searchOffers={getOffersFiltered}
+              handleChange={handleChangeInputValues}
+              displayLoader={loader}
               reset={resetOffers}
             />
       )}
         />
-        <Route path="/offer/:id/details" element={<OfferDetails offerDetail={offers} />} />
+        <Route path="/offer/:id/details" element={<OfferDetails offerDetail={receivedOffers} />} />
         <Route path="/about" element={<About />} />
         <Route path="/legals" element={<Legals />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
-);
+  );
 };
 
 export default App;

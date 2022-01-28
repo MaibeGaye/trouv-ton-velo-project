@@ -1,20 +1,46 @@
 import './style.scss';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
+import axios from 'axios';
 import { UserContext } from '../Context';
 
 const Profile = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  if (!user.infos.id) {
+  // Axios GET request to display user's infos
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: 'https://api-apo-velo.herokuapp.com/infos',
+      headers: {
+        Authorization: user.token,
+      },
+    })
+      .then((res) => {
+        const backUp = JSON.stringify(res.headers.authorization);
+        localStorage.setItem('token', backUp);
+        setUser({
+          ...user,
+          infos: res.data,
+          token: res.headers.authorization,
+          logged: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  if (!user.logged) {
     return <Navigate to="/" />;
   }
 
   return (
 
     <section className="container profile">
-      {user.infos.id && <h1 className="profile-title">Mon profil</h1>}
-      {user.infos.id && (
+      {user.logged && <h1 className="profile-title">Mon profil</h1>}
+      {user.logged && (
       <div className="profile-user">
         <div className="left-profile">
           <h2 className="left-profile-title">Mes informations <i className="far fa-address-card" /></h2>
@@ -39,10 +65,6 @@ const Profile = () => {
         </div>
       </div>
       )}
-      {!user.infos.id && (
-        <h2 className="profile-title">Merci de se connecter pour pouvoir consulter votre profil</h2>
-      )}
-
     </section>
   );
 };

@@ -2,10 +2,7 @@
 
 
 .offers{
-    // background-image: url("../../assets/checkoffers.jpg");
-    // background-position: center;
-    // background-size: cover;
-    // background-repeat: no-repeat;
+    
     background-color: vars.$third-color;
     display: flex;
 
@@ -16,7 +13,7 @@
         justify-content: center;
         width: 350px;
         height: 86vh;
-        background-color: vars.$second-color;
+        background-color: vars.$third-color;
 
         & label {
             color: vars.$third-color;
@@ -88,6 +85,10 @@
 }
 
 .offer-form-result{
+    background-image: url("../../assets/checkoffers.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: calc(100vw - 350px);
     display: flex;
     flex-wrap: wrap;

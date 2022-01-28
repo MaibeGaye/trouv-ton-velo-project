@@ -4,173 +4,166 @@ import './style.scss';
 import Offer from '../Offer';
 
 const Offers = ({
-  offers, handleChange, searchOffers, reset, displayLoader,
-}) => {
-  console.log('j\'accède aux offres');
-
-  return (
-    <section className="container offers">
-      <div className="offers-form">
-        <h1 className="offers-form-title">Recherche</h1>
-        {/* <div className="offers-form-inputs"> */}
-        <div className="offers-form-input">
-          <label htmlFor="option1">Ville</label>
+  offers, handleChange,
+  searchOffers, reset,
+  displayLoader,
+}) => (
+  <section className="container offers">
+    <div className="offers-form">
+      <h1 className="offers-form-title">Recherche</h1>
+      <div className="offers-form-input">
+        <label htmlFor="option1">Ville</label>
+        <input
+          type="tel"
+          maxLength={5}
+          id="option1"
+          name="zip_code"
+          onChange={handleChange}
+          placeholder="Code Postal"
+        />
+      </div>
+      <div className="offers-form-input">
+        <h2>Modèle</h2>
+        <div className="test">
           <input
-            type="tel"
-            maxLength={5}
-            id="option1"
-            name="zip_code"
-            onChange={handleChange}
-            placeholder="Code Postal"
-          />
-        </div>
-        <div className="offers-form-input">
-          <h2>Modèle</h2>
-          <div className="test">
-            <input
-              type="radio"
-              id="option2"
-              name="size"
-              value="Adult"
-              onChange={handleChange}
-            />
-            <label htmlFor="option2">Adulte</label>
-            <input
-              type="radio"
-              id="option3"
-              name="size"
-              value="Children"
-              onChange={handleChange}
-            />
-            <label htmlFor="option3">Enfant</label>
-          </div>
-        </div>
-        <div className="offers-form-input">
-          <h2>Type</h2>
-          <div className="test">
-            <input
-              type="radio"
-              id="ville"
-              name="model"
-              value="City"
-              onChange={handleChange}
-            />
-            <label htmlFor="ville">Ville</label>
-            <input
-              type="radio"
-              id="vtt"
-              name="model"
-              value="Vtt"
-              onChange={handleChange}
-            />
-            <label htmlFor="vtt">Vtt</label>
-          </div>
-        </div>
-        <div className="offers-form-input">
-          <h2>Lumières</h2>
-          <div className="test">
-            <input
-              type="radio"
-              id="option4"
-              name="lamps"
-              value="true"
-              onChange={handleChange}
-            />
-            <label htmlFor="option4">Oui</label>
-            <input
-              type="radio"
-              id="option5"
-              name="lamps"
-              value="false"
-              onChange={handleChange}
-            />
-            <label htmlFor="option5">Non</label>
-          </div>
-        </div>
-        <div className="offers-form-input">
-          <h2>Anti vol</h2>
-          <div className="test">
-            <input
-              type="radio"
-              id="option6"
-              name="safety_lock"
-              value="true"
-              onChange={handleChange}
-            />
-            <label htmlFor="option6">Oui</label>
-            <input
-              type="radio"
-              id="option7"
-              name="safety_lock"
-              value="false"
-              onChange={handleChange}
-            />
-            <label htmlFor="option7">Non</label>
-          </div>
-        </div>
-
-        <div className="offers-form-input">
-          <h2>Casque</h2>
-          <div className="test">
-            <input
-              type="radio"
-              id="option8"
-              name="helmet"
-              value="true"
-              onChange={handleChange}
-            />
-            <label htmlFor="option8">Oui</label>
-            <input
-              type="radio"
-              id="option9"
-              name="helmet"
-              value="false"
-              onChange={handleChange}
-            />
-            <label htmlFor="option9">Non</label>
-          </div>
-        </div>
-        <div className="offers-form-input-date">
-          <label htmlFor="option10">Début</label>
-          <input
-            type="date"
-            id="option10"
-            name="validity_start_date"
+            type="radio"
+            id="option2"
+            name="size"
+            value="Adult"
             onChange={handleChange}
           />
-          <label htmlFor="option11">Fin</label>
+          <label htmlFor="option2">Adulte</label>
           <input
-            type="date"
-            id="option11"
-            name="validity_end_date"
+            type="radio"
+            id="option3"
+            name="size"
+            value="Children"
             onChange={handleChange}
           />
-        </div>
-        {/*
-
-           */}
-        {/* </div> */}
-        <div className="offers-form-buttons">
-          <button className="offers-form-button" type="submit" onClick={reset}>Reset</button>
-          <button className="offers-form-button" type="submit" onClick={searchOffers}>GO !</button>
+          <label htmlFor="option3">Enfant</label>
         </div>
       </div>
-      <div className="offer-form-result">
-        {displayLoader
+      <div className="offers-form-input">
+        <h2>Type</h2>
+        <div className="test">
+          <input
+            type="radio"
+            id="ville"
+            name="model"
+            value="City"
+            onChange={handleChange}
+          />
+          <label htmlFor="ville">Ville</label>
+          <input
+            type="radio"
+            id="vtt"
+            name="model"
+            value="Vtt"
+            onChange={handleChange}
+          />
+          <label htmlFor="vtt">Vtt</label>
+        </div>
+      </div>
+      <div className="offers-form-input">
+        <h2>Lumières</h2>
+        <div className="test">
+          <input
+            type="radio"
+            id="option4"
+            name="lamps"
+            value="true"
+            onChange={handleChange}
+          />
+          <label htmlFor="option4">Oui</label>
+          <input
+            type="radio"
+            id="option5"
+            name="lamps"
+            value="false"
+            onChange={handleChange}
+          />
+          <label htmlFor="option5">Non</label>
+        </div>
+      </div>
+      <div className="offers-form-input">
+        <h2>Anti vol</h2>
+        <div className="test">
+          <input
+            type="radio"
+            id="option6"
+            name="safety_lock"
+            value="true"
+            onChange={handleChange}
+          />
+          <label htmlFor="option6">Oui</label>
+          <input
+            type="radio"
+            id="option7"
+            name="safety_lock"
+            value="false"
+            onChange={handleChange}
+          />
+          <label htmlFor="option7">Non</label>
+        </div>
+      </div>
+
+      <div className="offers-form-input">
+        <h2>Casque</h2>
+        <div className="test">
+          <input
+            type="radio"
+            id="option8"
+            name="helmet"
+            value="true"
+            onChange={handleChange}
+          />
+          <label htmlFor="option8">Oui</label>
+          <input
+            type="radio"
+            id="option9"
+            name="helmet"
+            value="false"
+            onChange={handleChange}
+          />
+          <label htmlFor="option9">Non</label>
+        </div>
+      </div>
+      <div className="offers-form-input-date">
+        <label htmlFor="option10">Début</label>
+        <input
+          type="date"
+          id="option10"
+          name="validity_start_date"
+          onChange={handleChange}
+        />
+        <label htmlFor="option11">Fin</label>
+        <input
+          type="date"
+          id="option11"
+          name="validity_end_date"
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="offers-form-buttons">
+        <button className="offers-form-button" type="submit" onClick={reset}>Reset</button>
+        <button className="offers-form-button" type="submit" onClick={searchOffers}>GO !</button>
+      </div>
+    </div>
+    <div className="offer-form-result">
+      {displayLoader
         && (
         <div className="spinner" />
         )}
-        {!displayLoader
+      {!displayLoader
         && offers.map((offer) => (
-          <div className="test-div" key={offer.id}>
+          <div className="offer-container" key={offer.id}>
             <Offer {...offer} />
           </div>
         ))}
-      </div>
-    </section>
-  );
-};
-
+    </div>
+  </section>
+);
 Offers.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,

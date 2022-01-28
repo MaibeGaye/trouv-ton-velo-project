@@ -34,42 +34,27 @@ const Header = () => {
   const [loginModalValue, setLoginModalValue] = useState({});
   const [registerModalValue, setRegisterModalValue] = useState({});
 
-  useEffect(() => {
-    // if (backUpToken) {
+  // Function useEffect after every changed user.token value
 
-    //   setUser({
-    //     ...user,
-    //     token: backUp,
-    //   });
-    // }
-    const backUpSession = localStorage.getItem('logged');
+  useEffect(() => {
     const backUpToken = localStorage.getItem('token');
-    if (backUpSession && backUpToken) {
-      const backupLog = JSON.parse(backUpSession);
-      const backUp = JSON.parse(backUpToken);
+    const backUpSession = localStorage.getItem('logged');
+
+    if (backUpSession || backUpToken) {
+      const backUpJWT = JSON.parse(backUpToken);
+      const backUpLOG = JSON.parse(backUpSession);
       setUser({
         ...user,
         infos: {
           ...user.infos,
-          id: backupLog,
         },
-        token: backUp,
+        token: backUpJWT,
+        logged: backUpLOG,
       });
     }
   }, []);
-  // useEffect(() => {
-  //   const backUpSession = localStorage.getItem('logged');
-  //   if (backUpSession) {
-  //     const backupLog = JSON.parse(backUpSession)
-  //     setUser({
-  //       ...user,
-  //       infos :{
-  //         ...user.infos,
-  //         id: backupLog,
-  //       },
-  //     })
-  //   }
-  // }, [])
+
+  // Function to change values from Login/Register modals
 
   const loginHandleChangeValue = (prop) => (event) => {
     setLoginModalValue({ ...loginModalValue, [prop]: event.target.value });
@@ -103,45 +88,13 @@ const Header = () => {
     });
   };
 
+  // Function to showPassword on register modal
+
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const showProfil = () => {
-    axios({
-      method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/infos',
-      headers: {
-        Authorization: user.token,
-      },
-    })
-      .then((res) => {
-        console.log(res.headers.authorization);
-        setUser({
-          ...user,
-          infos: res.data,
-          token: res.headers.authorization,
-        });
-        // const backUp = JSON.stringify(res.data);
-        // localStorage.setItem('infos', backUp);
-        // loginModal();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-      });
-  };
-
-  // Function for change  state
-  // const LoginHandleChangeValue = (event) => {
-  //   setLoginValue({
-  //     ...loginValue,
-  //     [event.target.id]: event.target.value,
-  //   });
-  // };
-
-  // Axios request for connect the user
+  // Axios POST request for connect the user
 
   const connectUser = (event) => {
     event.preventDefault();
@@ -152,26 +105,21 @@ const Header = () => {
       data: loginModalValue,
     })
       .then((res) => {
-        setTimeout(() => {
-          console.log(res.headers.authorization);
-          setUser({
-            ...user,
-            infos: res.data,
-            token: res.headers.authorization,
-          });
-          handleLoginModal();
-          const backUp = JSON.stringify(res.headers.authorization);
-          localStorage.setItem('token', backUp);
-          const test = JSON.stringify(res.data.id);
-          localStorage.setItem('logged', test);
-        }, 1000);
+        setUser({
+          ...user,
+          infos: res.data,
+          token: res.headers.authorization,
+          logged: res.data.logged,
+        });
+        const createBackUpJWT = JSON.stringify(res.headers.authorization);
+        localStorage.setItem('token', createBackUpJWT);
+        const createBackUpLOG = JSON.stringify(res.data.logged);
+        localStorage.setItem('logged', createBackUpLOG);
+        handleLoginModal();
       })
 
       .catch((err) => {
         console.log(err);
-        setTimeout(() => {
-          setLoader(false);
-        }, 1000);
       })
       .finally(() => {
         setTimeout(() => {
@@ -180,7 +128,7 @@ const Header = () => {
       });
   };
 
-  // Axios request for add a new user in the database
+  // Axios POST request to create an account
 
   const createAccount = (event) => {
     event.preventDefault();
@@ -193,18 +141,13 @@ const Header = () => {
       .then((res) => {
         console.log(res.data);
 
+        handleRegisterModal();
         setTimeout(() => {
-          handleRegisterModal();
-          setTimeout(() => {
-            handleLoginModal();
-          }, 1000);
+          handleLoginModal();
         }, 1000);
       })
       .catch((err) => {
         console.log(err);
-        setTimeout(() => {
-          setLoader(false);
-        }, 1000);
       })
       .finally(() => {
         setTimeout(() => {
@@ -386,13 +329,24 @@ const Header = () => {
       <div className="header-nav">
         <div className="header-nav-links">
           <NavLink to="/offers" className="header-nav-link">Louer</NavLink>
-          {user.infos.id && <NavLink to="/create" className="header-nav-link">Proposer</NavLink>}
-          {user.infos.id && <NavLink to="/dashboard" className="header-nav-link" onClick={showProfil}>Profil</NavLink>}
+
+          {user.logged
+            && (
+            <>
+              <NavLink to="/create" className="header-nav-link">Proposer</NavLink>
+              <NavLink to="/dashboard" className="header-nav-link">Profil</NavLink>
+            </>
+            )}
         </div>
         <div className="header-nav-buttons">
-          {!user.infos.id && <button className="header-nav-button register " type="button" onClick={handleRegisterModal}>S'inscrire</button>}
-          {!user.infos.id && <button className="header-nav-button loggin" type="button" onClick={handleLoginModal}>Connexion</button>}
-          {user.infos.id && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
+          {!user.logged
+          && (
+          <>
+            <button className="header-nav-button register " type="button" onClick={handleRegisterModal}>S'inscrire</button>
+            <button className="header-nav-button loggin" type="button" onClick={handleLoginModal}>Connexion</button>
+          </>
+          )}
+          {user.logged && <button className="header-nav-button logout" type="button" onClick={logout}>Deconnexion</button>}
         </div>
       </div>
     </header>

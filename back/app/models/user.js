@@ -112,7 +112,10 @@ class User {
     async save() {
         try {
             if (this.id) {
+                const hashedPwd = await bcrypt.hash(this.password, 10);
+                this.password = hashedPwd;
                 await client.query('SELECT * FROM update_user($1)', [this]);
+                return this;
             } else {
                 const hashedPwd = await bcrypt.hash(this.password, 10);
                 this.password = hashedPwd;
@@ -142,9 +145,10 @@ class User {
      * Deletes a user from the database
      * @returns {void} Nothing to return
      * @async
+     * @static
      * @throws {Error} a potential SQL error
      */
-    async delete(id) {
+    static async delete(id) {
         try {
             await client.query('DELETE FROM "user" WHERE id=$1', [id]);
         } catch (error) {

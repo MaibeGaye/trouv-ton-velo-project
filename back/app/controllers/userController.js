@@ -58,10 +58,11 @@ module.exports = {
 
     edit: async (request, response) => {
         try {
+            request.body.id = request.userId.id;
             response.setHeader('Authorization', jwt.makeToken(request.userId));
             response.setHeader('Access-Control-Expose-Headers', 'Authorization')
             const offer = await new User(request.body).save();
-            response.status(200).json(offer);   
+            response.status(200).json(offer);
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);   
@@ -72,7 +73,7 @@ module.exports = {
         try {
             // pas besoin de renvoyer un nouveau token, on delete juste l'utilisateur connecté
             await User.delete(request.userId.id);
-            response.status(200).json({msg: `L'utilisateur ${id} a bien été supprimé !`});
+            response.status(200).json({msg: `L'utilisateur ${request.userId.id} a bien été supprimé !`, logged:false});
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);

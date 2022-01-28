@@ -129,7 +129,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
  * @returns {Offer} 200 - The updated offer
  * @returns {string} 500 - An error message
  */
-//  router.patch('/dashboard/edit', jwtMW, userController.update);
+ router.patch('/dashboard/edit', jwtMW, userController.edit);
 
  /**
   * DELETE /dashboard/delete
@@ -139,7 +139,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
   * @returns {string} 200 - The deleted user confirmation
   * @returns {string} 500 - An error message
   */
-//  router.delete('/dashboard/delete', jwtMW, userController.delete);
+ router.delete('/dashboard/delete', jwtMW, userController.delete);
 
 /**
  * GET /dashboard
@@ -148,7 +148,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
  * @tags User
  * @returns {array<User>} 200 - An array of user info
  */
-router.get('/dashboard', userController.userDashboard);
+router.get('/dashboard', jwtMW, userController.userDashboard);
 
 
 /**

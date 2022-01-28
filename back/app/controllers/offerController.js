@@ -56,18 +56,23 @@ module.exports = {
             const lenderId = await Offer.returnLenderId(id);
 
             // si pas de locataire actuel, on définit quand même borrower_id sur null 
-            // pour avoir un objet body offer complet
+            // pour avoir un objet body offer complet avant de le save
             const borrowerId = await Offer.returnBorrowerId(id);
             if (!borrowerId) {
-                request.body.borrower_id = null
-            } else {
-                request.body.borrower_id = borrowerId
-            }
+                request.body.borrower_id = null;
 
-            const offer = await new Offer(request.body).save();
-            response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
-            response.status(200).json(offer);
+                const offer = await new Offer(request.body).save();
+                response.setHeader('Authorization', jwt.makeToken(request.userId));
+                response.setHeader('Access-Control-Expose-Headers', 'Authorization')
+                response.status(200).json(offer);
+            } else { // si l'annonce possède un id loueur, on interdit la modif
+                // à voir si pas mieux de filer l'info "editable: false" direct au GET /dashboard (via la returnborid) pour genre qu'ils grisent le bouton modifier, avec un tooltip attendez que l'utilisateur rende le vélo
+                response.status(500).json({
+                    msg:`Modification annulée, l'annonce présente un borrower_id, réessayez lorsque le vélosera rendu !`,
+                    editable:false
+                });
+                //request.body.borrower_id = borrowerId
+            }
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);   

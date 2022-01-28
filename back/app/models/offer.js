@@ -139,6 +139,7 @@ class Offer {
      * Deletes an offer from the database
      * @returns {void} Nothing to return
      * @async
+     * @static
      * @throws {Error} a potential SQL error
      */
     static async delete(id) {
@@ -153,7 +154,7 @@ class Offer {
     }
 
     /**
-     * Returns the lender id value of the specified offer id
+     * Returns an offer's lender id value
      * @param {number} id 
      * @returns {number|null} null if no offer matches the id in database, null if no record was found
      * @static
@@ -177,6 +178,14 @@ class Offer {
         }
     }
 
+    /**
+     * Returns the borrower_id value of the specified offer id
+     * @param {number} id 
+     * @returns {number|null} null if no offer matches the id in database, null if no record was found
+     * @static
+     * @async
+     * @throws {Error} An error
+     */
     static async returnBorrowerId(id) {
         try {
             const {rows} = await client.query('SELECT borrower_id FROM offer WHERE id=$1', [id]);

@@ -54,6 +54,29 @@ module.exports = {
         } catch (error) {
             
         }
+    },
+
+    edit: async (request, response) => {
+        try {
+            response.setHeader('Authorization', jwt.makeToken(request.userId));
+            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
+            const offer = await new User(request.body).save();
+            response.status(200).json(offer);   
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);   
+        }
+    },
+
+    delete: async (request, response) => {
+        try {
+            // pas besoin de renvoyer un nouveau token, on delete juste l'utilisateur connecté
+            await User.delete(request.userId.id);
+            response.status(200).json({msg: `L'utilisateur ${id} a bien été supprimé !`});
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        }
     }
 
 }

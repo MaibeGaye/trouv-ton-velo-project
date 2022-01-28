@@ -83,9 +83,9 @@ class Offer {
     }
 
     /**
-     * Fetches a single offer from the database
+     * Filters offer from the database
      * @param {number} id 
-     * @returns {Offer|null} null if no offer matches the id in database, null if no record was found
+     * @returns {Array<Offer>|null} null if no offer matches the filters in database, null if no record was found
      * @static
      * @async
      * @throws {Error} An error
@@ -119,6 +119,7 @@ class Offer {
         try {
             if (this.id) {
                 await client.query('SELECT * FROM update_offer($1)', [this]);
+                return this;
             } else {
                 const {rows} = await client.query('SELECT * FROM add_offer($1)', [this]);
                 this.id = rows[0].id;
@@ -140,9 +141,51 @@ class Offer {
      * @async
      * @throws {Error} a potential SQL error
      */
-    async delete(id) {
+    static async delete(id) {
         try {
             await client.query('DELETE FROM offer WHERE id=$1', [id]);
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Returns the lender id value of the specified offer id
+     * @param {number} id 
+     * @returns {number|null} null if no offer matches the id in database, null if no record was found
+     * @static
+     * @async
+     * @throws {Error} An error
+     */
+     static async returnLenderId(id) {
+        try {
+            const {rows} = await client.query('SELECT lender_id FROM offer WHERE id=$1', [id]);
+            if (rows[0]) {
+                return rows[0].lender_id;
+            } else {
+                console.log(`No offer found for id ${id}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
+    static async returnBorrowerId(id) {
+        try {
+            const {rows} = await client.query('SELECT borrower_id FROM offer WHERE id=$1', [id]);
+            if (rows[0]) {
+                return rows[0].borrower_id;
+            } else {
+                console.log(`No offer found for id ${id}`);
+                return null;
+            }
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);

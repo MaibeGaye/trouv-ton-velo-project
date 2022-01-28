@@ -102,22 +102,44 @@ router.post('/create', offerMiddleware, jwtMW, offerController.create);
  * @summary Updates an existing offer in database
  * @tags Offers
  * @param {number} id.path.required The id of the offer to fetch
- * @param {OfferJson} request.body.required User info to add in database
+ * @param {OfferJson} request.body.required Offer info to add in database
  * @returns {Offer} 200 - The updated offer
  * @returns {string} 500 - An error message
  */
-router.patch('/dashboard/:offerId/edit', offerController.update);
+router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, offerController.edit);
+// il faudra lui fournir
+
 
 /**
  * DELETE /dashboard/{offerId}/delete
  * @summary Deletes an existing offer in database
  * @tags Offers
- * @param {number} id.path.required The id of the offer to fetch
- * @returns {string} 200 - The deleted offer
+ * @param {number} id.path.required The id of the offer to delete
+ * @returns {string} 200 - The deleted offer confirmation
  * @returns {string} 500 - An error message
  */
-router.delete('/dashboard/:offerId/delete', offerController.delete);
+router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete);
 
+/**
+ * PATCH /dashboard/edit
+ * @summary Updates current user infos in database
+ * @tags Users
+ * @param {number} id.path.required The id of the offer to fetch
+ * @param {OfferJson} request.body.required User info to add in database
+ * @returns {Offer} 200 - The updated offer
+ * @returns {string} 500 - An error message
+ */
+//  router.patch('/dashboard/edit', jwtMW, userController.update);
+
+ /**
+  * DELETE /dashboard/delete
+  * @summary Deletes the current user in database
+  * @tags Users
+  * @param {number} id.path.required The id of the offer to fetch
+  * @returns {string} 200 - The deleted user confirmation
+  * @returns {string} 500 - An error message
+  */
+//  router.delete('/dashboard/delete', jwtMW, userController.delete);
 
 /**
  * GET /dashboard

@@ -19,7 +19,7 @@ module.exports = {
         try {
             const user = await new User(request.body).save();
             const token = jwt.makeToken(user);
-            response.setHeader('Authorization', token)
+            response.setHeader('Authorization', 'Bearer' + token)
             response.setHeader('Access-Control-Expose-Headers', 'Authorization')
             response.status(201).json(user);
         } catch(error) {
@@ -31,7 +31,7 @@ module.exports = {
         try {
             const user = await new User(request.body).getByEmail();
             const token = jwt.makeToken(user);
-            response.setHeader('Authorization', token)
+            response.setHeader('Authorization', 'Bearer' + token)
             response.setHeader('Access-Control-Expose-Headers', 'Authorization')
             response.status(200).json(user);
         } catch(error) {

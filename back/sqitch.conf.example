@@ -7,4 +7,4 @@
 	# registry = sqitch
 	# client = psql
 [target "heroku"]
-	uri = 
+	uri = db:pg://urlheroku

@@ -10,8 +10,8 @@ Content-Type: application/json
     "firstname": "myfirstname",
     "lastname": "myname",
     "password": "testtest",
-    "passwordConfirm": "hjfdklgbnfdxc",
-    "username": "monpseudo",
+    "passwordConfirm": "testtest",
+    "username": "mypseudo",
     "zip_code": "67000"
 }
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 
 ### Get infos
 GET {{host}}/infos
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyMSwiaWF0IjoxNjQzMjc4MjU1LCJleHAiOjE2NDMyNzg1NTV9.YHW_L49App6knMuLqeHOWkR4-vJwfACdJkVc8I6ihbw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGFYSS93SU1pMEF1VWF4SE0vdW4wZ09lNE9kaG5Ld2dXRG5sWUFQMnRGd1RPanQzNHlQNXBTIiwiaWQiOjIzfSwiaWF0IjoxNjQzMzYxMDg0LCJleHAiOjE2NDMzNjI4ODR9.MmWYR7nk8LWGnd13_x5L1Z-I0d808sTsjUY2mSj7dXI
 
 ### Add an offer
 POST {{host}}/create

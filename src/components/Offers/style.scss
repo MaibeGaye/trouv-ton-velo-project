@@ -13,7 +13,7 @@
         justify-content: center;
         width: 350px;
         height: 86vh;
-        background-color: vars.$third-color;
+        background-color: vars.$second-color;
 
         & label {
             color: vars.$third-color;
@@ -37,7 +37,7 @@
            align-items: center;
            border-radius: 10px;
            font-size: 2rem;
-           padding: 1rem;
+           padding: 0.5rem;
            margin: 1rem;
            width: 90%;
 
@@ -85,10 +85,11 @@
 }
 
 .offer-form-result{
-    background-image: url("../../assets/checkoffers.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    // background-image: url("../../assets/checkoffers.jpg");
+    // background-position: center;
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    background-color: vars.$third-color;
     width: calc(100vw - 350px);
     display: flex;
     flex-wrap: wrap;
@@ -97,18 +98,6 @@
     overflow: auto;
 }
 
-@media screen and (max-width: 767.98px) {
-    
-    // .offers-form{
-    //     // display: flex;
-    //     // align-items: center;
-    //     // justify-content: center;
-    //     // width: 300px;
-    //     // height: 86vh;
-    //     // background-color: vars.$second-color;
-    //     display: none;
-    // }
-}
 .spinner {
     width: 50px;
     height: 50px;
@@ -128,4 +117,14 @@
     100% {
       transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     }
+}
+
+@media screen and (max-width: 766px) {
+    
+  .offers-form{
+      width: 300px;
+  }
+  .offer-form-result{
+    width: calc(100vw - 300px);
+  }
 }

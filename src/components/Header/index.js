@@ -1,20 +1,11 @@
+/* eslint-disable no-console */
 import './style.scss';
 import { NavLink, Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Input from '@mui/material/Input';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import { InputLabel, FormControl, LinearProgress } from '@mui/material';
-import Box from '@mui/material/Box';
+import validations from './RegisterValidation';
+import LoginModal from './LoginModal';
+import RegisterModal from './RegisterModal';
 import { UserContext } from '../Context';
 
 const Header = () => {
@@ -28,11 +19,24 @@ const Header = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [errors, setErrors] = useState({});
 
   // Modals state values
 
-  const [loginModalValue, setLoginModalValue] = useState({});
-  const [registerModalValue, setRegisterModalValue] = useState({});
+  const [loginModalValue, setLoginModalValue] = useState({
+    email: '',
+    password: '',
+  });
+  const [registerModalValue, setRegisterModalValue] = useState({
+    firstname: '',
+    lastname: '',
+    username: '',
+    email: '',
+    address: '',
+    zip_code: '',
+    password: '',
+    passwordConfirm: '',
+  });
 
   // Function useEffect after every changed user.token value
 
@@ -40,7 +44,7 @@ const Header = () => {
     const backUpToken = localStorage.getItem('token');
     const backUpSession = localStorage.getItem('logged');
 
-    if (backUpSession || backUpToken) {
+    if (backUpSession && backUpToken) {
       const backUpJWT = JSON.parse(backUpToken);
       const backUpLOG = JSON.parse(backUpSession);
       setUser({
@@ -64,7 +68,7 @@ const Header = () => {
     setRegisterModalValue({ ...registerModalValue, [prop]: event.target.value });
   };
 
-  // Function to Open/Close Login/Register modals
+  // Function to Open/Close Login/Register modals and reset state
 
   const handleRegisterModal = () => {
     setShowRegisterModal(!showRegisterModal);
@@ -78,6 +82,7 @@ const Header = () => {
       password: '',
       passwordConfirm: '',
     });
+    setErrors({});
   };
 
   const handleLoginModal = () => {
@@ -98,6 +103,7 @@ const Header = () => {
 
   const connectUser = (event) => {
     event.preventDefault();
+
     setLoader(true);
     axios({
       method: 'post',
@@ -132,6 +138,7 @@ const Header = () => {
 
   const createAccount = (event) => {
     event.preventDefault();
+    setErrors(validations(registerModalValue));
     setLoader(true);
     axios({
       method: 'post',
@@ -140,14 +147,13 @@ const Header = () => {
     })
       .then((res) => {
         console.log(res.data);
-
         handleRegisterModal();
         setTimeout(() => {
           handleLoginModal();
         }, 1000);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.request.responseText);
       })
       .finally(() => {
         setTimeout(() => {
@@ -163,168 +169,26 @@ const Header = () => {
         <h3 className="header-logo-title">Trouv ton vélo</h3>
       </div>
 
-      {/* MODAL LOGIN */}
+      <LoginModal
+        loginHandleChangeValue={loginHandleChangeValue}
+        handleLoginModal={handleLoginModal}
+        loginModalValue={loginModalValue}
+        showLoginModal={showLoginModal}
+        connectUser={connectUser}
+        loader={loader}
+      />
 
-      <Dialog open={showLoginModal} onClose={handleLoginModal}>
-        <DialogTitle sx={{
-          color: '#18B7BE', fontSize: '7ch', textTransform: 'uppercase', textAlign: 'center',
-        }}
-        >Connexion
-        </DialogTitle>
-        <DialogContent>
-          { loader && (
-            <Box sx={{ width: '50%', margin: 'auto' }}>
-              <LinearProgress />
-            </Box>
-          )}
-          <TextField
-            required
-            autoFocus
-            margin="dense"
-            id="email"
-            label="Adresse email"
-            type="email"
-            fullWidth
-            variant="standard"
-            value={loginModalValue.email}
-            onChange={loginHandleChangeValue('email')}
-          />
-          <TextField
-            required
-            margin="dense"
-            id="password"
-            label="Mot de passe"
-            type="password"
-            fullWidth
-            variant="standard"
-            value={loginModalValue.password}
-            onChange={loginHandleChangeValue('password')}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} className="btn-test" variant="outlined" onClick={handleLoginModal}>Annuler</Button>
-          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} variant="outlined" onClick={connectUser}>Valider</Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* MODAL REGISTER */}
-
-      <Dialog sx={{ textAlign: 'center' }} open={showRegisterModal} onClose={handleRegisterModal}>
-        <DialogTitle sx={{ color: '#18B7BE', fontSize: '7ch', textTransform: 'uppercase' }}>Inscription</DialogTitle>
-        <DialogContent>
-          { loader && (
-            <Box sx={{ width: '50%', margin: 'auto' }}>
-              <LinearProgress sx={{ backgroundColor: '#18B7BE' }} />
-            </Box>
-          )}
-          <TextField
-            required
-            autoFocus
-            fullWidth
-            margin="dense"
-            id="firstname"
-            label="Prénom"
-            variant="standard"
-            value={registerModalValue.firstname}
-            onChange={registerHandleChangeValue('firstname')}
-          />
-          <TextField
-            fullWidth
-            margin="dense"
-            id="lastname"
-            label="Nom"
-            variant="standard"
-            value={registerModalValue.lastname}
-            onChange={registerHandleChangeValue('lastname')}
-          />
-          <TextField
-            fullWidth
-            margin="dense"
-            id="username"
-            label="Pseudo"
-            variant="standard"
-            value={registerModalValue.username}
-            onChange={registerHandleChangeValue('username')}
-          />
-          <TextField
-            fullWidth
-            margin="dense"
-            type="email"
-            id="email"
-            label="Email"
-            variant="standard"
-            value={registerModalValue.email}
-            onChange={registerHandleChangeValue('email')}
-          />
-          <TextField
-            fullWidth
-            margin="dense"
-            id="address"
-            label="Adresse"
-            variant="standard"
-            value={registerModalValue.adress}
-            onChange={registerHandleChangeValue('address')}
-          />
-          <TextField
-            fullWidth
-            margin="dense"
-            type="number"
-            id="zip_code"
-            label="Code Postal"
-            variant="standard"
-            value={registerModalValue.zip_code}
-            onChange={registerHandleChangeValue('zip_code')}
-          />
-          <FormControl sx={{ width: '50ch', margin: '2ch' }} variant="standard">
-            <InputLabel htmlFor="password">
-              Mot de passe
-            </InputLabel>
-            <Input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              value={registerModalValue.password}
-              onChange={registerHandleChangeValue('password')}
-              endAdornment={(
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleShowPassword}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              )}
-            />
-          </FormControl>
-          <FormControl sx={{ width: '50ch', marginTop: '1ch' }} variant="standard">
-            <InputLabel htmlFor="passwordConfirm">
-              Confirmer Mot de passe
-            </InputLabel>
-            <Input
-              id="password-confirm"
-              type={showPassword ? 'text' : 'password'}
-              value={registerModalValue.passwordConfirm}
-              onChange={registerHandleChangeValue('passwordConfirm')}
-              endAdornment={(
-                <InputAdornment position="end" sx={{ display: 'none' }}>
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleShowPassword}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              )}
-            />
-          </FormControl>
-        </DialogContent>
-        <DialogActions>
-          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} className="btn-test" variant="outlined" onClick={handleRegisterModal}>Annuler</Button>
-          <Button sx={{ color: '#18B7BE', border: '1px solid #18B7BE', ':hover': { border: '1px solid #072A40' } }} variant="outlined" onClick={createAccount}>Valider</Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Nav links */}
+      <RegisterModal
+        registerHandleChangeValue={registerHandleChangeValue}
+        handleRegisterModal={handleRegisterModal}
+        registerModalValue={registerModalValue}
+        handleShowPassword={handleShowPassword}
+        showRegisterModal={showRegisterModal}
+        createAccount={createAccount}
+        showPassword={showPassword}
+        loader={loader}
+        errors={errors}
+      />
 
       <div className="header-nav">
         <div className="header-nav-links">

@@ -25,11 +25,12 @@ const App = () => {
     setLoader(true);
 
     axios({
-      method: 'post',
+      method: 'get',
       url: 'https://api-apo-velo.herokuapp.com/offers',
       data: inputValues,
     })
       .then((res) => {
+        console.log(inputValues)
         setReceivedOffers(res.data);
       })
       .catch((err) => {
@@ -74,7 +75,7 @@ const App = () => {
               displayLoader={loader}
               reset={resetOffers}
             />
-      )}
+          )}
         />
         <Route path="/offer/:id/details" element={<OfferDetails offerDetail={receivedOffers} />} />
         <Route path="/about" element={<About />} />

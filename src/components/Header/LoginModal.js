@@ -12,6 +12,7 @@ const LoginModal = ({
   showLoginModal, handleLoginModal,
   loader, loginHandleChangeValue,
   loginModalValue, connectUser,
+  responseAPI,
 }) => (
   <div>
     <Dialog open={showLoginModal} onClose={handleLoginModal}>
@@ -26,6 +27,7 @@ const LoginModal = ({
           <LinearProgress />
         </Box>
         )}
+        <p className="inputs-errors">{responseAPI}</p>
         <TextField
           required
           autoFocus
@@ -64,5 +66,6 @@ LoginModal.propTypes = {
   loginHandleChangeValue: PropTypes.func.isRequired,
   loginModalValue: PropTypes.object.isRequired,
   connectUser: PropTypes.func.isRequired,
+  responseAPI: PropTypes.string.isRequired,
 };
 export default LoginModal;

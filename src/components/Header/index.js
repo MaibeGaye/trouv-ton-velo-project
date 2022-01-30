@@ -20,7 +20,7 @@ const Header = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loader, setLoader] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const [responseAPI, setResponseAPI] = useState('');
   // Modals state values
 
   const [loginModalValue, setLoginModalValue] = useState({
@@ -91,6 +91,7 @@ const Header = () => {
       email: '',
       password: '',
     });
+    setResponseAPI('');
   };
 
   // Function to showPassword on register modal
@@ -125,7 +126,10 @@ const Header = () => {
       })
 
       .catch((err) => {
-        console.log(err);
+        console.log(err.request.responseText);
+        setTimeout(() => {
+          setResponseAPI(err.request.responseText);
+        }, 1000);
       })
       .finally(() => {
         setTimeout(() => {
@@ -175,6 +179,8 @@ const Header = () => {
         loginModalValue={loginModalValue}
         showLoginModal={showLoginModal}
         connectUser={connectUser}
+        setResponseAPI={setResponseAPI}
+        responseAPI={responseAPI}
         loader={loader}
       />
 

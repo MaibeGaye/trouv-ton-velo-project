@@ -9,10 +9,6 @@ const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [displayInfos, setDisplayInfos] = useState(true);
 
-  if (!user.logged) {
-    return <Navigate to="/" />;
-  }
-
   // Axios GET request to display user's infos
 
   useEffect(() => {
@@ -37,6 +33,12 @@ const Profile = () => {
         console.log(err);
       });
   }, []);
+
+  // Do not use conditions before the useEffect other wise "Rendered fewer hooks than expected"
+
+  if (!user.logged) {
+    return <Navigate to="/" />;
+  }
 
   // Axios DELETE request to delete user's account
 

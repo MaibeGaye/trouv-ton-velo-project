@@ -14,8 +14,8 @@ const client = require('../database');
  * @property {string} photo
  * @property {string} address
  * @property {number} zip_code
- * @property {string} validity_start_date
- * @property {string} validity_end_date
+ * @property {Date} validity_start_date
+ * @property {Date} validity_end_date
  * @property {number} lender_id
  * @property {number} borrower_id
  */

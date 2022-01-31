@@ -84,7 +84,7 @@ class Offer {
 
     /**
      * Filters offer from the database
-     * @param {number} id 
+     * @param {Object} filters 
      * @returns {Array<Offer>|null} null if no offer matches the filters in database, null if no record was found
      * @static
      * @async
@@ -92,13 +92,27 @@ class Offer {
      */
      static async filter(filters) {
         try {
-
-            console.log(filters);
-            const {rows} = await client.query('SELECT * FROM offer WHERE id=2');
+            const baseQuery = "SELECT * FROM offer"
+            let queryString = " WHERE ";
+            for (const value in filters) {
+                if (typeof filters[value] === 'boolean' || filters[value] instanceof Boolean){
+                    queryString += `${value}=${filters[value]} AND `;
+                } else {
+                    queryString += `${value}='${filters[value]}' AND `;
+                }
+            }
+            let finalQuery = "";
+            if (Object.keys(filters).length === 0){
+                finalQuery = baseQuery;
+            } else {
+                finalQuery = baseQuery + queryString.slice(0, -5);
+            }
+            
+            const {rows} = await client.query(finalQuery);
             if (rows[0]) {
                 return rows.map(row => new Offer(row));
             } else {
-                console.log(`No offer found`);
+                console.log(`0 offer left after filtering.`);
                 return null;
             }
         } catch (error) {

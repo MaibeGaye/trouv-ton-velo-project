@@ -61,12 +61,7 @@ POST {{host}}/offers
 Content-Type: application/json
 
 {
-    "city": "5 avenue de la liberté",
-    "size": "test@test.com",
-    "model": "test@test.com",
-    "helmet": "myfirstname",
-    "lamps": "myname",
-    "safety_lock": "testtest"
+  "zip_code": 85000
 }
 
 ### Delete an offer from dashboard

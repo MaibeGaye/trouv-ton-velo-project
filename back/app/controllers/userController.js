@@ -36,24 +36,22 @@ module.exports = {
             response.status(500).json(error.message);
         }
     },
-    getInfos: async (request, response) => {
+    userDashboard: async (request, response) => {
         try {
-            const user = await new User(request.body).getUserData(request.userId.id);
+            const data = {};
+            data.userData = await User.getUserInfos(request.userId.id);
+            data.lendedOffers = await User.getLendedOffers(request.userId.id);
+            for (let i = 0; i < data.lendedOffers.length; i++){
+                data.lendedOffers[i].currentBorrowerInfos = await User.getCurrentBorrowerInfos(request.userId.id);
+            }
+            data.borrowedOffers = await User.getBorrowedOffers(request.userId.id);
             response.setHeader('Authorization', jwt.makeToken(request.userId));
             response.setHeader('Access-Control-Expose-Headers', 'Authorization')
-            response.status(200).json(user);
+            response.status(200).json(data);
         } catch(error) {
             console.log(error);
             response.status(500).json(error.message);
         } 
-    },
-
-    userDashboard: async (request, response) => {
-        try {
-            
-        } catch (error) {
-            
-        }
     },
 
     edit: async (request, response) => {

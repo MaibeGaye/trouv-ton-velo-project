@@ -5,13 +5,12 @@ const offerController = require('./controllers/offerController');
 
 // joi
 // const offerSchema = require('./schemas/offerSchema');
-// const userSchema = require('./schemas/userSchema');
+const userSchema = require('./schemas/userSchema');
 const loginSchema = require('./schemas/loginSchema');
 const signupSchema = require('./schemas/signupSchema');
 const offerSchema = require('./schemas/offerSchema')
 const {validateBody} = require('./middlewares/validator');
 const jwtMW = require('./middlewares/jwtMW');
-const User = require('./models/user');
 
 // redis
 // const {cache, flush} = require('./services/cache');
@@ -19,6 +18,7 @@ const User = require('./models/user');
 const router = Router();
 
 // joi
+const userMiddleware = validateBody(userSchema);
 const loginMiddleware = validateBody(loginSchema);
 const signupMiddleware = validateBody(signupSchema);
 const offerMiddleware = validateBody(offerSchema);
@@ -129,7 +129,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
  * @returns {Offer} 200 - The updated offer
  * @returns {string} 500 - An error message
  */
- router.patch('/dashboard/edit', jwtMW, userController.edit);
+ router.patch('/dashboard/edit', userMiddleware, jwtMW, userController.edit);
 
  /**
   * DELETE /dashboard/delete
@@ -149,7 +149,6 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
  * @returns {array<User>} 200 - An array of user info
  */
 router.get('/dashboard', jwtMW, userController.userDashboard);
-
 
 /**
  * Expected json object in request.body
@@ -184,12 +183,6 @@ router.post('/signup', signupMiddleware, userController.handleSignup);
  * @returns {string} 500 - An error message
  */
 router.post('/login', loginMiddleware, userController.handleLogin);
-
-
-
-router.get('/infos', jwtMW, userController.getInfos);
-
-
 
 // redis
 // router.post('/posts', myCustomMiddleware, flush, postController.addPost);

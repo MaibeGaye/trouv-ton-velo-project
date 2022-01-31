@@ -7,7 +7,7 @@ module.exports = (request, response, next) => {
             return response.status(401).json('Invalid token');
         }
         const payload = jwt.validateToken(token);
-        console.log(payload);
+        // console.log(payload);
         if (!payload.data){
             return response.status(401).json('Invalid token payload');
         }

@@ -1,5 +1,6 @@
 const client = require('../database');
 const bcrypt = require('bcrypt');
+const Offer = require('./offer');
 
 /**
  * An entity representing a user
@@ -159,19 +160,69 @@ class User {
         }
     }
 
-    async getUserData(id) {
+    static async getUserInfos(id) {
         try {
             const {rows} =  await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
-            this.id = rows[0].id;
-            // c'est crade, à optimiser
-            this.username = rows[0].username;
-            this.lastname = rows[0].lastname;
-            this.firstname = rows[0].firstname;
-            this.email = rows[0].email;
-            this.password = rows[0].password;
-            this.address = rows[0].address;
-            this.zip_code = rows[0].zip_code;
-            return this;
+
+            if (rows[0]) {
+                return new User(rows[0]);
+            } else {
+                console.log(`No user found for id ${id}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
+    static async getLendedOffers(id) {
+        try {
+            const {rows} =  await client.query('SELECT * FROM "offer" WHERE lender_id=$1', [id]);
+
+            if (rows[0]) {
+                return rows.map(row => new Offer(row));
+            } else {
+                console.log(`No offer found for lender_id ${id}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
+    static async getBorrowedOffers(id) {
+        try {
+            const {rows} =  await client.query('SELECT * FROM "offer" WHERE borrower_id=$1', [id]);
+            if (rows[0]) {
+                return rows.map(row => new Offer(row));
+            } else {
+                console.log(`No offer found for borrower_id ${id}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
+    static async getCurrentBorrowerInfos(id) {
+        try {
+            const {rows} =  await client.query('SELECT "user".username FROM "offer" FULL JOIN "user" ON "user".id=$1 WHERE borrower_id=$1', [id]);
+            console.log(rows);
+            if (rows[0]) {
+                return rows.map(row => new Offer(row));
+            } else {
+                console.log(`No offer found for borrower_id ${id}`);
+                return null;
+            }
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);

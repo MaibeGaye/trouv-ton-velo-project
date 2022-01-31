@@ -107,13 +107,14 @@ class Offer {
             } else {
                 finalQuery = baseQuery + queryString.slice(0, -5);
             }
-            
+            console.log(finalQuery);
             const {rows} = await client.query(finalQuery);
             if (rows[0]) {
+                console.log('ok new Offer avec les résultats');
                 return rows.map(row => new Offer(row));
             } else {
                 console.log(`0 offer left after filtering.`);
-                return null;
+                return {msg:'pas trouvé d\'offres'};
             }
         } catch (error) {
             if (error.detail) {

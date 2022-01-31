@@ -15,18 +15,12 @@ const Header = () => {
 
   // Login and Register modals state
 
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [loader, setLoader] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [responseAPI, setResponseAPI] = useState('');
-  // Modals state values
-
   const [loginModalValue, setLoginModalValue] = useState({
     email: '',
     password: '',
   });
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
   const [registerModalValue, setRegisterModalValue] = useState({
     firstname: '',
     lastname: '',
@@ -38,7 +32,13 @@ const Header = () => {
     passwordConfirm: '',
   });
 
-  // Function useEffect after every changed user.token value
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [responseAPI, setResponseAPI] = useState('');
+
+  // Function useEffect for check if the user is logged and have a token before the first render
 
   useEffect(() => {
     const backUpToken = localStorage.getItem('token');
@@ -47,6 +47,7 @@ const Header = () => {
     if (backUpSession && backUpToken) {
       const backUpJWT = JSON.parse(backUpToken);
       const backUpLOG = JSON.parse(backUpSession);
+
       setUser({
         ...user,
         infos: {
@@ -60,15 +61,15 @@ const Header = () => {
 
   // Function to change values from Login/Register modals
 
-  const loginHandleChangeValue = (prop) => (event) => {
-    setLoginModalValue({ ...loginModalValue, [prop]: event.target.value });
-  };
+  // REGISTER FUNCTIONS
 
-  const registerHandleChangeValue = (prop) => (event) => {
-    setRegisterModalValue({ ...registerModalValue, [prop]: event.target.value });
+  const registerHandleChangeValue = (event) => {
+    // setRegisterModalValue({ ...registerModalValue, [prop]: event.target.value });
+    setRegisterModalValue({
+      ...registerModalValue,
+      [event.target.id]: event.target.value,
+    });
   };
-
-  // Function to Open/Close Login/Register modals and reset state
 
   const handleRegisterModal = () => {
     setShowRegisterModal(!showRegisterModal);
@@ -82,7 +83,24 @@ const Header = () => {
       password: '',
       passwordConfirm: '',
     });
+    setResponseAPI('');
     setErrors({});
+  };
+
+  // Function to showPassword on register modal
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // LOGIN FUNCTIONS
+
+  const loginHandleChangeValue = (event) => {
+    // setLoginModalValue({ ...loginModalValue, [prop]: event.target.value });
+    setLoginModalValue({
+      ...loginModalValue,
+      [event.target.id]: event.target.value,
+    });
   };
 
   const handleLoginModal = () => {
@@ -92,12 +110,6 @@ const Header = () => {
       password: '',
     });
     setResponseAPI('');
-  };
-
-  // Function to showPassword on register modal
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
   };
 
   // Axios POST request for connect the user
@@ -112,6 +124,7 @@ const Header = () => {
       data: loginModalValue,
     })
       .then((res) => {
+        console.log('Je viens de me connecter, mes infos de la bdd:', res.data);
         setUser({
           ...user,
           infos: res.data,
@@ -126,13 +139,13 @@ const Header = () => {
       })
 
       .catch((err) => {
-        console.log(err.request.responseText);
         setTimeout(() => {
           setResponseAPI(err.request.responseText);
         }, 1000);
       })
       .finally(() => {
         setTimeout(() => {
+          setErrors(validations(loginModalValue));
           setLoader(false);
         }, 1000);
       });
@@ -142,7 +155,6 @@ const Header = () => {
 
   const createAccount = (event) => {
     event.preventDefault();
-    setErrors(validations(registerModalValue));
     setLoader(true);
     axios({
       method: 'post',
@@ -150,18 +162,21 @@ const Header = () => {
       data: registerModalValue,
     })
       .then((res) => {
-        console.log(res.data);
+        console.log(`Je viens de creer un compte ${res.data}`);
         handleRegisterModal();
         setTimeout(() => {
           handleLoginModal();
         }, 1000);
       })
       .catch((err) => {
-        console.log(err.request.responseText);
+        setTimeout(() => {
+          setResponseAPI(err.request.responseText);
+        }, 1000);
       })
       .finally(() => {
         setTimeout(() => {
           setLoader(false);
+          setErrors(validations(registerModalValue));
         }, 1000);
       });
   };
@@ -182,6 +197,7 @@ const Header = () => {
         setResponseAPI={setResponseAPI}
         responseAPI={responseAPI}
         loader={loader}
+        errors={errors}
       />
 
       <RegisterModal
@@ -192,6 +208,7 @@ const Header = () => {
         showRegisterModal={showRegisterModal}
         createAccount={createAccount}
         showPassword={showPassword}
+        responseAPI={responseAPI}
         loader={loader}
         errors={errors}
       />

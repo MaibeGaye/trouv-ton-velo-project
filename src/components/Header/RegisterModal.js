@@ -15,15 +15,16 @@ import Box from '@mui/material/Box';
 
 const RegisterModal = ({
   registerHandleChangeValue, showRegisterModal,
-  handleRegisterModal, loader,
-  registerModalValue, errors,
+  handleRegisterModal, loader, errors,
   handleShowPassword, showPassword,
-  createAccount,
+  createAccount, responseAPI,
+  registerModalValue,
 }) => (
   <div>
     <Dialog sx={{ textAlign: 'center' }} open={showRegisterModal} onClose={handleRegisterModal}>
       <DialogTitle sx={{ color: '#18B7BE', fontSize: '7ch', textTransform: 'uppercase' }}>Inscription</DialogTitle>
       <DialogContent>
+        {/* <p className="inputs-errors">{responseAPI}</p> */}
         { loader && (
           <Box sx={{ width: '50%', margin: 'auto' }}>
             <LinearProgress sx={{ backgroundColor: '#18B7BE' }} />
@@ -37,36 +38,34 @@ const RegisterModal = ({
           id="firstname"
           label="Prénom"
           variant="standard"
+          onChange={registerHandleChangeValue}
           value={registerModalValue.firstname}
-          onChange={registerHandleChangeValue('firstname')}
         />
         {errors.firstname && <p className="inputs-errors">{errors.firstname}</p>}
         <TextField
-            // error={errors.lastname}
           required
           fullWidth
           margin="dense"
           id="lastname"
           label="Nom"
           variant="standard"
+          onChange={registerHandleChangeValue}
           value={registerModalValue.lastname}
-          onChange={registerHandleChangeValue('lastname')}
         />
         {errors.lastname && <p className="inputs-errors">{errors.lastname}</p>}
         <TextField
-            // error={errors.username}
           required
           fullWidth
+          type="text"
           margin="dense"
           id="username"
           label="Pseudo"
           variant="standard"
+          onChange={registerHandleChangeValue}
           value={registerModalValue.username}
-          onChange={registerHandleChangeValue('username')}
         />
         {errors.username && <p className="inputs-errors">{errors.username}</p>}
         <TextField
-            // error={errors.email}
           required
           fullWidth
           margin="dense"
@@ -74,24 +73,23 @@ const RegisterModal = ({
           id="email"
           label="Email"
           variant="standard"
+          onChange={registerHandleChangeValue}
           value={registerModalValue.email}
-          onChange={registerHandleChangeValue('email')}
         />
         {errors.email && <p className="inputs-errors">{errors.email}</p>}
         <TextField
-            // error={errors.address}
           required
           fullWidth
+          type="text"
           margin="dense"
           id="address"
           label="Adresse"
           variant="standard"
-          value={registerModalValue.adress}
-          onChange={registerHandleChangeValue('address')}
+          onChange={registerHandleChangeValue}
+          value={registerModalValue.address}
         />
         {errors.address && <p className="inputs-errors">{errors.address}</p>}
         <TextField
-            // error={errors.zip_code}
           required
           fullWidth
           margin="dense"
@@ -99,8 +97,8 @@ const RegisterModal = ({
           id="zip_code"
           label="Code Postal"
           variant="standard"
+          onChange={registerHandleChangeValue}
           value={registerModalValue.zip_code}
-          onChange={registerHandleChangeValue('zip_code')}
         />
         {errors.zip_code && <p className="inputs-errors">{errors.zip_code}</p>}
         <FormControl sx={{ width: '50ch', margin: '2ch' }} variant="standard">
@@ -108,12 +106,11 @@ const RegisterModal = ({
             Mot de passe
           </InputLabel>
           <Input
-              // error={errors.password}
             required
             id="password"
             type={showPassword ? 'text' : 'password'}
+            onChange={registerHandleChangeValue}
             value={registerModalValue.password}
-            onChange={registerHandleChangeValue('password')}
             endAdornment={(
               <InputAdornment position="end">
                 <IconButton
@@ -133,10 +130,10 @@ const RegisterModal = ({
           </InputLabel>
           <Input
             required
-            id="password-confirm"
+            id="passwordConfirm"
             type={showPassword ? 'text' : 'password'}
+            onChange={registerHandleChangeValue}
             value={registerModalValue.passwordConfirm}
-            onChange={registerHandleChangeValue('passwordConfirm')}
             endAdornment={(
               <InputAdornment position="end" sx={{ display: 'none' }}>
                 <IconButton
@@ -163,10 +160,20 @@ RegisterModal.propTypes = {
   showRegisterModal: PropTypes.bool.isRequired,
   handleRegisterModal: PropTypes.func.isRequired,
   loader: PropTypes.bool.isRequired,
-  registerModalValue: PropTypes.object.isRequired,
   handleShowPassword: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   showPassword: PropTypes.bool.isRequired,
   createAccount: PropTypes.func.isRequired,
+  responseAPI: PropTypes.string.isRequired,
+  registerModalValue: PropTypes.shape({
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    zip_code: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    passwordConfirm: PropTypes.string.isRequired,
+  }).isRequired,
 };
 export default RegisterModal;

@@ -11,8 +11,9 @@ import { LinearProgress } from '@mui/material';
 const LoginModal = ({
   showLoginModal, handleLoginModal,
   loader, loginHandleChangeValue,
-  loginModalValue, connectUser,
+  connectUser,
   responseAPI,
+  loginModalValue,
 }) => (
   <div>
     <Dialog open={showLoginModal} onClose={handleLoginModal}>
@@ -37,8 +38,8 @@ const LoginModal = ({
           type="email"
           fullWidth
           variant="standard"
+          onChange={loginHandleChangeValue}
           value={loginModalValue.email}
-          onChange={loginHandleChangeValue('email')}
         />
         <TextField
           required
@@ -48,8 +49,8 @@ const LoginModal = ({
           type="password"
           fullWidth
           variant="standard"
+          onChange={loginHandleChangeValue}
           value={loginModalValue.password}
-          onChange={loginHandleChangeValue('password')}
         />
       </DialogContent>
       <DialogActions>
@@ -64,8 +65,11 @@ LoginModal.propTypes = {
   handleLoginModal: PropTypes.func.isRequired,
   loader: PropTypes.bool.isRequired,
   loginHandleChangeValue: PropTypes.func.isRequired,
-  loginModalValue: PropTypes.object.isRequired,
   connectUser: PropTypes.func.isRequired,
   responseAPI: PropTypes.string.isRequired,
+  loginModalValue: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }).isRequired,
 };
 export default LoginModal;

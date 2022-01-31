@@ -1,13 +1,19 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
 import './style.scss';
 import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import UpdateInfos from './UpdateModal';
 import { UserContext } from '../Context';
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [displayInfos, setDisplayInfos] = useState(true);
+  // eslint-disable-next-line no-unused-vars
+  const [loader, setLoader] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [updateInputsValues, setUpdateInputsValues] = useState({});
 
   // Axios GET request to display user's infos
 
@@ -20,13 +26,11 @@ const Profile = () => {
       },
     })
       .then((res) => {
-        const backUp = JSON.stringify(res.headers.authorization);
-        localStorage.setItem('token', backUp);
+        console.log('J\'ai fais une requete en visitant mon profil et mes infos sont :', res.data);
         setUser({
           ...user,
           infos: res.data,
           token: res.headers.authorization,
-          logged: true,
         });
       })
       .catch((err) => {
@@ -34,20 +38,53 @@ const Profile = () => {
       });
   }, []);
 
-  // Do not use conditions before the useEffect other wise "Rendered fewer hooks than expected"
+  // UPDATE FUNCTIONS
 
-  if (!user.logged) {
-    return <Navigate to="/" />;
-  }
+  const handleUpdateModal = () => {
+    setShowUpdateModal(!showUpdateModal);
+  };
 
-  // Axios DELETE request to delete user's account
+  const updateModalChangeValue = (prop) => (event) => {
+    setUpdateInputsValues({ ...updateInputsValues, [prop]: event.target.value });
+  };
+
+  // Axios PATCH request to update user's infos
+
+  const updateInfos = () => {
+    console.log('Je fais une requete PATCH pour modifier ces champs :', updateInputsValues);
+    axios({
+      method: 'patch',
+      url: 'https://api-apo-velo.herokuapp.com/dashboard/edit',
+      data: updateInputsValues,
+      headers: {
+        Authorization: user.token,
+      },
+    })
+      .then((res) => {
+        console.log('Je fais une requete PATCH pour modifier ces champs :', updateInputsValues);
+        console.log('La BDD me me retourne ça :', res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+
+      });
+  };
+
+  // First confirmation before select Yes or No for delete account
 
   const firstConfirmDelete = () => {
     setDisplayInfos(false);
   };
+
+  // Cancel the delete component
+
   const cancelDelete = () => {
     setDisplayInfos(true);
   };
+
+  // Axios DELETE request to delete user's account after 1 confirmation
 
   const confirmDelete = () => {
     axios({
@@ -76,9 +113,24 @@ const Profile = () => {
       });
   };
 
+  // If the user is not logged, automatically redirect to the home page
+
+  if (!user.logged) {
+    return <Navigate to="/" />;
+  }
+
   return (
 
     <section className="container profile">
+      <UpdateInfos
+        updateInputsValues={updateInputsValues}
+        showUpdateModal={showUpdateModal}
+        handleUpdateModal={handleUpdateModal}
+        updateModalChangeValue={updateModalChangeValue}
+        updateInfos={updateInfos}
+        loader={loader}
+
+      />
       {user.logged && <h1 className="profile-title">Mon profil</h1>}
       {user.logged && (
       <div className="profile-user">
@@ -94,7 +146,7 @@ const Profile = () => {
                 <p>Adresse: {user.infos.address}</p>
                 <p>Code postal: {user.infos.zip_code}</p>
               </div>
-              <button className="left-profile-button" type="button">Modifier mes informations</button>
+              <button className="left-profile-button" type="button" onClick={handleUpdateModal}>Modifier mes informations</button>
               <button className="left-profile-button" type="button" onClick={firstConfirmDelete}>Supprimer mon compte</button>
             </>
           )}

@@ -8,10 +8,6 @@ const Footer = () => (
       <Link to="/about" className="footer-link">A propos</Link>
       <Link to="/legals" className="footer-link">Mentions légales</Link>
     </div>
-    {/* <div className="footer-medias">
-      <i className="fab fa-facebook" />
-      <i className="fab fa-instagram" />
-    </div> */}
   </div>
 );
 

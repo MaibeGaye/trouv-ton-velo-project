@@ -30,7 +30,8 @@ const App = () => {
       data: inputValues,
     })
       .then((res) => {
-        console.log(inputValues)
+        console.log('Je fais une requete pour consulter les offres et le resultat est :', res.data);
+        console.log('J\'ai fais une requete post et je cherche un vélo avec ces filtres :', inputValues);
         setReceivedOffers(res.data);
       })
       .catch((err) => {

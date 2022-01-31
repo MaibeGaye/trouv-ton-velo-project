@@ -113,7 +113,7 @@ class Offer {
                 console.log('ok new Offer avec les résultats');
                 return rows.map(row => new Offer(row));
             } else {
-                console.log(`0 offer left after filtering.`);
+                console.log(`0 offers left after filtering.`);
                 return {msg:'pas trouvé d\'offres'};
             }
         } catch (error) {

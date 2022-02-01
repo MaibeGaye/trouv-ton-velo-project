@@ -162,7 +162,7 @@ const Header = () => {
       data: registerModalValue,
     })
       .then((res) => {
-        console.log(`Je viens de creer un compte ${res.data}`);
+        console.log('creation compte :', res.data);
         handleRegisterModal();
         setTimeout(() => {
           handleLoginModal();

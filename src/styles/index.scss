@@ -13,3 +13,10 @@ body {
 .container {
   height: 86vh;
 }
+
+@media screen and (max-width: 768px) {
+  .container{
+    height: 84vh;
+  }
+
+}

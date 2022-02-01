@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import './style.scss';
@@ -5,6 +6,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import UpdateInfos from './UpdateModal';
+import Lended from './Lended';
+import Borrow from './Borrow';
 import { UserContext } from '../Context';
 
 const Profile = () => {
@@ -20,7 +23,7 @@ const Profile = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/infos',
+      url: 'https://api-apo-velo.herokuapp.com/dashboard',
       headers: {
         Authorization: user.token,
       },
@@ -29,14 +32,38 @@ const Profile = () => {
         console.log('J\'ai fais une requete en visitant mon profil et mes infos sont :', res.data);
         setUser({
           ...user,
-          infos: res.data,
+          infos: res.data.userData,
           token: res.headers.authorization,
+          borrow: res.data.borrowedOffers,
+          lende: res.data.lendedOffers,
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.request.responseText);
       });
   }, []);
+
+  // useEffect(async () => {
+  //   try {
+  //     const response = await axios({
+  //       url: 'https://api-apo-velo.herokuapp.com/dashboard',
+  //       method: 'get',
+  //       timeout: 3000,
+  //       headers: {
+  //         Authorization: user.token,
+  //       },
+  //     });
+  //     setUser({
+  //       ...user,
+  //       infos: response.data.userData,
+  //       token: response.headers.authorization,
+  //       lende: response.data.lendedOffers,
+  //     });
+  //   }
+  //   catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [user.infos]);
 
   // UPDATE FUNCTIONS
 
@@ -119,6 +146,17 @@ const Profile = () => {
     return <Navigate to="/" />;
   }
 
+  const renderLended = () => {
+    if (user.lende === null) {
+      return 'Vous n\'avez pas de vélo ...';
+    }
+    user.lende.map((element) => (
+      <div key={element.id}>
+        <h1>{element.infos}</h1>
+      </div>
+    ));
+  };
+
   return (
 
     <section className="container profile">
@@ -136,6 +174,7 @@ const Profile = () => {
       <div className="profile-user">
         <div className="left-profile">
           <h2 className="left-profile-title">Mes informations <i className="far fa-address-card" /></h2>
+
           {displayInfos && (
             <>
               <div className="left-profile-infos">
@@ -146,31 +185,45 @@ const Profile = () => {
                 <p>Adresse: {user.infos.address}</p>
                 <p>Code postal: {user.infos.zip_code}</p>
               </div>
-              <button className="left-profile-button" type="button" onClick={handleUpdateModal}>Modifier mes informations</button>
-              <button className="left-profile-button" type="button" onClick={firstConfirmDelete}>Supprimer mon compte</button>
+              <div className="left-profile-buttons">
+                <button className="left-profile-button" type="button" onClick={handleUpdateModal}>Modifier mes informations</button>
+                <button className="left-profile-button" type="button" onClick={firstConfirmDelete}>Supprimer mon compte</button>
+              </div>
             </>
           )}
           {
             !displayInfos && (
-              <>
-                <h3 className="left-profile-delete">Êtes vous sûrs de vouloir supprimer votre compte ?</h3>
+              <div className="delete-profile">
+                <h3 className="left-profile-delete">Êtes vous sûrs de <br /> vouloir supprimer votre compte ?</h3>
                 <div className="confirm-buttons">
                   <button type="button" className="left-profile-button delete-confirm" onClick={confirmDelete}>Oui</button>
                   <button type="button" className="left-profile-button delete-cancel" onClick={cancelDelete}>Non</button>
                 </div>
-              </>
+              </div>
             )
           }
         </div>
+
+        {displayInfos && (
         <div className="right-profile">
           <h2 className="right-profile-title">Récapitulatif <i className="fas fa-bicycle" /></h2>
           <div className="right-profile-infos">
             <h3 className="profile-infos-title">Les vélos que j'ai emprunté</h3>
-            <p>Réservation n° : 5 </p>
-            <p>Titre de l'annonce : VTT Homme</p>
-            <p>Rendre le vélo le : 24/01/2022</p>
+
+            {
+              !user.borrow ? <p>Je n'ai pas encore emprunté de vélos</p> : <Borrow />
+            }
+
+          </div>
+          <div className="right-profile-infos">
+            <h3 className="profile-infos-title">Mes vélos en circulation</h3>
+            {
+               !user.lende ? <p>Vous n'avez pas encore proposé de vélos ...</p> : <Lended />
+              }
           </div>
         </div>
+        )}
+
       </div>
       )}
     </section>

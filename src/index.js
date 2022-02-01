@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from 'src/components/App';
 import UserProvider from './components/Context';
+
 // == Import : local
 // Composants
 
@@ -12,12 +13,12 @@ import UserProvider from './components/Context';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 
 ReactDOM.render(
-  <UserProvider>
-    <Router>
-      <React.StrictMode>
+  <React.StrictMode>
+    <UserProvider>
+      <Router>
         <App />
-      </React.StrictMode>
-    </Router>
-  </UserProvider>,
+      </Router>
+    </UserProvider>
+  </React.StrictMode>,
   document.getElementById('root'),
 );

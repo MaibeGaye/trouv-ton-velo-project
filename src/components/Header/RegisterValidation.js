@@ -1,5 +1,14 @@
 const validations = (values) => {
-  const errors = {};
+  const errors = {
+    firstname: '',
+    lastname: '',
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    zip_code: '',
+    address: '',
+  };
 
   if (!values.firstname) {
     errors.firstname = 'Le prénom est requis ';

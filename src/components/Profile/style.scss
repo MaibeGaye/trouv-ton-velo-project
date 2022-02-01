@@ -1,14 +1,14 @@
 @use '../../styles/vars';
 
+
+
+@media screen and (min-width: 1000px) {
+    
 .profile{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: vars.$third-color;
-    // background-image: url('../../assets/profil.jpg');
-    // background-position: center;
-    // background-size: cover;
-    // background-repeat: no-repeat;
 
     &-title{
         font-size: 5rem;
@@ -52,6 +52,11 @@
         color: vars.$four-color;
         margin: 1rem;
     }
+
+    &-buttons{
+        display: flex;
+        flex-direction: column;
+    }
     &-button{
             font-family: 'Dongle', sans-serif;
             border: none;
@@ -85,7 +90,7 @@
     }
     &-infos{
       background-color: vars.$first-color;
-      margin: 3rem;
+      margin: 1rem;
       border-radius: 10px;
     }
     &-infos p {
@@ -132,21 +137,148 @@
     background-color: green;
     color: vars.$first-color;
 }
+}
 
-@media screen and (max-width: 821px) {
+@media screen and (max-width: 1000px) {
+
     .profile{
-        overflow-y: auto;
-        align-items: center;
-    }
-    .profile-user{
+        display: flex;
         flex-direction: column;
+        align-items: center;
+        background-color: vars.$third-color;
+        overflow-y: auto;
+        
+
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+            color: vars.$first-color;
+            display: none;
+        }
+
+        &-user{
+            height: 100%;
+            width: 100%;
+           
+        }
+
     }
     .left-profile{
-        width: 100%;
-        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 84vh;
+
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+            color: vars.$four-color;
+
+            & i {
+                margin: 1rem;
+                font-size: 2rem;
+            }
+            
+        }
+        &-infos{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            margin: 1rem;
+            
+            
+
+            & p {
+                margin: 0.5rem;
+                font-size: 1.7rem;
+                color: vars.$first-color;
+                align-self: center;
+                
+            }
+        }
+
+        &-buttons{
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+
+        }
+        &-button{
+            font-family: 'Dongle', sans-serif;
+            border: none;
+            background-color: vars.$second-color;
+            color: vars.$first-color;
+            font-size: 1.5rem;
+            border-radius: 0.7rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
+        &-delete{
+            font-size: 2rem;
+            font-weight: bold;
+            color: vars.$four-color;
+            text-align: center;
+        }
+
     }
+    .delete-profile{
+        margin: 10rem 0;
+    }
+    .confirm-buttons{
+        display: flex;
+        width: 90%;
+    }
+    .delete-confirm{
+        background-color: red;
+        width: 50%;
+    }
+    .delete-cancel{
+        background-color: green;
+        width: 50%;
+    }
+
     .right-profile{
-        width: 100%;
-        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 84vh;
+        
+        &-title{
+            font-size: 3rem;
+            margin: 2rem;
+            color: vars.$four-color;
+
+            & i {
+                font-size: 2rem;
+            }
+        }
+
+        &-infos{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            margin: 2rem;
+
+            & p {
+                font-size: 1.7rem;
+                color: vars.$four-color;
+            }
+        }
     }
+    .profile-infos-title{
+        font-size: 2rem;
+        margin: 1rem;
+        color: vars.$first-color;
+        text-decoration: underline;
+
+    }
+    
+   
+    
 }

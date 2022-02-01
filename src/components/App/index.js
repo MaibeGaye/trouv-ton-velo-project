@@ -11,6 +11,7 @@ import About from '../About';
 import Legals from '../Legals';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
+
 import '../../styles/index.scss';
 
 const App = () => {
@@ -23,15 +24,14 @@ const App = () => {
   const getOffersFiltered = (event) => {
     event.preventDefault();
     setLoader(true);
+    console.log(inputValues);
 
     axios({
-      method: 'get',
+      method: 'post',
       url: 'https://api-apo-velo.herokuapp.com/offers',
       data: inputValues,
     })
       .then((res) => {
-        console.log('Je fais une requete pour consulter les offres et le resultat est :', res.data);
-        console.log('J\'ai fais une requete post et je cherche un vélo avec ces filtres :', inputValues);
         setReceivedOffers(res.data);
       })
       .catch((err) => {
@@ -59,6 +59,7 @@ const App = () => {
     });
   };
 
+  // console.log(user.logged);
   return (
     <div className="app">
       <Header />

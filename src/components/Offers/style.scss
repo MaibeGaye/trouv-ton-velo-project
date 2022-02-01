@@ -119,12 +119,9 @@
     }
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 767px) {
     
   .offers-form{
-      width: 300px;
-  }
-  .offer-form-result{
-    width: calc(100vw - 300px);
+    
   }
 }

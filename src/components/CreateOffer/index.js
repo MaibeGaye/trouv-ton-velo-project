@@ -91,7 +91,7 @@ const CreateOffer = () => {
             <label htmlFor="title">Titre</label>
             <input
               type="text"
-              maxLength={15}
+              maxLength={30}
               id="title"
               name="title"
               placeholder="Titre de votre annonce"

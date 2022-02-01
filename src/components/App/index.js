@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import Header from '../Header';
 import Home from '../Home';
@@ -11,6 +11,7 @@ import About from '../About';
 import Legals from '../Legals';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
+import { UserContext } from '../Context';
 
 import '../../styles/index.scss';
 
@@ -18,24 +19,34 @@ const App = () => {
   const [receivedOffers, setReceivedOffers] = useState([]);
   const [inputValues, setInputValues] = useState([]);
   const [loader, setLoader] = useState(false);
-
+  const [submitSearchOffer, setSubmitSearchOffer] = useState(false);
+  const [errorSubmitSearchOffer, setErrorSubmitSearchOffer] = useState(false);
+  const { user } = useContext(UserContext);
   // Axios POST request to display filtered offers from inputs values
 
-  const getOffersFiltered = (event) => {
-    event.preventDefault();
-    setLoader(true);
-    console.log(inputValues);
 
+  const getOffersFiltered = (event) => {
+    setReceivedOffers([]);
+    event.preventDefault();
+    console.log(inputValues);
+    setLoader(true);
     axios({
       method: 'post',
       url: 'https://api-apo-velo.herokuapp.com/offers',
       data: inputValues,
     })
       .then((res) => {
-        setReceivedOffers(res.data);
+        console.log(res.data);
+        setTimeout(() => {
+          setReceivedOffers(res.data);
+          setSubmitSearchOffer(!submitSearchOffer);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
+        setTimeout(() => {
+          setErrorSubmitSearchOffer(!errorSubmitSearchOffer);
+        }, 2000);
       })
       .finally(() => {
         setTimeout(() => {
@@ -48,6 +59,8 @@ const App = () => {
 
   const resetOffers = () => {
     setReceivedOffers([]);
+    setSubmitSearchOffer(false);
+    setErrorSubmitSearchOffer(false);
   };
 
   // Function to change inputs values
@@ -76,6 +89,8 @@ const App = () => {
               handleChange={handleChangeInputValues}
               displayLoader={loader}
               reset={resetOffers}
+              errorSubmitSearchOffer={errorSubmitSearchOffer}
+              submitSearchOffer={submitSearchOffer}
             />
           )}
         />

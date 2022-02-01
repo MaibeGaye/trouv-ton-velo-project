@@ -174,12 +174,11 @@ const Profile = () => {
           {displayInfos && (
             <>
               <div className="left-profile-infos">
-                <p>Nom: {user.infos.firstname}</p>
-                <p>Prénom: {user.infos.lastname}</p>
-                <p>Pseudo: {user.infos.username}</p>
-                <p>Email: {user.infos.email}</p>
-                <p>Adresse: {user.infos.address}</p>
-                <p>Code postal: {user.infos.zip_code}</p>
+                <div className="test"><p>Nom :</p><p>{user.infos.lastname}</p></div>
+                <div className="test"><p>Prénom :</p><p>{user.infos.firstname}</p></div>
+                <div className="test"><p>Pseudo :</p><p>{user.infos.username}</p></div>
+                <div className="test"><p>Email :</p><p>{user.infos.email}</p></div>
+                <div className="test"><p>Adresse :</p><p>{user.infos.address} {user.infos.zip_code}</p></div>
               </div>
               <div className="left-profile-buttons">
                 <button className="left-profile-button" type="button" onClick={handleUpdateModal}>Modifier mes informations</button>
@@ -213,9 +212,11 @@ const Profile = () => {
           </div>
           <div className="right-profile-infos">
             <h3 className="profile-infos-title">Mes vélos en circulation</h3>
+
             {
                !user.lende ? <p>Vous n'avez pas encore proposé de vélos ...</p> : <Lended />
               }
+
           </div>
         </div>
         )}

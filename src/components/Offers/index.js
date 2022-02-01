@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
 import './style.scss';
-import Offer from '../Offer';
+import OffersDisplay from './OffersDisplay';
 
 const Offers = ({
   offers, handleChange,
   searchOffers, reset,
   displayLoader,
+  errorSubmitSearchOffer,
+  submitSearchOffer,
 }) => (
   <section className="container offers">
     <div className="offers-form">
@@ -155,12 +157,13 @@ const Offers = ({
         && (
         <div className="spinner" />
         )}
-      {!displayLoader
-        && offers.map((offer) => (
-          <div className="offer-container" key={offer.id}>
-            <Offer {...offer} />
-          </div>
-        ))}
+
+      { !offers ? <p>Désolé aucune offre ne correspond </p> : <OffersDisplay offers={offers} />}
+      {/* {console.log(offers)} */}
+
+      { !submitSearchOffer && errorSubmitSearchOffer && (
+      <h1 className="offer-form-result-error">Oups nous avons un problème <br />avec votre demande ...</h1>
+      )}
     </div>
   </section>
 );
@@ -172,5 +175,7 @@ Offers.propTypes = {
   searchOffers: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   displayLoader: PropTypes.bool.isRequired,
+  submitSearchOffer: PropTypes.bool.isRequired,
+  errorSubmitSearchOffer: PropTypes.bool.isRequired,
 };
 export default Offers;

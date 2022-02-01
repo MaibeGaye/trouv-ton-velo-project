@@ -146,17 +146,6 @@ const Profile = () => {
     return <Navigate to="/" />;
   }
 
-  const renderLended = () => {
-    if (user.lende === null) {
-      return 'Vous n\'avez pas de vélo ...';
-    }
-    user.lende.map((element) => (
-      <div key={element.id}>
-        <h1>{element.infos}</h1>
-      </div>
-    ));
-  };
-
   return (
 
     <section className="container profile">

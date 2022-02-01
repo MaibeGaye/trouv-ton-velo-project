@@ -61,7 +61,11 @@ POST {{host}}/offers
 Content-Type: application/json
 
 {
-  "zip_code": 85000
+  "size": "Adult",
+  "zip_code": 42,
+  "helmet": true,
+  "lamps": true,
+  "safety_lock": true
 }
 
 ### Delete an offer from dashboard
@@ -83,7 +87,7 @@ GET {{host}}/offers
 
 ### Get infos of current user
 GET {{host}}/dashboard
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMWphL2RFUTk4YmVNdUV4Skl5dS4uLjY0UVFpM0M0Z1hjZ2kxM2dDOHNoUTJhRGI0SEpBVnkiLCJpZCI6MjgsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzYyNjAyOCwiZXhwIjoxNjQzNjI3ODI4fQ.kYiLAOC83eZKH3QHUl59pNqjR8PhFF_5b6szN-BaKb4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUWw4dkgxZ09lV1ZtNm5rdHZNeXM1Ty9IUHZ4WDVnYUpDbWZTWGdIbi9iWkM3cHN3RDRvYVMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzczNDYwNiwiZXhwIjoxNjQzNzM2NDA2fQ.yX6uTvUjX9b0qzs0LtgQ55EVFpJzrYTeSPxfSSsAjuQ
 
 ### Update an offer
 PATCH {{host}}/dashboard/27/edit

@@ -54,7 +54,7 @@ module.exports = {
             request.body.id = id;
 
             const lenderId = await Offer.returnLenderId(id);
-
+            request.body.lender_id = lenderId;
             // si pas de locataire actuel, on définit quand même borrower_id sur null 
             // pour avoir un objet body offer complet avant de le save
             const borrowerId = await Offer.returnBorrowerId(id);
@@ -71,7 +71,6 @@ module.exports = {
                     msg:`Modification annulée, l'annonce possède un borrower_id, réessayez lorsque le vélo sera rendu !`,
                     editable:false
                 });
-                //request.body.borrower_id = borrowerId
             }
         } catch (error) {
             console.log(error);

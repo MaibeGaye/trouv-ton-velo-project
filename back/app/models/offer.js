@@ -110,11 +110,11 @@ class Offer {
             console.log(finalQuery);
             const {rows} = await client.query(finalQuery);
             if (rows[0]) {
-                console.log('ok new Offer avec les résultats');
+                console.log(`OK ${rows.length} offers found with these filter values`);
                 return rows.map(row => new Offer(row));
             } else {
                 console.log(`0 offers left after filtering.`);
-                return {msg:'pas trouvé d\'offres'};
+                return null;
             }
         } catch (error) {
             if (error.detail) {

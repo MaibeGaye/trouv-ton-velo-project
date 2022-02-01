@@ -13,6 +13,7 @@ import { UserContext } from '../Context';
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [displayInfos, setDisplayInfos] = useState(true);
+  const [displayInfosOffer, setDisplayInfosOffer] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [loader, setLoader] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -95,7 +96,9 @@ const Profile = () => {
         console.log(err);
       })
       .finally(() => {
-
+        setTimeout(() => {
+          setShowUpdateModal(false);
+        }, 1500);
       });
   };
 
@@ -104,6 +107,10 @@ const Profile = () => {
   const firstConfirmDelete = () => {
     setDisplayInfos(false);
   };
+
+  // const confirmDeleteOffer = () => {
+  //   setDisplayInfosOffer(false);
+  // };
 
   // Cancel the delete component
 

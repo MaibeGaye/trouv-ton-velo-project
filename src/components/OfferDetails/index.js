@@ -16,22 +16,31 @@ const OfferDetails = ({ offerDetail }) => {
     validity_start_date, zip_code,
   } = foundOffer;
 
+  const testReservation = () => {
+    console.log(`je reserve mon offre avec le titre : ${title}`);
+  };
+
   return (
     <div className="container offer-details">
-      <h1 className="offer-details-title">{title}</h1>
-      <p>Adresse : {address} {zip_code}</p>
-      <p>{photo}</p>
-      <p> {model} {size}</p>
-      <p className="offer-details-infos">Description : {infos}</p>
-      <ul>
-        Accéssoires :
-        <li>Lampe fournie : {lamps ? 'Oui' : 'Non'}</li>
-        <li>Lampe fourni : {helmet ? 'Oui' : 'Non'}</li>
-        <li>Anti-vol fourni : {safety_lock ? 'Oui' : 'Non'}</li>
-      </ul>
-      <p>Dates : du {validity_start_date} au {validity_end_date}</p>
-      <button type="button">Réserver cette offre</button>
-      <Link to="/offers">Retour aux offres</Link>
+
+      <div className="offer-details-page">
+        <h1 className="offer-details-title">{title}</h1>
+        <div className="offer-details-infos">Description : {infos}
+          <p>Adresse : {address} {zip_code}</p>
+          {/* <p>{photo}</p> */}
+          <p>Dates : du {validity_start_date} au {validity_end_date}</p>
+          <ul>
+            <p>Accessoires :</p>
+            <li>Lampe fournie : {lamps ? 'Oui' : 'Non'}</li>
+            <li>Lampe fourni : {helmet ? 'Oui' : 'Non'}</li>
+            <li>Anti-vol fourni : {safety_lock ? 'Oui' : 'Non'}</li>
+          </ul>
+          <p> Votre modèle et votre taille : {model} {size}</p>
+        </div>
+        <button type="button" onClick={testReservation}>Réserver cette offre</button>
+        <Link to="/offers">Retour aux offres</Link>
+      </div>
+
     </div>
   );
 };

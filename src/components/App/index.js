@@ -25,7 +25,7 @@ const App = () => {
     setLoader(true);
 
     axios({
-      method: 'get',
+      method: 'post',
       url: 'https://api-apo-velo.herokuapp.com/offers',
       data: inputValues,
     })

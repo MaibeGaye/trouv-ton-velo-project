@@ -10,6 +10,7 @@ import { UserContext } from '../Context';
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [displayInfos, setDisplayInfos] = useState(true);
+  const [displayInfosOffer, setDisplayInfosOffer] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [loader, setLoader] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -20,7 +21,7 @@ const Profile = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/infos',
+      url: 'https://api-apo-velo.herokuapp.com/dashboard',
       headers: {
         Authorization: user.token,
       },
@@ -29,8 +30,10 @@ const Profile = () => {
         console.log('J\'ai fais une requete en visitant mon profil et mes infos sont :', res.data);
         setUser({
           ...user,
-          infos: res.data,
+          infos: res.data.userData,
           token: res.headers.authorization,
+          borrow: res.data.borowOffers,
+          lender: res.data.lendedOffers,
         });
       })
       .catch((err) => {
@@ -68,7 +71,9 @@ const Profile = () => {
         console.log(err);
       })
       .finally(() => {
-
+        setTimeout(() => {
+          setShowUpdateModal(false);
+        }, 1500);
       });
   };
 
@@ -76,6 +81,10 @@ const Profile = () => {
 
   const firstConfirmDelete = () => {
     setDisplayInfos(false);
+  };
+
+  const confirmDeleteOffer = () => {
+    setDisplayInfosOffer(false);
   };
 
   // Cancel the delete component
@@ -164,12 +173,31 @@ const Profile = () => {
         </div>
         <div className="right-profile">
           <h2 className="right-profile-title">Récapitulatif <i className="fas fa-bicycle" /></h2>
-          <div className="right-profile-infos">
-            <h3 className="profile-infos-title">Les vélos que j'ai emprunté</h3>
-            <p>Réservation n° : 5 </p>
-            <p>Titre de l'annonce : VTT Homme</p>
-            <p>Rendre le vélo le : 24/01/2022</p>
-          </div>
+          {displayInfosOffer && (
+            <>
+              <div className="right-profile-lender">
+                <h3 className="profile-infos-title">Mes vélos en circulations</h3>
+                <p className="profile-infos-offer">Annonce n° 5 : du 10/10/2022 au 12/12/2022</p>
+                <button className="right-profile-button" type="button">Modifier mon annonce</button>
+                <button className="right-profile-button" type="button" onClick={confirmDeleteOffer}>Supprimer mon annonce</button>
+              </div>
+              <div className="right-profile-borrow">
+                <h3 className="profile-infos-title">Les vélos que j'ai emprunté</h3>
+                <p>Réservation n° : 5 </p>
+                <p>Titre de l'annonce : VTT Homme</p>
+                <p>Rendre le vélo le : 24/01/2022</p>
+              </div>
+            </>
+          )}
+          { !displayInfosOffer && (
+          <>
+            <h3 className="left-profile-delete">Êtes vous sûrs de vouloir supprimer votre annonce n° ?</h3>
+            <div className="confirm-buttons">
+              <button type="button" className="right-profile-button delete-confirm" onClick={confirmDelete}>Oui</button>
+              <button type="button" className="right-profile-button delete-cancel" onClick={cancelDelete}>Non</button>
+            </div>
+          </>
+          )}
         </div>
       </div>
       )}

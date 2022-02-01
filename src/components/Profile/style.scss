@@ -55,8 +55,8 @@
     &-button{
             font-family: 'Dongle', sans-serif;
             border: none;
-            background-color: vars.$second-color;
-            color: vars.$first-color;
+            background-color: #178ca4;
+            color: #f9f7f0;
             font-size: 1.9rem;
             border-radius: 0.7rem;
             margin: 0.5rem;
@@ -83,16 +83,43 @@
         color: vars.$first-color;
         
     }
-    &-infos{
+    &-borrow{
       background-color: vars.$first-color;
       margin: 3rem;
       border-radius: 10px;
     }
-    &-infos p {
+    &-borrow p {
         font-size: 2rem;
         color: vars.$four-color;
         margin: 1rem;
     }
+    &-lender {
+      background-color: #f9f7f0;
+      border-radius: 10px;
+      margin: 3rem;
+      & p{
+        font-size: 2rem;
+        color: vars.$four-color;
+        margin: 1rem;
+      }
+
+      & button {
+        border-radius: 0.7rem;
+        margin-bottom: 1rem;
+        margin-left: 2rem;
+        padding: 0.5rem;
+        background-color: #18b7be;
+        border: none;
+        color: #f9f7f0;
+        font-family: Dongle,sans-serif;
+        font-size: 1.4rem;
+      }
+    }
+}
+
+.profile-infos-lender {
+  font-size: 3rem;
+  margin: 1rem;
 }
 
 .profile-infos-title{

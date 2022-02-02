@@ -8,7 +8,7 @@ const schema = Joi.object({
     helmet : Joi.boolean(),
     lamps : Joi.boolean(),
     safety_lock : Joi.boolean(),
-    photo: Joi.string().max(256).required(),
+    photo: Joi.string().max(50000).required(),
     address: Joi.string().max(256).required(),
     // zip_code: Joi.number().min(3).max(5).required(),
     zip_code: Joi.number().required(),

@@ -23,7 +23,6 @@ const loginMiddleware = validateBody(loginSchema);
 const signupMiddleware = validateBody(signupSchema);
 const offerMiddleware = validateBody(offerSchema);
 
-
 router.get('/getUserTest', userController.findOne);
 
 /**

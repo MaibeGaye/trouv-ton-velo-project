@@ -21,7 +21,7 @@ CREATE TABLE "offer" (
     "helmet" BOOLEAN NOT NULL DEFAULT false,
     "lamps" BOOLEAN NOT NULL DEFAULT false,
     "safety_lock" BOOLEAN NOT NULL DEFAULT false,
-    "photo" VARCHAR(256) NOT NULL DEFAULT '',
+    "photo" VARCHAR NOT NULL DEFAULT '',
     "address" VARCHAR(256) DEFAULT '',
     "zip_code" VARCHAR(5) NOT NULL DEFAULT '',
     "validity_start_date" TIMESTAMPTZ NOT NULL,

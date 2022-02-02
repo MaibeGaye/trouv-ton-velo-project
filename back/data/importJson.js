@@ -3,7 +3,7 @@ require('dotenv').config();
 const users = require('./users.json');
 const offers = require('./offers.json');
 
-const client = require('../app/database');
+const client = require('../app/db-pg');
 
 const importData = async () => {
     //on supprime les événtuels enregistrements présents

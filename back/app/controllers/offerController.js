@@ -1,6 +1,8 @@
 // const { request } = require('express');
 const Offer = require('../models/offer');
 const jwt = require('../services/jwt');
+const cloudinary = require('../services/cloudinary');
+
 
 module.exports = {
     findAll: async (_, response) => {
@@ -35,6 +37,11 @@ module.exports = {
         try {
             //on ajoute au contenu de la requête l'id de l'utilisateur ayant effectué la requête
             request.body.lender_id = request.userId.id;
+
+            const fileStr = request.body.photo;
+            const uploadResponse = await cloudinary.uploader.upload(fileStr, {});
+            request.body.photo = uploadResponse.url;
+
             const offer = await new Offer(request.body).save();
             response.setHeader('Authorization', jwt.makeToken(request.userId));
             response.setHeader('Access-Control-Expose-Headers', 'Authorization')

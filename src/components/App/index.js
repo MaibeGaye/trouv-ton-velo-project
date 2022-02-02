@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../Header';
 import Home from '../Home';
@@ -16,18 +16,42 @@ import { UserContext } from '../Context';
 import '../../styles/index.scss';
 
 const App = () => {
-  const [receivedOffers, setReceivedOffers] = useState([]);
+  const [resultOffers, setResultOffers] = useState([]);
   const [inputValues, setInputValues] = useState([]);
   const [loader, setLoader] = useState(false);
   const [submitSearchOffer, setSubmitSearchOffer] = useState(false);
   const [errorSubmitSearchOffer, setErrorSubmitSearchOffer] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  // USEFFECT A REMPLACER AVEC NOUVELLE REQUETE pour
+  // check tt le temps si user.token et good sinon logged false
+
+  // Function useEffect for check if the user is logged and have a token before the first render
+
+  useEffect(() => {
+    const backUpToken = localStorage.getItem('token');
+    const backUpSession = localStorage.getItem('logged');
+
+    if (backUpSession && backUpToken) {
+      const backUpJWT = JSON.parse(backUpToken);
+      const backUpLOG = JSON.parse(backUpSession);
+
+      setUser({
+        ...user,
+        infos: {
+          ...user.infos,
+        },
+        token: backUpJWT,
+        logged: backUpLOG,
+      });
+    }
+  }, []);
+
   // Axios POST request to display filtered offers from inputs values
 
   const getOffersFiltered = (event) => {
-    setReceivedOffers([]);
     event.preventDefault();
-    console.log(inputValues);
+    setResultOffers([]);
     setLoader(true);
     axios({
       method: 'post',
@@ -37,7 +61,7 @@ const App = () => {
       .then((res) => {
         console.log(res.data);
         setTimeout(() => {
-          setReceivedOffers(res.data);
+          setResultOffers(res.data);
           setSubmitSearchOffer(!submitSearchOffer);
         }, 2000);
       })
@@ -57,7 +81,7 @@ const App = () => {
   // Function to reset offers from state
 
   const resetOffers = () => {
-    setReceivedOffers([]);
+    setResultOffers([]);
     setSubmitSearchOffer(false);
     setErrorSubmitSearchOffer(false);
   };
@@ -71,7 +95,7 @@ const App = () => {
     });
   };
 
-  // console.log(user.logged);
+  console.log(user.logged);
   return (
     <div className="app">
       <Header />
@@ -83,7 +107,7 @@ const App = () => {
           path="/offers"
           element={(
             <Offers
-              offers={receivedOffers}
+              offers={resultOffers}
               searchOffers={getOffersFiltered}
               handleChange={handleChangeInputValues}
               displayLoader={loader}
@@ -93,7 +117,7 @@ const App = () => {
             />
           )}
         />
-        <Route path="/offer/:id/details" element={<OfferDetails offerDetail={receivedOffers} />} />
+        <Route path="/offer/:id/details" element={<OfferDetails offerDetail={resultOffers} />} />
         <Route path="/about" element={<About />} />
         <Route path="/legals" element={<Legals />} />
         <Route path="*" element={<NotFound />} />

@@ -38,6 +38,8 @@ const Profile = () => {
           borrow: res.data.borrowedOffers,
           lende: res.data.lendedOffers,
         });
+        const createBackUpJWT = JSON.stringify(res.headers.authorization);
+        localStorage.setItem('token', createBackUpJWT);
       })
       .catch((err) => {
         console.log(err.request.responseText);

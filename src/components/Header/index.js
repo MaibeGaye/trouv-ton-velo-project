@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import './style.scss';
 import { NavLink, Link } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import validations from './RegisterValidation';
 import LoginModal from './LoginModal';
@@ -37,27 +37,6 @@ const Header = () => {
   const [loader, setLoader] = useState(false);
   const [errors, setErrors] = useState({});
   const [responseAPI, setResponseAPI] = useState('');
-
-  // Function useEffect for check if the user is logged and have a token before the first render
-
-  useEffect(() => {
-    const backUpToken = localStorage.getItem('token');
-    const backUpSession = localStorage.getItem('logged');
-
-    if (backUpSession && backUpToken) {
-      const backUpJWT = JSON.parse(backUpToken);
-      const backUpLOG = JSON.parse(backUpSession);
-
-      setUser({
-        ...user,
-        infos: {
-          ...user.infos,
-        },
-        token: backUpJWT,
-        logged: backUpLOG,
-      });
-    }
-  }, []);
 
   // Function to change values from Login/Register modals
 

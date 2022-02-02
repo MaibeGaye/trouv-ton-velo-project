@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import './style.scss';
 
 import { UserContext } from '../Context';

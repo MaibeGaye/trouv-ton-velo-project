@@ -81,113 +81,138 @@ const CreateOffer = () => {
 
   return (
     <section className="container create-offer">
+      { !errorSubmitOffer && !submitOffer && (
       <h1 className="create-offer-title">Créer votre annonce</h1>
+      )}
       <Box sx={{ width: '50%', margin: '0 auto' }}>
         { loader && <LinearProgress />}
       </Box>
       { !submitOffer && !errorSubmitOffer && (
         <div className="create-offer-form">
-          <div className="create-offer-form-input">
-            <label htmlFor="title">Titre</label>
-            <input
-              type="text"
-              maxLength={30}
-              id="title"
-              name="title"
-              placeholder="Titre de votre annonce"
-              onChange={handleChangeInputValues}
-            />
-          </div>
-          <div className="create-offer-form-input">
-            <label htmlFor="zip_code">Ville</label>
-            <input
-              type="tel"
-              maxLength={5}
-              id="zip_code"
-              name="zip_code"
-              placeholder="Code Postal"
-              onChange={handleChangeInputValues}
-            />
-          </div>
-          <div className="create-offer-form-input">
-            <label htmlFor="date_start">Début</label>
-            <input
-              type="date"
-              id="date_start"
-              name="validity_start_date"
-              onChange={handleChangeInputValues}
-            />
-          </div>
-          <div className="create-offer-form-input">
-            <label htmlFor="date_end">Fin</label>
-            <input
-              type="date"
-              id="date_end"
-              name="validity_end_date"
-              onChange={handleChangeInputValues}
-            />
-          </div>
-          <div className="create-offer-form-input">
-            <label htmlFor="photo">Photo</label>
-            <input
-              type="file"
-              id="photo"
-              name="photo"
-              onChange={handleChangeInputValues}
-            />
-          </div>
-          <div className="create-offer-radio">
-            <div className="create-offer-radio-title">
-              <h2>Taille</h2>
-            </div>
-            <div className="create-offer-radio-input">
-              <label htmlFor="option1">Adulte</label>
+          <div className="create-offer-form-left">
+            <div className="create-offer-form-input">
+              <label htmlFor="title">Titre</label>
               <input
-                type="radio"
-                id="option1"
-                name="size"
-                value="Adult"
-                onChange={handleChangeInputValues}
-              />
-              <label htmlFor="option2">Enfant</label>
-              <input
-                type="radio"
-                id="option2"
-                name="size"
-                value="Children"
+                type="text"
+                maxLength={20}
+                id="title"
+                name="title"
+                placeholder="Titre de votre annonce"
                 onChange={handleChangeInputValues}
               />
             </div>
-          </div>
-          <div className="create-offer-radio">
-            <div className="create-offer-radio-title">
-              <h2>Type</h2>
-            </div>
-            <div className="create-offer-radio-input">
-              <label htmlFor="ville">Ville</label>
-              <input
-                type="radio"
-                id="ville"
-                name="model"
-                value="City"
+            <div className="create-offer-form-input">
+              <label htmlFor="infos">Description</label>
+              <textarea
+                type="text"
+                id="infos"
+                maxLength={50}
+                name="infos"
+                placeholder="Description"
                 onChange={handleChangeInputValues}
               />
-              <label htmlFor="vtt">Vtt</label>
+            </div>
+            <div className="create-offer-form-input">
+              <label htmlFor="zip_code">Ville</label>
               <input
-                type="radio"
-                id="vtt"
-                name="model"
-                value="Vtt"
+                type="tel"
+                maxLength={5}
+                id="zip_code"
+                name="zip_code"
+                placeholder="Code Postal"
+                onChange={handleChangeInputValues}
+              />
+            </div>
+            <div className="create-offer-form-input">
+              <label htmlFor="address">Adresse</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                placeholder="Adresse"
+                onChange={handleChangeInputValues}
+              />
+            </div>
+            <div className="create-offer-form-input">
+              <label htmlFor="date_start">Début</label>
+              <input
+                type="date"
+                id="date_start"
+                name="validity_start_date"
+                onChange={handleChangeInputValues}
+              />
+            </div>
+            <div className="create-offer-form-input">
+              <label htmlFor="date_end">Fin</label>
+              <input
+                type="date"
+                id="date_end"
+                name="validity_end_date"
+                onChange={handleChangeInputValues}
+              />
+            </div>
+            <div className="create-offer-form-input">
+              <label htmlFor="photo">Photo</label>
+              <input
+                type="file"
+                id="photo"
+                name="photo"
                 onChange={handleChangeInputValues}
               />
             </div>
           </div>
-          <div className="create-offer-radio">
-            <div className="create-offer-radio-title">
-              <h2>Lumières</h2>
+          <div className="create-offer-form-right">
+            <div className="create-offer-radio">
+              <div className="create-offer-radio-title">
+                <h2>Taille</h2>
+              </div>
+              <div className="create-offer-radio-input">
+                <label htmlFor="option1">Adulte</label>
+                <input
+                  type="radio"
+                  id="option1"
+                  name="size"
+                  value="Adult"
+                  onChange={handleChangeInputValues}
+                />
+                <label htmlFor="option2">Enfant</label>
+                <input
+                  type="radio"
+                  id="option2"
+                  name="size"
+                  value="Children"
+                  onChange={handleChangeInputValues}
+                />
+              </div>
             </div>
-            <div className="create-offer-radio-input">
-              <div>
+            <div className="create-offer-radio">
+              <div className="create-offer-radio-title">
+                <h2>Type</h2>
+              </div>
+              <div className="create-offer-radio-input">
+                <label htmlFor="ville">Ville</label>
+                <input
+                  type="radio"
+                  id="ville"
+                  name="model"
+                  value="City"
+                  onChange={handleChangeInputValues}
+                />
+                <label htmlFor="vtt">Vtt</label>
+                <input
+                  type="radio"
+                  id="vtt"
+                  name="model"
+                  value="Vtt"
+                  onChange={handleChangeInputValues}
+                />
+              </div>
+            </div>
+            <div className="create-offer-radio">
+              <div className="create-offer-radio-title">
+                <h2>Lumières</h2>
+              </div>
+              <div className="create-offer-radio-input">
                 <label htmlFor="option4">Oui</label>
                 <input
                   type="radio"
@@ -196,8 +221,6 @@ const CreateOffer = () => {
                   value="true"
                   onChange={handleChangeInputValues}
                 />
-              </div>
-              <div>
                 <label htmlFor="option5">Non</label>
                 <input
                   type="radio"
@@ -208,13 +231,11 @@ const CreateOffer = () => {
                 />
               </div>
             </div>
-          </div>
-          <div className="create-offer-radio">
-            <div className="create-offer-radio-title">
-              <h2>Anti vol</h2>
-            </div>
-            <div className="create-offer-radio-input">
-              <div>
+            <div className="create-offer-radio">
+              <div className="create-offer-radio-title">
+                <h2>Anti vol</h2>
+              </div>
+              <div className="create-offer-radio-input">
                 <label htmlFor="option6">Oui</label>
                 <input
                   type="radio"
@@ -223,8 +244,6 @@ const CreateOffer = () => {
                   value="true"
                   onChange={handleChangeInputValues}
                 />
-              </div>
-              <div>
                 <label htmlFor="option7">Non</label>
                 <input
                   type="radio"
@@ -235,13 +254,11 @@ const CreateOffer = () => {
                 />
               </div>
             </div>
-          </div>
-          <div className="create-offer-radio">
-            <div className="create-offer-radio-title">
-              <h2>Casque</h2>
-            </div>
-            <div className="create-offer-radio-input">
-              <>
+            <div className="create-offer-radio">
+              <div className="create-offer-radio-title">
+                <h2>Casque</h2>
+              </div>
+              <div className="create-offer-radio-input">
                 <label htmlFor="option8">Oui</label>
                 <input
                   type="radio"
@@ -250,34 +267,24 @@ const CreateOffer = () => {
                   value="true"
                   onChange={handleChangeInputValues}
                 />
-              </>
-              <label htmlFor="option9">Non</label>
-              <input
-                type="radio"
-                id="option9"
-                name="helmet"
-                value="false"
-                onChange={handleChangeInputValues}
-              />
+                <label htmlFor="option9">Non</label>
+                <input
+                  type="radio"
+                  id="option9"
+                  name="helmet"
+                  value="false"
+                  onChange={handleChangeInputValues}
+                />
+              </div>
             </div>
-            <textarea
-              type="radio"
-              id="infos"
-              name="infos"
-              onChange={handleChangeInputValues}
-            />
-            <label htmlFor="address">Adresse</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              onChange={handleChangeInputValues}
-            />
           </div>
-
-          <button type="button" className="create-offer-button publish" onClick={offerSubmit}>Publier</button>
         </div>
       )}
+
+      { !submitOffer && !errorSubmitOffer && (
+      <button type="button" className="create-offer-button publish" onClick={offerSubmit}>Publier</button>
+      )}
+
       { submitOffer && !errorSubmitOffer && (
         <div className="create-offer-done">
           <h2 className="create-offer-done-title">Votre annonce a bien été publiée !</h2>

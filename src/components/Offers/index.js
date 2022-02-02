@@ -158,8 +158,7 @@ const Offers = ({
         <div className="spinner" />
         )}
 
-      { !offers ? <p>Désolé aucune offre ne correspond </p> : <OffersDisplay offers={offers} />}
-      {/* {console.log(offers)} */}
+      { !offers ? <p className="offer-form-result-error">Désolé aucune offre ne correspond </p> : <OffersDisplay offers={offers} />}
 
       { !submitSearchOffer && errorSubmitSearchOffer && (
       <h1 className="offer-form-result-error">Oups nous avons un problème <br />avec votre demande ...</h1>
@@ -169,7 +168,7 @@ const Offers = ({
 );
 Offers.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
   })).isRequired,
   handleChange: PropTypes.func.isRequired,
   searchOffers: PropTypes.func.isRequired,

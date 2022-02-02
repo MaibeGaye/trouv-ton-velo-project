@@ -199,7 +199,6 @@ const Profile = () => {
           }
         </div>
 
-        {displayInfos && (
         <div className="right-profile">
           <h2 className="right-profile-title">Récapitulatif <i className="fas fa-bicycle" /></h2>
           <div className="right-profile-infos">
@@ -219,8 +218,6 @@ const Profile = () => {
 
           </div>
         </div>
-        )}
-
       </div>
       )}
     </section>

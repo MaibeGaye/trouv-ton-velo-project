@@ -24,7 +24,6 @@ const App = () => {
   const { user } = useContext(UserContext);
   // Axios POST request to display filtered offers from inputs values
 
-
   const getOffersFiltered = (event) => {
     setReceivedOffers([]);
     event.preventDefault();

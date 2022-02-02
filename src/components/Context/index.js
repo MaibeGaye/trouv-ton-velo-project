@@ -17,7 +17,7 @@ const UserProvider = ({ children }) => {
       id: '',
     },
     token: '',
-    logged: null,
+    logged: false,
     lende: [],
     borrow: [],
   });

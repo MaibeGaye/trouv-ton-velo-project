@@ -16,8 +16,8 @@ import { UserContext } from '../Context';
 import '../../styles/index.scss';
 
 const App = () => {
+  const [inputValues, setInputValues] = useState({});
   const [resultOffers, setResultOffers] = useState([]);
-  const [inputValues, setInputValues] = useState([]);
   const [loader, setLoader] = useState(false);
   const [submitSearchOffer, setSubmitSearchOffer] = useState(false);
   const [errorSubmitSearchOffer, setErrorSubmitSearchOffer] = useState(false);
@@ -81,6 +81,7 @@ const App = () => {
   // Function to reset offers from state
 
   const resetOffers = () => {
+    setInputValues({});
     setResultOffers([]);
     setSubmitSearchOffer(false);
     setErrorSubmitSearchOffer(false);
@@ -93,6 +94,7 @@ const App = () => {
       ...inputValues,
       [event.target.name]: event.target.value,
     });
+    console.log(inputValues);
   };
 
   console.log(user.logged);
@@ -114,6 +116,7 @@ const App = () => {
               reset={resetOffers}
               errorSubmitSearchOffer={errorSubmitSearchOffer}
               submitSearchOffer={submitSearchOffer}
+              inputValues={inputValues}
             />
           )}
         />

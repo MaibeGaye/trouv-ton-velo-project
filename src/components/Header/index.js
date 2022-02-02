@@ -14,13 +14,16 @@ const Header = () => {
   const { user, logout, setUser } = useContext(UserContext);
 
   // Login and Register modals state
-
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [responseAPI, setResponseAPI] = useState('');
   const [loginModalValue, setLoginModalValue] = useState({
     email: '',
     password: '',
   });
   const [showLoginModal, setShowLoginModal] = useState(false);
-
   const [registerModalValue, setRegisterModalValue] = useState({
     firstname: '',
     lastname: '',
@@ -31,12 +34,6 @@ const Header = () => {
     password: '',
     passwordConfirm: '',
   });
-
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [loader, setLoader] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [responseAPI, setResponseAPI] = useState('');
 
   // Function to change values from Login/Register modals
 

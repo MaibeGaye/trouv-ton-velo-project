@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { LinearProgress } from '@mui/material';
+
 import { UserContext } from '../Context';
 
 const CreateOffer = () => {
@@ -21,7 +22,8 @@ const CreateOffer = () => {
     safety_lock: '',
 
   });
-
+  const [errorInputs, setErrorInputs] = useState(false);
+  const [errorDate, setErrorDate] = useState(false);
   const [submitOffer, setSubmitOffer] = useState(false);
   const [errorSubmitOffer, setErrorSubmitOffer] = useState(false);
 
@@ -35,46 +37,59 @@ const CreateOffer = () => {
 
   const offerSubmit = () => {
     setLoader(true);
-    axios({
-      method: 'post',
-      url: 'https://api-apo-velo.herokuapp.com/create',
-      data: createOfferValues,
-      headers: {
-        Authorization: user.token,
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        setTimeout(() => {
-          setSubmitOffer(!submitOffer);
-        }, 2000);
+    setErrorDate(false);
+    setErrorInputs(false);
+    if (createOfferValues.validity_start_date > createOfferValues.validity_end_date) {
+      setTimeout(() => {
+        setLoader(false);
+        setErrorDate(true);
+      }, 2000);
+    }
+    else if (Object.keys(createOfferValues).length < 12) {
+      setTimeout(() => {
+        setLoader(false);
+        setErrorInputs(true);
+      }, 2000);
+    }
+    else if (Object.keys(createOfferValues).length === 12) {
+      axios({
+        method: 'post',
+        url: 'https://api-apo-velo.herokuapp.com/create',
+        data: createOfferValues,
+        headers: {
+          Authorization: user.token,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        setTimeout(() => {
-          setErrorSubmitOffer(!errorSubmitOffer);
-        }, 2000);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setLoader(false);
-        }, 2000);
-      });
-    // if (Object.keys(createOfferValues).length < 10) {
-    //   console.log('non pas bon');
-    // }
-    // else if (Object.keys(createOfferValues).length === 10) {
-    //   console.log('oui good');
-    //   console.log('j\'ai crée une annonce avec comme filtres : ', createOfferValues);
-    // }
+        .then((res) => {
+          setTimeout(() => {
+            setLoader(false);
+            setSubmitOffer(!submitOffer);
+          }, 2000);
+        })
+        .catch((err) => {
+          console.log(err);
+          setTimeout(() => {
+            setErrorSubmitOffer(!errorSubmitOffer);
+          }, 2000);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setLoader(false);
+          }, 2000);
+        });
+    }
   };
   const repostOfferSucces = () => {
     setSubmitOffer(!submitOffer);
     setCreateOfferValues({});
+    setErrorInputs(false);
+    setErrorDate(false);
   };
   const respostOfferFailed = () => {
     setErrorSubmitOffer(!errorSubmitOffer);
     setCreateOfferValues({});
+    setErrorInputs(false);
+    setErrorDate(false);
   };
 
   if (!user.logged) {
@@ -87,8 +102,14 @@ const CreateOffer = () => {
       <h1 className="create-offer-title">Créer votre annonce</h1>
       )}
       <Box sx={{ width: '50%', margin: '0 auto' }}>
-        { loader && <LinearProgress />}
+        { loader && <LinearProgress sx={{ margin: '5ch' }} />}
       </Box>
+      {
+        errorInputs && <p className="create-offer-title-error">Merci de remplir la totalité des champs <i className="fas fa-exclamation-triangle" /></p>
+      }
+      {
+        errorDate && <p className="create-offer-title-error">La date de fin ne doit pas être inférieur à celle du début <i className="fas fa-exclamation-triangle" /></p>
+      }
       { !submitOffer && !errorSubmitOffer && (
         <div className="create-offer-form">
           <div className="create-offer-form-left">
@@ -284,7 +305,7 @@ const CreateOffer = () => {
       )}
 
       { !submitOffer && !errorSubmitOffer && (
-      <button type="button" className="create-offer-button publish" onClick={offerSubmit}>Publier</button>
+        <button type="button" className="create-offer-button publish" onClick={offerSubmit}>Publier</button>
       )}
 
       { submitOffer && !errorSubmitOffer && (

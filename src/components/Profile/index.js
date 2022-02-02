@@ -91,8 +91,12 @@ const Profile = () => {
       },
     })
       .then((res) => {
-        console.log('Je fais une requete PATCH pour modifier ces champs :', updateInputsValues);
-        console.log('La BDD me me retourne ça :', res.data);
+        console.log(res.headers.authorization);
+        setUser({
+          ...user,
+          infos: res.data,
+          token: res.headers.authorization,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -100,7 +104,7 @@ const Profile = () => {
       .finally(() => {
         setTimeout(() => {
           setShowUpdateModal(false);
-        }, 1500);
+        }, 2000);
       });
   };
 
@@ -180,7 +184,8 @@ const Profile = () => {
                 <div className="test"><p>Prénom :</p><p>{user.infos.firstname}</p></div>
                 <div className="test"><p>Pseudo :</p><p>{user.infos.username}</p></div>
                 <div className="test"><p>Email :</p><p>{user.infos.email}</p></div>
-                <div className="test"><p>Adresse :</p><p>{user.infos.address} {user.infos.zip_code}</p></div>
+                <div className="test"><p>Adresse :</p><p>{user.infos.address}</p></div>
+                <div className="test"><p>Code postal :</p><p>{user.infos.zip_code}</p></div>
               </div>
               <div className="left-profile-buttons">
                 <button className="left-profile-button" type="button" onClick={handleUpdateModal}>Modifier mes informations</button>
@@ -215,8 +220,8 @@ const Profile = () => {
             <h3 className="profile-infos-title">Mes vélos en circulation</h3>
 
             {
-               !user.lende ? <p>Vous n'avez pas encore proposé de vélos ...</p> : <Lended />
-              }
+              !user.lende ? <p>Vous n'avez pas encore proposé de vélos ...</p> : <Lended />
+            }
 
           </div>
         </div>

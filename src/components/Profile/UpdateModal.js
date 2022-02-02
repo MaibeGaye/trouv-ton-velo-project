@@ -31,7 +31,7 @@ const UpdateInfos = ({
   return (
     <div>
       <Dialog sx={{ textAlign: 'center' }} open={showUpdateModal} onClose={handleUpdateModal}>
-        <DialogTitle sx={{ color: '#18B7BE', fontSize: '7ch', textTransform: 'uppercase' }}>Modifier mes informations</DialogTitle>
+        <DialogTitle sx={{ color: '#18B7BE', fontSize: '5ch', textTransform: 'uppercase' }}>Modifier mes informations</DialogTitle>
         <DialogContent>
           { loader && (
           <Box sx={{ width: '50%', margin: 'auto' }}>

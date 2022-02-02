@@ -14,7 +14,7 @@ const Offers = ({
     <div className="offers-form">
       <h1 className="offers-form-title">Recherche</h1>
       <div className="offers-form-input">
-        <label htmlFor="option1">Ville</label>
+        <label htmlFor="option1">CP</label>
         <input
           type="tel"
           maxLength={5}
@@ -163,12 +163,13 @@ const Offers = ({
       { !submitSearchOffer && errorSubmitSearchOffer && (
       <h1 className="offer-form-result-error">Oups nous avons un problème <br />avec votre demande ...</h1>
       )}
+
     </div>
   </section>
 );
 Offers.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.number.isRequired,
   })).isRequired,
   handleChange: PropTypes.func.isRequired,
   searchOffers: PropTypes.func.isRequired,

@@ -70,9 +70,11 @@ const CreateOffer = () => {
   };
   const repostOfferSucces = () => {
     setSubmitOffer(!submitOffer);
+    setCreateOfferValues({});
   };
   const respostOfferFailed = () => {
     setErrorSubmitOffer(!errorSubmitOffer);
+    setCreateOfferValues({});
   };
 
   if (!user.logged) {

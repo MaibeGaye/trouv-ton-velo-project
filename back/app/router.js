@@ -13,7 +13,7 @@ const {validateBody} = require('./middlewares/validator');
 const jwtMW = require('./middlewares/jwtMW');
 
 // redis
-// const {cache, flush} = require('./services/cache');
+const {cache, flush} = require('./services/cache');
 
 const router = Router();
 
@@ -42,7 +42,7 @@ router.get('/getAllUsers', userController.findAll);
  * @tags Offers
  * @returns {array<Offer>} 200 - An array of offers
  */
-router.get('/offers', offerController.findAll);
+router.get('/offers', cache, offerController.findAll);
 
 /**
  * POST /offers

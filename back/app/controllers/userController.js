@@ -1,7 +1,5 @@
 const User = require('../models/user');
 const jwt = require('../services/jwt');
-// const cache = require('../services/cache');
-
 
 module.exports = {
     findAll: async (_, response) => {

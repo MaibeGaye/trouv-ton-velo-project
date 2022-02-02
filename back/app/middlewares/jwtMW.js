@@ -1,5 +1,13 @@
 const jwt = require('../services/jwt');
 
+// const redis = require('redis');
+// var rediscl = redis.createClient();
+
+// rediscl.on("connect", function () {
+//     console.log("Redis plugged in.");
+// });
+// rediscl.connect();
+
 module.exports = (request, response, next) => {
     try {
         let token = request.headers['authorization'];

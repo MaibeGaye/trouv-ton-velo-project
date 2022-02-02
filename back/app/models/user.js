@@ -1,4 +1,4 @@
-const client = require('../database');
+const client = require('../db-pg.js');
 const bcrypt = require('bcrypt');
 const Offer = require('./offer');
 

@@ -1,4 +1,4 @@
-const client = require('../database');
+const client = require('../db-pg.js');
 
 /**
  * An entity representing an offer

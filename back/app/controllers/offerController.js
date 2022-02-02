@@ -2,9 +2,6 @@
 const Offer = require('../models/offer');
 const jwt = require('../services/jwt');
 
-// const cache = require('../services/cache');
-
-
 module.exports = {
     findAll: async (_, response) => {
         const offers = await Offer.findAll();

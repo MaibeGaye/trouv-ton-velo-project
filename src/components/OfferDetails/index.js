@@ -35,7 +35,6 @@ const OfferDetails = ({ offerDetail }) => {
             <li>Lampe fourni : {helmet ? 'Oui' : 'Non'}</li>
             <li>Anti-vol fourni : {safety_lock ? 'Oui' : 'Non'}</li>
           </ul>
-          <p> Votre modèle et votre taille : {model} {size}</p>
         </div>
         <button type="button" onClick={testReservation}>Réserver cette offre</button>
         <Link to="/offers">Retour aux offres</Link>

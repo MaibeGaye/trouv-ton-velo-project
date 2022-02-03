@@ -50,7 +50,7 @@ router.get('/offers', cache, offerController.findAll);
  * @tags Offers
  * @returns {array<Offer>} 200 - An array of offers
  */
- router.post('/offers', offerController.findFiltered);
+ router.post('/offers', flush, offerController.findFiltered);
 
 /**
  * GET /offer/{id}
@@ -62,7 +62,7 @@ router.get('/offers', cache, offerController.findAll);
  * @returns {string} 404 - An error message
  * 
  */
-router.get('/offer/:id(\\d+)', offerController.findOne);
+router.get('/offer/:id(\\d+)', cache, offerController.findOne);
 
 /**
  * Expected json object in request.body
@@ -93,7 +93,7 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  * @returns {Offer} 201 - The newly created offer
  * @returns {string} 500 - An error message
  */
-router.post('/create', offerMiddleware, jwtMW, offerController.create);
+router.post('/create', offerMiddleware, jwtMW, flush, offerController.create);
 
 
 /**
@@ -105,7 +105,7 @@ router.post('/create', offerMiddleware, jwtMW, offerController.create);
  * @returns {Offer} 200 - The updated offer
  * @returns {string} 500 - An error message
  */
-router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, offerController.edit);
+router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, flush, offerController.edit);
 // il faudra lui fournir
 
 
@@ -117,7 +117,7 @@ router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, offerController.edit);
  * @returns {string} 200 - The deleted offer confirmation
  * @returns {string} 500 - An error message
  */
-router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete);
+router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.delete);
 
 /**
  * PATCH /dashboard/edit
@@ -128,7 +128,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
  * @returns {Offer} 200 - The updated offer
  * @returns {string} 500 - An error message
  */
- router.patch('/dashboard/edit', userMiddleware, jwtMW, userController.edit);
+ router.patch('/dashboard/edit', userMiddleware, jwtMW, flush, userController.edit);
 
  /**
   * DELETE /dashboard/delete
@@ -138,7 +138,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
   * @returns {string} 200 - The deleted user confirmation
   * @returns {string} 500 - An error message
   */
- router.delete('/dashboard/delete', jwtMW, userController.delete);
+ router.delete('/dashboard/delete', jwtMW, flush, userController.delete);
 
 /**
  * GET /dashboard
@@ -147,7 +147,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
  * @tags User
  * @returns {array<User>} 200 - An array of user info
  */
-router.get('/dashboard', jwtMW, userController.userDashboard);
+router.get('/dashboard', jwtMW, cache, userController.userDashboard);
 
 /**
  * Expected json object in request.body
@@ -170,7 +170,7 @@ router.get('/dashboard', jwtMW, userController.userDashboard);
  * @returns {User} 201 - The newly created user
  * @returns {string} 500 - An error message
  */
-router.post('/signup', signupMiddleware, userController.handleSignup);
+router.post('/signup', signupMiddleware, flush, userController.handleSignup);
 
 
 /**
@@ -181,7 +181,7 @@ router.post('/signup', signupMiddleware, userController.handleSignup);
  * @returns {User} 200 - The logged in user
  * @returns {string} 500 - An error message
  */
-router.post('/login', loginMiddleware, userController.handleLogin);
+router.post('/login', loginMiddleware, flush, userController.handleLogin);
 
 // redis
 // router.post('/posts', myCustomMiddleware, flush, postController.addPost);

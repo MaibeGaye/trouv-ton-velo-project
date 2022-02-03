@@ -38,9 +38,9 @@ module.exports = {
             //on ajoute au contenu de la requête l'id de l'utilisateur ayant effectué la requête
             request.body.lender_id = request.userId.id;
 
-            const fileStr = request.body.photo;
-            const uploadResponse = await cloudinary.uploader.upload(fileStr, {});
-            request.body.photo = uploadResponse.url;
+            // const fileStr = request.body.photo;
+            // const uploadResponse = await cloudinary.uploader.upload(fileStr, {});
+            // request.body.photo = uploadResponse.url;
 
             const offer = await new Offer(request.body).save();
             response.setHeader('Authorization', jwt.makeToken(request.userId));

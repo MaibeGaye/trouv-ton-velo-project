@@ -72,8 +72,8 @@ const cache = async (request, response, next) => {
         originalResponseJson(data);
     }
 
-    response.setHeader('Authorization', jwt.makeToken(request.userId));
-    response.setHeader('Access-Control-Expose-Headers', 'Authorization');
+    // response.setHeader('Authorization', jwt.makeToken(request.userId));
+    // response.setHeader('Access-Control-Expose-Headers', 'Authorization');
     next();
 };
 

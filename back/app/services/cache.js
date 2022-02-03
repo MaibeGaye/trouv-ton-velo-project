@@ -1,9 +1,5 @@
 const {createClient} = require('redis');
-// const db = createClient();
-// db.connect();
 const config = {};
-const jwt = require('../services/jwt');
-
 
 if (process.env.NODE_ENV === 'production') {
     config.url = process.env.REDISCLOUD_URL
@@ -26,17 +22,6 @@ const cache = async (request, response, next) => {
     //est-ce que les data sont présentes dans le cache ?
     const key = `${prefix}${request.url}`;
     console.log(key);
-
-    await db.set(
-        "object",
-        JSON.stringify({
-            name: "Redis",
-            lastname: "Client",
-        })
-    );
-    
-    const getStringResult = await db.get("object");
-    console.log("Get string result: ", JSON.parse(getStringResult));
 
     //si les data sont présentes dans le cache
     if (await db.exists(key)) {
@@ -71,9 +56,6 @@ const cache = async (request, response, next) => {
         console.log('Envoi au front');
         originalResponseJson(data);
     }
-
-    // response.setHeader('Authorization', jwt.makeToken(request.userId));
-    // response.setHeader('Access-Control-Expose-Headers', 'Authorization');
     next();
 };
 

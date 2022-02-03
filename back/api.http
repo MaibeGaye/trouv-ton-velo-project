@@ -37,7 +37,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 ### Add an offer
 POST {{host}}/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzg3NzE0NywiZXhwIjoxNjQzODc4OTQ3fQ.tCZ7r-nUTaGCGg8ekYUT13KG8KQI-R947AOUmIniJ-o
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzg3NzIyNSwiZXhwIjoxNjQzODc5MDI1fQ.P5Jn74UjXEID_GIDEdlKgi2SIv-GOizoj7f-zL-41cc
+
 {
   "title": "nouvelle offre test cloudinary",
   "infos": "string",
@@ -83,10 +84,13 @@ Content-Type: application/json
 ### getall offers
 GET {{host}}/offers
 
+### refresh token
+POST {{host}}/token
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzkwNTU0MCwiZXhwIjoxNjQzOTA3MzQwfQ.L_eWg6Sf3Fy-cq4-Dq6OnAeQsH1lIOx9sGYcv2BsnsA
 
 ### Get infos of current user
 GET {{host}}/dashboard
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUWw4dkgxZ09lV1ZtNm5rdHZNeXM1Ty9IUHZ4WDVnYUpDbWZTWGdIbi9iWkM3cHN3RDRvYVMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzgwMTE3NCwiZXhwIjoxNjQzODAyOTc0fQ.Qraos6VcEdAoJKAQhYn6ED0LGKLNqg8KSkRSPlwIDJU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzkwNTE2NSwiZXhwIjoxNjQzOTA1MTg1fQ.S-jLMgLSgVQp_Cq92wic9Ch_HgVFs2I3gxAPBN64720
 
 ### Update an offer
 PATCH {{host}}/dashboard/27/edit
@@ -107,3 +111,4 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
   "validity_start_date": "2022-01-01",
   "validity_end_date": "2022-01-01"
 }
+

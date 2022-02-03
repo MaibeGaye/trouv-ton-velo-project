@@ -181,9 +181,11 @@ router.post('/signup', signupMiddleware, flush, userController.handleSignup);
  * @returns {User} 200 - The logged in user
  * @returns {string} 500 - An error message
  */
-router.post('/login', loginMiddleware, flush, userController.handleLogin);
+router.post('/login', loginMiddleware, userController.handleLogin);
+// router.post('/login', loginMiddleware, flush, userController.handleLogin);
 
-// redis
-// router.post('/posts', myCustomMiddleware, flush, postController.addPost);
+router.post('/logout', jwtMW, userController.disconnect);
+
+router.post('/token', userController.refreshToken);
 
 module.exports = router;

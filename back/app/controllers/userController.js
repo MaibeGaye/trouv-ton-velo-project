@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('../services/jwt');
+const {cache, verifyToken, deleteToken} = require('../services/tokenCache');
 
 module.exports = {
     findAll: async (_, response) => {
@@ -25,15 +26,69 @@ module.exports = {
     handleLogin: async (request, response) => {
         try {
             const user = await new User(request.body).getByEmail();
-            const token = jwt.makeToken(user);
-            response.setHeader('Authorization', token)
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
+            const access_token = await jwt.makeToken(user);
+            const refresh_token = await jwt.generateRefreshToken(user);
+            console.log('mise en cache du token...');
+
+            // on enregistre le token dans redis
+            console.log('user id :');
+            console.log(user.id);
+            console.log('refresh_token');
+            console.log(refresh_token);
+            cache(user.id, refresh_token);
+
+            response.setHeader("Access-Control-Expose-Headers", [
+                "Authorization",
+                "RefreshToken",
+            ]);
+            response.setHeader("Authorization", access_token);
+            response.setHeader("RefreshToken", refresh_token)
+
             response.status(200).json(user);
         } catch(error) {
             console.log(error);
             response.status(500).json(error.message);
         }
     },
+
+    refreshToken: async (request, response) => {
+        try {
+            const ref_token = request.headers.authorization;
+            console.log('ref_token :');
+            console.log(ref_token);
+            if (!ref_token) {
+                return response.status(401).json('No token');
+            }
+
+            const payload = jwt.validateRefreshToken(ref_token);
+            console.log(payload);
+            if (!payload.data){
+                return response.status(401).json('Invalid token payload');
+            }
+
+            //on check l'existence du token dans redis
+            console.log(payload.data.id);
+            const verifiedToken = await verifyToken(payload.data.id, ref_token);
+            if (!verifiedToken) {
+                return response.status(401).json('No token found in db');
+            }
+            const access_token = await jwt.makeToken(payload.data);
+            const refresh_token = ref_token;
+
+            response.setHeader("Access-Control-Expose-Headers", [
+                "Authorization",
+                "RefreshToken",
+            ]);
+            response.setHeader("Authorization", access_token);
+            response.setHeader("RefreshToken", refresh_token);
+
+            response.status(200).json(payload.data);
+        } catch(error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        }
+    },
+
     userDashboard: async (request, response) => {
         try {
             const data = {};
@@ -45,8 +100,6 @@ module.exports = {
                 }
             }
             data.borrowedOffers = await User.getBorrowedOffers(request.userId.id);
-            response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization');
             response.status(200).json(data);
         } catch(error) {
             console.log(error);
@@ -72,6 +125,17 @@ module.exports = {
             // pas besoin de renvoyer un nouveau token, on delete juste l'utilisateur connecté
             await User.delete(request.userId.id);
             response.status(200).json({msg: `L'utilisateur ${request.userId.id} a bien été supprimé !`, logged:false});
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        }
+    },
+
+    disconnect: async (request, response) => {
+        try {
+            deleteToken(request.userId.id);
+            // pas besoin de renvoyer un nouveau token, on logout juste l'utilisateur connecté
+            response.status(200).json({msg: `L'utilisateur ${request.userId.id} a bien été déconnecté !`, logged:false});
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);

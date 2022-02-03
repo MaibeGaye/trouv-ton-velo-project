@@ -147,7 +147,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
  * @tags User
  * @returns {array<User>} 200 - An array of user info
  */
-router.get('/dashboard', jwtMW, cache, userController.userDashboard);
+router.get('/dashboard', jwtMW, userController.userDashboard);
 
 /**
  * Expected json object in request.body

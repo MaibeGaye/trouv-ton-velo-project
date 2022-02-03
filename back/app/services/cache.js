@@ -2,6 +2,8 @@ const {createClient} = require('redis');
 // const db = createClient();
 // db.connect();
 const config = {};
+const jwt = require('../services/jwt');
+
 
 if (process.env.NODE_ENV === 'production') {
     config.url = process.env.REDISCLOUD_URL
@@ -70,6 +72,8 @@ const cache = async (request, response, next) => {
         originalResponseJson(data);
     }
 
+    response.setHeader('Authorization', jwt.makeToken(request.userId));
+    response.setHeader('Access-Control-Expose-Headers', 'Authorization');
     next();
 };
 

@@ -45,8 +45,6 @@ module.exports = {
                 }
             }
             data.borrowedOffers = await User.getBorrowedOffers(request.userId.id);
-            response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
             response.status(200).json(data);
         } catch(error) {
             console.log(error);

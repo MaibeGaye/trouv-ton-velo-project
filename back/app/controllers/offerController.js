@@ -44,7 +44,7 @@ module.exports = {
 
             const offer = await new Offer(request.body).save();
             response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
+            response.setHeader('Access-Control-Expose-Headers', 'Authorization');
             response.status(201).json(offer);   
         } catch (error) {
             console.log(error);

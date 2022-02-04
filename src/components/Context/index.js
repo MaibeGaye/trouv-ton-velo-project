@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 
 export const UserContext = createContext();
 
@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
       password: '',
       id: '',
     },
-    token: '',
+    token: null,
     logged: false,
     lende: [],
     borrow: [],
@@ -27,7 +27,21 @@ const UserProvider = ({ children }) => {
       localStorage.removeItem('logged');
       localStorage.removeItem('token');
       setUser({
+        ...user,
+        infos: {
+          firstname: '',
+          lastname: '',
+          username: '',
+          email: '',
+          zip_code: '',
+          address: '',
+          password: '',
+          id: '',
+        },
+        token: null,
         logged: false,
+        lende: [],
+        borrow: [],
       });
     }, 1000);
   };

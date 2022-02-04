@@ -38,11 +38,13 @@ const App = () => {
 
       setUser({
         ...user,
-        infos: {
-          ...user.infos,
-        },
         token: backUpJWT,
         logged: backUpLOG,
+      });
+    }
+    else {
+      setUser({
+        logged: false,
       });
     }
   }, []);
@@ -97,7 +99,7 @@ const App = () => {
     console.log(inputValues);
   };
 
-  console.log(user.logged);
+  console.log(user.token);
   return (
     <div className="app">
       <Header />

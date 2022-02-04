@@ -20,6 +20,7 @@ const Profile = () => {
   const [updateInputsValues, setUpdateInputsValues] = useState({});
 
   // Axios GET request to display user's infos
+  // /token
 
   useEffect(() => {
     axios({
@@ -30,43 +31,23 @@ const Profile = () => {
       },
     })
       .then((res) => {
+        console.log(res.data);
         console.log('J\'ai fais une requete en visitant mon profil et mes infos sont :', res.data);
+        setUpdateInputsValues(res.data.userData);
         setUser({
           ...user,
           infos: res.data.userData,
-          token: res.headers.authorization,
+          // token: res.headers.authorization,
           borrow: res.data.borrowedOffers,
           lende: res.data.lendedOffers,
         });
-        const createBackUpJWT = JSON.stringify(res.headers.authorization);
-        localStorage.setItem('token', createBackUpJWT);
+        // const createBackUpJWT = JSON.stringify(res.headers.authorization);
+        // localStorage.setItem('token', createBackUpJWT);
       })
       .catch((err) => {
         console.log(err.request.responseText);
       });
   }, []);
-
-  // useEffect(async () => {
-  //   try {
-  //     const response = await axios({
-  //       url: 'https://api-apo-velo.herokuapp.com/dashboard',
-  //       method: 'get',
-  //       timeout: 3000,
-  //       headers: {
-  //         Authorization: user.token,
-  //       },
-  //     });
-  //     setUser({
-  //       ...user,
-  //       infos: response.data.userData,
-  //       token: response.headers.authorization,
-  //       lende: response.data.lendedOffers,
-  //     });
-  //   }
-  //   catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [user.infos]);
 
   // UPDATE FUNCTIONS
 
@@ -124,6 +105,10 @@ const Profile = () => {
     setDisplayInfos(true);
   };
 
+  const updateOffer = () => {
+    console.log
+  }
+
   // Axios DELETE request to delete user's account after 1 confirmation
 
   const confirmDelete = () => {
@@ -155,9 +140,9 @@ const Profile = () => {
 
   // If the user is not logged, automatically redirect to the home page
 
-  if (!user.logged) {
-    return <Navigate to="/" />;
-  }
+  // if (!user.logged) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
 
@@ -205,8 +190,41 @@ const Profile = () => {
             )
           }
         </div>
-
         <div className="right-profile">
+          <h2 className="right-profile-title">Récapitulatif <i className="fas fa-bicycle" /></h2>
+          {displayInfosOffer && (
+            <>
+              <div className="right-profile-lender">
+                <h3 className="profile-infos-title">Mes vélos en circulations</h3>
+                {
+               !user.lende ? <p>Vous n'avez pas encore proposé de vélos ...</p> : <Lended />
+              }
+                <div className="right-profile-buttons">
+                  <button className="right-profile-button" type="button">Modifier mon annonce</button>
+                  <button className="right-profile-button" type="button">Supprimer mon annonce</button>
+                </div>
+
+              </div>
+              <div className="right-profile-borrow">
+                <h3 className="profile-infos-title">Les vélos que j'ai emprunté</h3>
+
+                {
+               !user.borrow ? <p>Vous n'avez pas encore emprunté de vélos ...</p> : <Borrow />
+              }
+              </div>
+            </>
+          )}
+          { !displayInfosOffer && (
+            <>
+              <h3 className="right-profile-delete">Êtes vous sûrs de vouloir supprimer votre annonce n° ?</h3>
+              <div className="confirm-buttons">
+                <button type="button" className="right-profile-button delete-confirm">Oui</button>
+                <button type="button" className="right-profile-button delete-cancel">Non</button>
+              </div>
+            </>
+          )}
+        </div>
+        {/* <div className="right-profile">
           <h2 className="right-profile-title">Récapitulatif <i className="fas fa-bicycle" /></h2>
           <div className="right-profile-infos">
             <h3 className="profile-infos-title">Les vélos que j'ai emprunté</h3>
@@ -224,7 +242,7 @@ const Profile = () => {
             }
 
           </div>
-        </div>
+        </div> */}
       </div>
       )}
     </section>

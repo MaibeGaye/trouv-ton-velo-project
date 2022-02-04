@@ -20,6 +20,7 @@ const UpdateInfos = ({
   showUpdateModal, handleUpdateModal,
   updateInfos,
   updateModalChangeValue,
+  updateInputsValues,
 }) => {
   const { user } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -49,6 +50,7 @@ const UpdateInfos = ({
             variant="standard"
             onChange={updateModalChangeValue('firstname')}
             helperText={`Prénom: ${user.infos.firstname}`}
+            value={updateInputsValues.firstname}
           />
           <TextField
             required
@@ -60,6 +62,8 @@ const UpdateInfos = ({
             variant="standard"
             onChange={updateModalChangeValue('lastname')}
             helperText={`Nom: ${user.infos.lastname}`}
+            value={updateInputsValues.lastname}
+
           />
           <TextField
             required
@@ -71,6 +75,8 @@ const UpdateInfos = ({
             variant="standard"
             onChange={updateModalChangeValue('username')}
             helperText={`Pseudo: ${user.infos.username}`}
+            value={updateInputsValues.username}
+
           />
           <TextField
             required
@@ -82,6 +88,8 @@ const UpdateInfos = ({
             variant="standard"
             onChange={updateModalChangeValue('email')}
             helperText={`Email: ${user.infos.email}`}
+            value={updateInputsValues.email}
+
           />
           <TextField
             required
@@ -93,6 +101,8 @@ const UpdateInfos = ({
             variant="standard"
             onChange={updateModalChangeValue('address')}
             helperText={`Adresse: ${user.infos.address}`}
+            value={updateInputsValues.address}
+
           />
           <TextField
             required
@@ -104,11 +114,14 @@ const UpdateInfos = ({
             variant="standard"
             onChange={updateModalChangeValue('zip_code')}
             helperText={`Code Postal: ${user.infos.zip_code}`}
+            value={updateInputsValues.zip_code}
+
           />
           <FormControl sx={{ width: '50ch', margin: '2ch' }} variant="standard">
             <InputLabel htmlFor="password">
               Mot de passe
             </InputLabel>
+            <p>Nouveau MDP</p>
             <Input
               required
               id="password"

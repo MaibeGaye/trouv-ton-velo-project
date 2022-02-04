@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import DayJS from 'react-dayjs';
 import { useContext } from 'react';
 import { UserContext } from '../Context';
 
@@ -12,7 +13,7 @@ const Borrow = () => {
                   <div key={id} className="profile-borrow">
                     <h1 className="profile-borrow-title">Titre : {title}</h1>
                     <p className="profile-borrow-id">Réservation n° {id}</p>
-                    <p className="profile-borrow-date">A rendre le : {validity_end_date}</p>
+                    <p className="profile-borrow-date">A rendre le : <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>
                   </div>
                 ))
       }

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import './style.scss';
+import jwt_decode from 'jwt-decode';
 import { NavLink, Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import axios from 'axios';
@@ -90,9 +91,8 @@ const Header = () => {
 
   // Axios POST request for connect the user
 
-  const connectUser = (event) => {
+  const login = (event) => {
     event.preventDefault();
-
     setLoader(true);
     axios({
       method: 'post',
@@ -100,17 +100,25 @@ const Header = () => {
       data: loginModalValue,
     })
       .then((res) => {
-        console.log('Je viens de me connecter, mes infos de la bdd:', res.data);
+        // console.log('Je viens de me connecter, mes infos de la bdd:', res.data);
         setUser({
           ...user,
           infos: res.data,
           token: res.headers.authorization,
           logged: res.data.logged,
+          refreshToken: res.headers.refreshtoken,
         });
-        const createBackUpJWT = JSON.stringify(res.headers.authorization);
-        localStorage.setItem('token', createBackUpJWT);
-        const createBackUpLOG = JSON.stringify(res.data.logged);
-        localStorage.setItem('logged', createBackUpLOG);
+        const decoded = jwt_decode(res.headers.authorization);
+        console.log(decoded);
+        // console.log(res.headers.authorization);
+        // console.log(res.headers.refreshtoken);
+        localStorage.setItem('token', res.headers.authorization);
+        localStorage.setItem('refresh_token', res.headers.refreshtoken);
+        // localStorage.setItem('logged', res.data.logged);
+        // const createBackUpJWT = JSON.stringify(res.headers.authorization);
+        // localStorage.setItem('token', createBackUpJWT);
+        // const createBackUpLOG = JSON.stringify(res.data.logged);
+        // localStorage.setItem('logged', createBackUpLOG);
         handleLoginModal();
       })
 
@@ -169,7 +177,7 @@ const Header = () => {
         handleLoginModal={handleLoginModal}
         loginModalValue={loginModalValue}
         showLoginModal={showLoginModal}
-        connectUser={connectUser}
+        connectUser={login}
         setResponseAPI={setResponseAPI}
         responseAPI={responseAPI}
         loader={loader}

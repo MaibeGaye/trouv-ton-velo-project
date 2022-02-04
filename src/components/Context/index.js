@@ -17,6 +17,8 @@ const UserProvider = ({ children }) => {
       id: '',
     },
     token: null,
+    refreshToken: null,
+    isExpired: false,
     logged: false,
     lende: [],
     borrow: [],

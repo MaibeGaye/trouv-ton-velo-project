@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+
 import Header from '../Header';
 import Home from '../Home';
 import Offers from '../Offers';
@@ -11,6 +12,7 @@ import About from '../About';
 import Legals from '../Legals';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
+
 import { UserContext } from '../Context';
 
 import '../../styles/index.scss';
@@ -29,25 +31,50 @@ const App = () => {
   // Function useEffect for check if the user is logged and have a token before the first render
 
   useEffect(() => {
-    const backUpToken = localStorage.getItem('token');
-    const backUpSession = localStorage.getItem('logged');
+    axios({
+      method: 'post',
+      url: 'https://api-apo-velo.herokuapp.com/token',
+      headers: {
+        Authorization: user.refreshToken,
+      },
+    })
+      .then((res) => {
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('token');
+        localStorage.setItem('token', res.headers.authorization);
+        localStorage.setItem('refresh_token', res.headers.refreshtoken);
+        setUser({
+          ...user,
+          token: res.headers.authorization,
+          refreshToken: res.headers.refreshtoken,
+        });
+      })
 
-    if (backUpSession && backUpToken) {
-      const backUpJWT = JSON.parse(backUpToken);
-      const backUpLOG = JSON.parse(backUpSession);
-
-      setUser({
-        ...user,
-        token: backUpJWT,
-        logged: backUpLOG,
+      .catch((err) => {
+        console.log(err);
       });
-    }
-    else {
-      setUser({
-        logged: false,
-      });
-    }
   }, []);
+console.log(user.logged);
+  // useEffect(() => {
+  //   const backUpToken = localStorage.getItem('token');
+  //   const backUpSession = localStorage.getItem('logged');
+
+  //   if (backUpSession && backUpToken) {
+  //     const backUpJWT = JSON.parse(backUpToken);
+  //     const backUpLOG = JSON.parse(backUpSession);
+
+  //     setUser({
+  //       ...user,
+  //       token: backUpJWT,
+  //       logged: backUpLOG,
+  //     });
+  //   }
+  //   else {
+  //     setUser({
+  //       logged: false,
+  //     });
+  //   }
+  // }, []);
 
   // Axios POST request to display filtered offers from inputs values
 
@@ -98,8 +125,6 @@ const App = () => {
     });
     console.log(inputValues);
   };
-
-  console.log(user.token);
   return (
     <div className="app">
       <Header />

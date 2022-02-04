@@ -72,6 +72,10 @@ Content-Type: application/json
 DELETE {{host}}/dashboard/6/delete
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRULnhlcS5BT0t1R3NxbFNTeE8xS2x1Z1lkQW4xdGpYSlZGbFR6ZTB3T29tN2UuNmJSbGljYSIsImlkIjoyNSwibG9nZ2VkIjp0cnVlfSwiaWF0IjoxNjQzMzkwNzE0LCJleHAiOjE2NDMzOTI1MTR9.kDiDO9Qi14JKXXSBPNxrmmeNR9OydxmyDb6Wj3abtKs
 
+### Logout
+POST {{host}}/logout
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzkwNzcwNCwiZXhwIjoxNjQzOTA3NzI0fQ.XeBCZfO0U0Z-8HxqtJvjLB0R99u7bgeXcnp6bGE3TZQ
+
 ### Login
 POST {{host}}/login
 Content-Type: application/json
@@ -86,11 +90,11 @@ GET {{host}}/offers
 
 ### refresh token
 POST {{host}}/token
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzkwNTU0MCwiZXhwIjoxNjQzOTA3MzQwfQ.L_eWg6Sf3Fy-cq4-Dq6OnAeQsH1lIOx9sGYcv2BsnsA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzk2NjcxNiwiZXhwIjoxNjQzOTY4NTE2fQ.FD-QdXs40FR1bIZ0omVlTNnrscMfj9Clpu36ekNwDZE
 
 ### Get infos of current user
 GET {{host}}/dashboard
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzkwNTE2NSwiZXhwIjoxNjQzOTA1MTg1fQ.S-jLMgLSgVQp_Cq92wic9Ch_HgVFs2I3gxAPBN64720
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzk2NDQxNSwiZXhwIjoxNjQzOTY0NDM1fQ.nqnN2AR3j5dmrZQx_LTq6CiECzWXyKyXQO-Muj96pAE
 
 ### Update an offer
 PATCH {{host}}/dashboard/27/edit
@@ -112,3 +116,22 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
   "validity_end_date": "2022-01-01"
 }
 
+### Book an offer
+POST {{host}}/offer/5
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzk2NzcwMSwiZXhwIjoxNjQzOTY3NzIxfQ.cqTK5xTmDc8Ucs7MwfYJLTNJQmyno5OGpJRWCotYlfc
+
+{
+  "title": "string",
+  "infos": "string",
+  "model": "string",
+  "size": "string",
+  "helmet": true,
+  "lamps": true,
+  "safety_lock": true,
+  "photo": "string",
+  "address": "string",
+  "zip_code": 85001,
+  "validity_start_date": "2022-01-01",
+  "validity_end_date": "2022-01-01"
+}

@@ -26,6 +26,7 @@ module.exports = {
     handleLogin: async (request, response) => {
         try {
             const user = await new User(request.body).getByEmail();
+            deleteToken(user.id);
             const access_token = await jwt.makeToken(user);
             const refresh_token = await jwt.generateRefreshToken(user);
             console.log('mise en cache du token...');

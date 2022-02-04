@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 const schema = Joi.object({
+    id: Joi.number().required(),
     username: Joi.string().alphanum().min(3).max(64).required(),
     lastname: Joi.string().min(3).max(64).required(),
     firstname: Joi.string().min(3).max(64).required(),

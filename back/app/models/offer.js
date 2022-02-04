@@ -69,6 +69,9 @@ class Offer {
         try {
             const {rows} = await client.query('SELECT * FROM offer WHERE id=$1', [id]);
             if (rows[0]) {
+                const lenderId = rows[0].lender_id;
+                const lenderUsername = await client.query('SELECT username FROM "user" WHERE id=$1', [lenderId]);
+                rows[0].lenderUsername = lenderUsername.rows[0].username;
                 return new Offer(rows[0]);
             } else {
                 console.log(`No offer found for id ${id}`);

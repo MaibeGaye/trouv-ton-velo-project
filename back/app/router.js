@@ -9,6 +9,7 @@ const userSchema = require('./schemas/userSchema');
 const loginSchema = require('./schemas/loginSchema');
 const signupSchema = require('./schemas/signupSchema');
 const offerSchema = require('./schemas/offerSchema')
+const bookSchema = require('./schemas/bookSchema')
 const {validateBody} = require('./middlewares/validator');
 const jwtMW = require('./middlewares/jwtMW');
 
@@ -22,6 +23,7 @@ const userMiddleware = validateBody(userSchema);
 const loginMiddleware = validateBody(loginSchema);
 const signupMiddleware = validateBody(signupSchema);
 const offerMiddleware = validateBody(offerSchema);
+const bookMiddleware = validateBody(bookSchema);
 
 router.get('/getUserTest', userController.findOne);
 
@@ -62,7 +64,20 @@ router.get('/offers', cache, offerController.findAll);
  * @returns {string} 404 - An error message
  * 
  */
-router.get('/offer/:id(\\d+)', cache, offerController.findOne);
+router.get('/offer/:id(\\d+)', offerController.findOne);
+// router.get('/offer/:id(\\d+)', cache, offerController.findOne);
+
+/**
+ * GET /offer/{id}
+ * @summary Responds with one offer from database
+ * @route GET /offer/{id}
+ * @tags Offers
+ * @param {number} id.path.required The id of the offer to fetch
+ * @returns {Offer} 200 - A single offer identified by its id
+ * @returns {string} 404 - An error message
+ * 
+ */
+ router.post('/offer/:offerId(\\d+)', bookMiddleware, jwtMW, flush, offerController.bookOne);
 
 /**
  * Expected json object in request.body
@@ -147,7 +162,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
  * @tags User
  * @returns {array<User>} 200 - An array of user info
  */
-router.get('/dashboard', jwtMW, cache, userController.userDashboard);
+router.get('/dashboard', jwtMW, userController.userDashboard);
 
 /**
  * Expected json object in request.body

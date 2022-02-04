@@ -82,6 +82,37 @@ module.exports = {
         }
     },
 
+    bookOne: async (request, response) => {
+        try {
+            const idOffer = parseInt(request.params.offerId, 10);
+
+            const idUser = request.userId.id;
+
+            request.body.id = idOffer;
+
+            const lenderId = await Offer.returnLenderId(idOffer);
+            request.body.lender_id = lenderId;
+            // si pas de locataire actuel, on définit quand même borrower_id sur null 
+            // pour avoir un objet body offer complet avant de le save
+            const borrowerId = await Offer.returnBorrowerId(idOffer);
+            if (!borrowerId) {
+                request.body.borrower_id = idUser;
+
+                const updatedOffer = await new Offer(request.body).save();
+                response.status(200).json(updatedOffer);
+            } else { // si l'annonce possède un id loueur, on interdit la modif
+                // à voir si pas mieux de filer l'info "editable: false" direct au GET /dashboard (via la returnborid) pour genre qu'ils grisent le bouton modifier, avec un tooltip attendez que l'utilisateur rende le vélo
+                response.status(500).json({
+                    msg:`Modification annulée, l'annonce est déjà louée`,
+                    bookable:false
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);   
+        }
+    },
+
     delete: async (request, response) => {
         try {
             const id = parseInt(request.params.offerId, 10);

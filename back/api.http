@@ -67,7 +67,7 @@ Content-Type: application/json
 {
   "size": "Adult",
   "zip_code": 59000,
-  "helmet": true,
+  "helmet": false,
   "lamps": false,
   "safety_lock": false
 }

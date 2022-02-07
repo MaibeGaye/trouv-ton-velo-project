@@ -1,138 +1,196 @@
 @use '../../styles/vars';
 
 
-.offers{
+// .offers{
     
-    background-color: vars.$third-color;
-    display: flex;
+//     background-color: vars.$third-color;
+//     display: flex;
 
-    &-form{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 350px;
-        height: 86vh;
-        background-color: vars.$second-color;
+//     &-form{
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: center;
+//         width: 350px;
+//         height: 86vh;
+//         background-color: vars.$second-color;
 
-        & label {
-            color: vars.$third-color;
-            margin: 0 0.5rem;
-            font-size: 1.8rem;
-        }
+//         & label {
+//             color: vars.$third-color;
+//             margin: 0 0.5rem;
+//             font-size: 1.8rem;
+//         }
 
-       & h2 {
-           font-size: 1.8rem;
-       }
+//        & h2 {
+//            font-size: 1.8rem;
+//        }
 
-        &-title{
-            color: vars.$first-color;
-            font-size: 2rem;
-            margin: 0.5rem;
-        }
-        &-input{
-           background-color: vars.$first-color;
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-           border-radius: 10px;
-           font-size: 2rem;
-           padding: 0.5rem;
-           margin: 1rem;
-           width: 90%;
+//         &-title{
+//             color: vars.$first-color;
+//             font-size: 2rem;
+//             margin: 0.5rem;
+//         }
+//         &-input{
+//            background-color: vars.$first-color;
+//            display: flex;
+//            justify-content: space-between;
+//            align-items: center;
+//            border-radius: 10px;
+//            font-size: 2rem;
+//            padding: 0.5rem;
+//            margin: 1rem;
+//            width: 90%;
 
-           & label{
-            color: vars.$four-color;
+//            & label{
+//             color: vars.$four-color;
 
-           }
-           & input{
-               border: 1px solid vars.$second-color;
-               border-radius: 10px;
-               padding: 0.5rem;
-           }
+//            }
+//            & input{
+//                border: 1px solid vars.$second-color;
+//                border-radius: 10px;
+//                padding: 0.5rem;
+//            }
             
-        }
-        &-buttons{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-        &-button{
-            margin: 1rem;
-            border-radius: 10px;
-            height: 3rem;
-            width: 8rem;
-            border: none;
-            background-color: vars.$first-color;
-            color: vars.$four-color;
-            font-weight: bold;
-        }
+//         }
+//         &-buttons{
+//             width: 100%;
+//             display: flex;
+//             justify-content: center;
+//         }
+//         &-button{
+//             margin: 1rem;
+//             border-radius: 10px;
+//             height: 3rem;
+//             width: 8rem;
+//             border: none;
+//             background-color: vars.$first-color;
+//             color: vars.$four-color;
+//             font-weight: bold;
+//         }
 
-    }
-}
-.offers-form-input-date{
-    display: flex;
-    flex-direction: column;
-}
-.offers-form-input-date input{
-    font-size: 1rem;
-    margin: 0.5rem;
-    border-radius: 10px;
-    border: none;
-    padding: 0.5rem;
-    color: vars.$four-color;
-}
-.offers-form-input-date label{
-    color: vars.$four-color;
-    text-decoration: underline;
-    font-size: 1.5rem;
-    text-align: center;
-}
+//     }
+// }
+// .offers-form-input-date{
+//     display: flex;
+//     flex-direction: column;
+// }
+// .offers-form-input-date input{
+//     font-size: 1rem;
+//     margin: 0.5rem;
+//     border-radius: 10px;
+//     border: none;
+//     padding: 0.5rem;
+//     color: vars.$four-color;
+// }
+// .offers-form-input-date label{
+//     color: vars.$four-color;
+//     text-decoration: underline;
+//     font-size: 1.5rem;
+//     text-align: center;
+// }
 
-.offer-form-result{
-    // background-image: url("../../assets/checkoffers.jpg");
-    // background-position: center;
-    // background-size: cover;
-    // background-repeat: no-repeat;
-    background-color: vars.$third-color;
-    width: calc(100vw - 350px);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-}
+// .offer-form-result{
+//     background-color: vars.$third-color;
+//     width: calc(100vw - 350px);
+//     display: flex;
+//     flex-direction: row;
+//     flex-wrap: wrap;
+//     justify-content: center;
+//     align-items: center;
+//     overflow: auto;
+// }
 
-.spinner {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: vars.$first-color;
+// .spinner {
+//     width: 50px;
+//     height: 50px;
+//     border-radius: 50%;
+//     background-color: vars.$first-color;
     
-    animation: rotateplane 1.5s infinite ease-in-out;
-}
-.offer-form-result-error{
-    color: vars.$first-color;
-    font-size: 2.5rem;
-    text-align: center;
-}
+//     animation: rotateplane 1.5s infinite ease-in-out;
+// }
+// .offer-form-result-error{
+//     color: vars.$first-color;
+//     font-size: 2.5rem;
+//     text-align: center;
+// }
   
-  @keyframes rotateplane {
-    0% {
-      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-    }
-    50% {
-      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-    }
-    100% {
-      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-    }
-}
+//   @keyframes rotateplane {
+//     0% {
+//       transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+//     }
+//     50% {
+//       transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+//     }
+//     100% {
+//       transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+//     }
+// }
 
-@media screen and (max-width: 767px) {
-    
-  .offers-form{
-    
+@media screen and (max-width: 1000px) {
+   
+  .offers{
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: vars.$third-color;
+      
+
+      &-form{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+          height: 100%;
+          width: 100%;
+
+          &-title{
+              font-size: 3rem;
+              margin: 1rem;
+          }
+
+          &-input{
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+              width: 75%;
+              margin: 0.5rem;
+
+              & h2{
+                  font-size: 1.5rem;
+              }
+              & label{
+                font-size: 1.5rem;
+              }
+              & input{
+                  margin: 0.5rem;
+              }
+
+              &-contain{
+
+              }
+              &-date{
+                  display: flex;
+                  flex-direction: column;
+                  margin: 1rem;
+              }
+          }
+
+          &-button{
+            margin: 1rem;
+                        border-radius: 10px;
+                        height: 3rem;
+                        width: 8rem;
+                        border: none;
+                        background-color: vars.$first-color;
+                        color: vars.$four-color;
+                        font-weight: bold;
+          }
+
+          &-result{
+             background-color: black;
+          }
+      }
   }
 }

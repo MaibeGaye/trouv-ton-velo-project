@@ -21,8 +21,6 @@ const OfferDetails = ({ offerDetail }) => {
     validity_start_date, zip_code,
   } = foundOffer;
 
-  
-
   const reserve = () => {
     axios({
       method: 'post',

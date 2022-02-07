@@ -105,10 +105,6 @@ const Profile = () => {
     setDisplayInfos(true);
   };
 
-  const updateOffer = () => {
-    console.log
-  }
-
   // Axios DELETE request to delete user's account after 1 confirmation
 
   const confirmDelete = () => {
@@ -165,17 +161,18 @@ const Profile = () => {
           {displayInfos && (
             <>
               <div className="left-profile-infos">
-                <div className="test"><p>Nom :</p><p>{user.infos.lastname}</p></div>
-                <div className="test"><p>Prénom :</p><p>{user.infos.firstname}</p></div>
-                <div className="test"><p>Pseudo :</p><p>{user.infos.username}</p></div>
-                <div className="test"><p>Email :</p><p>{user.infos.email}</p></div>
-                <div className="test"><p>Adresse :</p><p>{user.infos.address}</p></div>
-                <div className="test"><p>Code postal :</p><p>{user.infos.zip_code}</p></div>
+                <div className="left-profile-info"><p>Nom :</p><p>{user.infos.lastname}</p></div>
+                <div className="left-profile-info"><p>Prénom :</p><p>{user.infos.firstname}</p></div>
+                <div className="left-profile-info"><p>Pseudo :</p><p>{user.infos.username}</p></div>
+                <div className="left-profile-info"><p>Email :</p><p>{user.infos.email}</p></div>
+                <div className="left-profile-info"><p>Adresse :</p><p>{user.infos.address}</p></div>
+                <div className="left-profile-info"><p>Code postal :</p><p>{user.infos.zip_code}</p></div>
               </div>
               <div className="left-profile-buttons">
                 <button className="left-profile-button" type="button" onClick={handleUpdateModal}>Modifier mes informations</button>
                 <button className="left-profile-button" type="button" onClick={firstConfirmDelete}>Supprimer mon compte</button>
               </div>
+              <i className="fas fa-arrow-down" />
             </>
           )}
           {
@@ -183,14 +180,15 @@ const Profile = () => {
               <div className="delete-profile">
                 <h3 className="left-profile-delete">Êtes vous sûrs de <br /> vouloir supprimer votre compte ?</h3>
                 <div className="confirm-buttons">
-                  <button type="button" className="left-profile-button delete-confirm" onClick={confirmDelete}>Oui</button>
-                  <button type="button" className="left-profile-button delete-cancel" onClick={cancelDelete}>Non</button>
+                  <button type="button" className="confirm-buttons-delete" onClick={confirmDelete}>Oui</button>
+                  <button type="button" className="confirm-buttons-cancel" onClick={cancelDelete}>Non</button>
+                 
                 </div>
               </div>
             )
           }
         </div>
-        <div className="right-profile">
+        {/* <div className="right-profile">
           <h2 className="right-profile-title">Récapitulatif <i className="fas fa-bicycle" /></h2>
           {displayInfosOffer && (
             <>
@@ -223,8 +221,8 @@ const Profile = () => {
               </div>
             </>
           )}
-        </div>
-        {/* <div className="right-profile">
+        </div> */}
+        <div className="right-profile">
           <h2 className="right-profile-title">Récapitulatif <i className="fas fa-bicycle" /></h2>
           <div className="right-profile-infos">
             <h3 className="profile-infos-title">Les vélos que j'ai emprunté</h3>
@@ -242,7 +240,7 @@ const Profile = () => {
             }
 
           </div>
-        </div> */}
+        </div>
       </div>
       )}
     </section>

@@ -26,7 +26,7 @@ const Offers = ({
       </div>
       <div className="offers-form-input">
         <h2>Modèle</h2>
-        <div className="test">
+        <div className="offers-form-input-contain">
           <input
             type="radio"
             id="option2"
@@ -47,7 +47,7 @@ const Offers = ({
       </div>
       <div className="offers-form-input">
         <h2>Type</h2>
-        <div className="test">
+        <div className="offers-form-input-contain">
           <input
             type="radio"
             id="ville"
@@ -68,7 +68,7 @@ const Offers = ({
       </div>
       <div className="offers-form-input">
         <h2>Lumières</h2>
-        <div className="test">
+        <div className="offers-form-input-contain">
           <input
             type="radio"
             id="option4"
@@ -89,7 +89,7 @@ const Offers = ({
       </div>
       <div className="offers-form-input">
         <h2>Anti vol</h2>
-        <div className="test">
+        <div className="offers-form-input-contain">
           <input
             type="radio"
             id="option6"
@@ -111,7 +111,7 @@ const Offers = ({
 
       <div className="offers-form-input">
         <h2>Casque</h2>
-        <div className="test">
+        <div className="offers-form-input-contain">
           <input
             type="radio"
             id="option8"

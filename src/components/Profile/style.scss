@@ -21,6 +21,10 @@
         flex-direction: row;
         width: 100%;
         height: 100%;
+
+        & i {
+           display: none;
+        }
     }
     &-lender{
         margin: 1rem;
@@ -33,7 +37,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 
     &-title{
@@ -42,6 +46,7 @@
 
         & i {
             font-size: 3rem;
+            
         }
     }
 
@@ -50,6 +55,7 @@
       margin: 2rem;
       border-radius: 10px;
       text-align: center;
+
     }
     &-info{
         display: flex;
@@ -60,7 +66,6 @@
         font-size: 2rem;
         padding: 1rem;
         color: vars.$four-color;
-        // margin: 1rem;
     }
 
     &-buttons{
@@ -84,6 +89,8 @@
         text-align: center;
     }
 
+    /* DELETE ACCOUNT BUTTON */
+
     .confirm-buttons{
         display: flex;
         align-items: center;
@@ -91,7 +98,7 @@
         margin: 2rem;
         width: 75%;
 
-        &-confirm{
+        &-delete{
             font-family: 'Dongle', sans-serif;
             border: none;
             background-color: #178ca4;
@@ -102,7 +109,7 @@
             padding: 0.5rem;
             width: 50%;
         }
-        &-confirm:hover{
+        &-delete:hover{
             background-color: red;
         }
 
@@ -124,151 +131,106 @@
        
     }
 }
+}
 
+/* RIGHT SIDE */
 .right-profile{
-    background-color: vars.$second-color;
     width: 50%;
-    height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    background-color: vars.$second-color;
+    justify-content: center;
     align-items: center;
 
-    &-title{
-        font-size: 4rem;
-        color: vars.$first-color;
-        & i {
-            font-size: 3rem;
-        }
-    }
-
-    &-infos{
+    &-infos-left{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 50%;
-        width: 75%;
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
+
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+            color: vars.$first-color;
+            margin: 2rem;
+            text-decoration: underline;
+        }
+    }
+    &-infos-right{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
+
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+            color: vars.$first-color;
+            margin: 2rem;
+            text-decoration: underline;
+        }
+    }
+
+    &-borrow{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: vars.$first-color;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 1rem;
+
+        &-list{
+            background-color: vars.$third-color;
+            border-radius: 10px;
+        }
+
+        &-title{
+            font-size: 2rem;
+        }
+
+        &-id{
+            font-size: 1.5rem;
+        }
         
+        &-date{
+            font-size: 1.5rem;
+        }
     }
-    // &-borrow{
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     width: 75%;
-    //     background-color: vars.$first-color;
-    //     margin: 1rem;
-    //     border-radius: 10px;
-    // }
-    // &-borrow p {
-    //     font-size: 2rem;
-    //     color: vars.$four-color;
-    //     margin: 1rem;
-    // }
-    // &-lender {
+
+    &-lended{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: vars.$first-color;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 1rem;
+
+        &-list{
+            background-color: vars.$third-color;
+            border-radius: 10px;
+        }
+
+        &-title{
+            font-size: 2rem;
+        }
         
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     width: 75%;
-    //     height: 35%;
-    //     background-color: vars.$first-color;
-    //     border-radius: 10px;
-    //     margin: 1rem;
+        &-description{
+            font-size: 1.5rem;
+        }
 
-    //   & p{
-    //     font-size: 2rem;
-    //     color: vars.$four-color;
-    //     margin: 1rem;
-    //   }
-
-    //   & button {
-    //     border-radius: 0.7rem;
-    //     margin-bottom: 1rem;
-    //     margin-left: 2rem;
-    //     padding: 0.5rem;
-    //     background-color: #18b7be;
-    //     border: none;
-    //     color: #f9f7f0;
-    //     font-family: Dongle,sans-serif;
-    //     font-size: 1.4rem;
-    //   }
-    // }
-}
-
-.profile-infos-title{
-    font-size: 3rem;
-}
-
-.profile-borrow{
-    
-    background-color: vars.$first-color;
-    margin: 1rem;
-    border-radius: 10px;
-    
-    &-list{
-        overflow-y: scroll;
+        &-date{
+            font-size: 1.5rem;
+        }
     }
-    &-title{
-        font-size: 1.5rem;
-        margin: 0.5rem;
-    }
-    &-id{
-        font-size: 1.3rem;
-        margin: 0.5rem;
-    }
-    &-date{
-        font-size: 1.5rem;
-        margin: 0.5rem;
-    }
-}
-
-// .profile-borrow-date{
-//     font-weight: bold;
-//     text-decoration: underline;
-// }
-
-// .profile-infos-title{
-//     font-size: 3rem;
-//     margin: 1rem;
-// }
-// .left-profile i {
-//     color: vars.$second-color;
-// }
-// .right-profile i { 
-//     color: vars.$third-color;
-// }
-// .confirm-buttons{
-//     display: flex;
-//     margin: 5rem 1rem;
-// }
-// .delete-confirm{
-//     margin: 2rem;
-//     background-color: vars.$first-color;
-//     color: red;
-//     width: 10vw;
-//     text-transform: uppercase;
-//     font-weight: bold;
-// }
-// .delete-confirm:hover{
-//     background-color: red;
-//     color: vars.$first-color;
-// }
-// .delete-cancel{
-//     margin: 2rem;
-//     background-color: vars.$first-color;
-//     color: green;
-//     width: 10vw;
-//     text-transform: uppercase;
-//     font-weight: bold;
-// }
-// .delete-cancel:hover{
-//     background-color: green;
-//     color: vars.$first-color;
-// }
-// .delete-profile{
-//     margin: 5rem;
-// }
 }
 
 @media screen and (max-width: 1000px) {
@@ -372,7 +334,6 @@
     }
 
     .delete-profile{
-        
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -405,58 +366,107 @@
         padding: 0.5rem;
         width: 150px;
     }
-    // .confirm-buttons{
-    //     display: flex;
-    //     width: 90%;
-    // }
-    // .delete-confirm{
-    //     background-color: red;
-    //     width: 50%;
-    // }
-    // .delete-cancel{
-    //     background-color: green;
-    //     width: 50%;
-    // }
 
     .right-profile{
+        width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         align-items: center;
+        justify-content: flex-start;
         height: 84vh;
-        
-        &-title{
-            font-size: 3rem;
-            margin: 2rem;
-            color: vars.$four-color;
+        background-color: vars.$third-color;
 
-            & i {
-                font-size: 2rem;
-            }
-        }
-
-        &-infos{
+        &-infos-left{
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 90%;
-            margin: 2rem;
+            height: 50%;
 
-            & p {
-                font-size: 1.7rem;
+            &-title{
+                font-size: 2rem;
+                margin: 2rem;
+                color: vars.$first-color;
+                text-decoration: underline;
+            }
+        }
+
+        &-borrow{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: vars.$first-color;
+            border-radius: 10px;
+            margin: 1rem;
+            padding: 1rem;
+
+            &-list{
+                background-color: vars.$third-color;
+                border-radius: 10px;
+            }
+            &-title{
+                font-size: 2rem;
                 color: vars.$four-color;
+            }
+            &-id{
+                font-size: 1.5rem;
+            }
+            &-date{
+                font-size: 1.5rem;
+            }
+        }
+
+        &-infos-right{
+            display: none;
+        }
+
+        &-infos-right{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: 50%;
+
+            &-title{
+                font-size: 2rem;
+                margin: 2rem;
+                color: vars.$first-color;
+                text-decoration: underline;
+            }
+        }
+
+        &-lended{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: vars.$first-color;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem;
+
+            &-list{
+                background-color: vars.$third-color;
+                border-radius: 10px;
+            }
+
+            &-title{
+                font-size: 2rem;
+                color: vars.$four-color;
+            }
+
+            &-description{
+                font-size: 1.5rem;
+            }
+
+            &-date{
+                font-size: 1.5rem;
             }
         }
     }
-    .profile-infos-title{
-        font-size: 2rem;
-        margin: 1rem;
-        color: vars.$first-color;
-        text-decoration: underline;
-
-    }
-    
    
     
 }

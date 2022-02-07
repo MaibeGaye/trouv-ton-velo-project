@@ -17,14 +17,13 @@ const RegisterModal = ({
   registerHandleChangeValue, showRegisterModal,
   handleRegisterModal, loader, errors,
   handleShowPassword, showPassword,
-  createAccount, responseAPI,
+  createAccount,
   registerModalValue,
 }) => (
   <div>
     <Dialog sx={{ textAlign: 'center' }} open={showRegisterModal} onClose={handleRegisterModal}>
       <DialogTitle sx={{ color: '#18B7BE', fontSize: '7ch', textTransform: 'uppercase' }}>Inscription</DialogTitle>
       <DialogContent>
-        {/* <p className="inputs-errors">{responseAPI}</p> */}
         { loader && (
           <Box sx={{ width: '50%', margin: 'auto' }}>
             <LinearProgress sx={{ backgroundColor: '#18B7BE' }} />
@@ -164,7 +163,6 @@ RegisterModal.propTypes = {
   errors: PropTypes.object.isRequired,
   showPassword: PropTypes.bool.isRequired,
   createAccount: PropTypes.func.isRequired,
-  responseAPI: PropTypes.string.isRequired,
   registerModalValue: PropTypes.shape({
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,

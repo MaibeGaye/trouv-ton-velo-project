@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-
 import Header from '../Header';
 import Home from '../Home';
 import Offers from '../Offers';
@@ -54,7 +53,7 @@ const App = () => {
         console.log(err);
       });
   }, []);
-console.log(user.logged);
+
   // useEffect(() => {
   //   const backUpToken = localStorage.getItem('token');
   //   const backUpSession = localStorage.getItem('logged');

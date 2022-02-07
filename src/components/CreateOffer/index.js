@@ -35,6 +35,9 @@ const CreateOffer = () => {
     });
   };
 
+  // You have to complet 12 inputs and select
+  // correctly the dates for submit the form and post a new offer
+
   const offerSubmit = () => {
     setLoader(true);
     setErrorDate(false);
@@ -61,6 +64,7 @@ const CreateOffer = () => {
         },
       })
         .then((res) => {
+          // console.log(res);
           setTimeout(() => {
             setLoader(false);
             setSubmitOffer(!submitOffer);
@@ -91,6 +95,8 @@ const CreateOffer = () => {
     setErrorInputs(false);
     setErrorDate(false);
   };
+
+  // If user are not logged redirect to homePage
 
   if (!user.logged) {
     return <Navigate to="/" />;

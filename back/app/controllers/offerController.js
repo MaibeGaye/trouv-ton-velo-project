@@ -1,4 +1,3 @@
-// const { request } = require('express');
 const Offer = require('../models/offer');
 const jwt = require('../services/jwt');
 const cloudinary = require('../services/cloudinary');
@@ -35,7 +34,6 @@ module.exports = {
 
     create: async (request, response) => {
         try {
-            //on ajoute au contenu de la requête l'id de l'utilisateur ayant effectué la requête
             request.body.lender_id = request.userId.id;
 
             // const fileStr = request.body.photo;
@@ -43,8 +41,6 @@ module.exports = {
             // request.body.photo = uploadResponse.url;
 
             const offer = await new Offer(request.body).save();
-            response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization');
             response.status(201).json(offer);   
         } catch (error) {
             console.log(error);
@@ -59,20 +55,17 @@ module.exports = {
 
             const lenderId = await Offer.returnLenderId(id);
             request.body.lender_id = lenderId;
-            // si pas de locataire actuel, on définit quand même borrower_id sur null 
-            // pour avoir un objet body offer complet avant de le save
+            // we have to define borrower_id in order to correctly save it in the model
             const borrowerId = await Offer.returnBorrowerId(id);
             if (!borrowerId) {
                 request.body.borrower_id = null;
 
                 const offer = await new Offer(request.body).save();
-                response.setHeader('Authorization', jwt.makeToken(request.userId));
-                response.setHeader('Access-Control-Expose-Headers', 'Authorization')
                 response.status(200).json(offer);
             } else { // si l'annonce possède un id loueur, on interdit la modif
                 // à voir si pas mieux de filer l'info "editable: false" direct au GET /dashboard (via la returnborid) pour genre qu'ils grisent le bouton modifier, avec un tooltip attendez que l'utilisateur rende le vélo
                 response.status(500).json({
-                    msg:`Modification annulée, l'annonce possède un borrower_id, réessayez lorsque le vélo sera rendu !`,
+                    msg: `modification aborted, the offer presents a borrower_id, return the bike first !`,
                     editable:false
                 });
             }
@@ -85,25 +78,19 @@ module.exports = {
     bookOne: async (request, response) => {
         try {
             const idOffer = parseInt(request.params.offerId, 10);
-
             const idUser = request.userId.id;
-
-            request.body.id = idOffer;
-
             const lenderId = await Offer.returnLenderId(idOffer);
+            request.body.id = idOffer;
             request.body.lender_id = lenderId;
-            // si pas de locataire actuel, on définit quand même borrower_id sur null 
-            // pour avoir un objet body offer complet avant de le save
+
             const borrowerId = await Offer.returnBorrowerId(idOffer);
             if (!borrowerId) {
                 request.body.borrower_id = idUser;
-
                 const updatedOffer = await new Offer(request.body).save();
                 response.status(200).json(updatedOffer);
-            } else { // si l'annonce possède un id loueur, on interdit la modif
-                // à voir si pas mieux de filer l'info "editable: false" direct au GET /dashboard (via la returnborid) pour genre qu'ils grisent le bouton modifier, avec un tooltip attendez que l'utilisateur rende le vélo
+            } else { 
                 response.status(500).json({
-                    msg:`Modification annulée, l'annonce est déjà louée`,
+                    msg:`Abort modification, offer already lended`,
                     bookable:false
                 });
             }
@@ -119,13 +106,11 @@ module.exports = {
             const borrowerId = await Offer.returnBorrowerId(id);
             if (!borrowerId) {
                 await Offer.delete(id);
-                response.setHeader('Authorization', jwt.makeToken(request.userId));
-                response.setHeader('Access-Control-Expose-Headers', 'Authorization')
-                response.status(200).json({msg: `L'annonce ${id} a bien été supprimée !`});
+                response.status(200).json({msg: `Offer "${id}" deleted !`});
             } else { // si l'annonce possède un id locataire, on interdit la modif
                 // à voir si pas mieux de filer l'info "editable: false" direct au GET /dashboard (via la returnborid) pour genre qu'ils grisent le bouton modifier, avec un tooltip attendez que l'utilisateur rende le vélo
                 response.status(500).json({
-                    msg:`Suppression annulée, l'annonce possède un borrower_id, réessayez lorsque le vélo sera rendu !`,
+                    msg:`suppression aborted, the offer presents a borrower_id, return the bike first !`,
                     editable:false
                 });
             }

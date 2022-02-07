@@ -2,10 +2,7 @@
 
 BEGIN;
 
--- -- XXX Add DDLs here.
--- ALTER TABLE "user"
---     ALTER COLUMN zip_code TYPE varchar;
-
--- DROP DOMAIN postalcode;
+ALTER TABLE offer
+    DROP CONSTRAINT date_coherence;
 
 COMMIT;

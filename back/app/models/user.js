@@ -83,12 +83,12 @@ class User {
         try {
             const {rows} = await client.query('SELECT * FROM "user" WHERE email=$1', [this.email]);
             if (!rows[0]) {
-                throw new Error('email non reconnu ');
+                throw new Error('unknown email');
             }
 
             const isPwdValid = await bcrypt.compare(this.password, rows[0].password)
             if (!isPwdValid) {
-                throw new Error('email ok mais mdp incorrect');
+                throw new Error('email ok but wrong mdp');
             }
 
             this.id = rows[0].id;
@@ -123,12 +123,10 @@ class User {
 
                 const {rows} =  await client.query('SELECT * FROM add_user($1)', [this]);
 
-                // pour pas donner aux fronteux la confirm inutile
                 if (this.passwordConfirm) {
                   delete this.passwordConfirm;
                 }
 
-                // pour donner aux fronteux l'id du user
                 this.id = rows[0].id;
 
                 return this;
@@ -136,7 +134,7 @@ class User {
         } catch (error) {
                 console.log(error);
                 if (error.detail) {
-                    throw new Error('On a une erreur SQL : ' + error.detail);
+                    throw new Error('SQL error : ' + error.detail);
                 }
                 throw error;
             }

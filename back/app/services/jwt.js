@@ -10,7 +10,7 @@ module.exports = {
                 process.env.JWT_SECRET,
                 {
                     algorithm: 'HS256',
-                    expiresIn: '20s'
+                    expiresIn: '1m'
                 }
             )
         } catch (error) {

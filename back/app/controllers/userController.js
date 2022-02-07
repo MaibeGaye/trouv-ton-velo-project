@@ -4,9 +4,7 @@ const {cache, verifyToken, deleteToken} = require('../services/tokenCache');
 
 module.exports = {
     findAll: async (_, response) => {
-        console.log('Data depuis Postgres');
         const users = await User.findAll();
-        console.log('Appel de response.json');
         response.json(users);
     },
     findOne: async (_, response) => {
@@ -29,7 +27,7 @@ module.exports = {
             deleteToken(user.id);
             const access_token = await jwt.makeToken(user);
             const refresh_token = await jwt.generateRefreshToken(user);
-            console.log('mise en cache du token...');
+            console.log(`caching user.id "${user.id}" & refresh token "${refresh_token}"`);
 
             // on enregistre le token dans redis
             console.log('user id :');
@@ -55,20 +53,15 @@ module.exports = {
     refreshToken: async (request, response) => {
         try {
             const ref_token = request.headers.authorization;
-            console.log('ref_token :');
-            console.log(ref_token);
             if (!ref_token) {
                 return response.status(401).json('No token');
             }
 
             const payload = jwt.validateRefreshToken(ref_token);
-            console.log(payload);
             if (!payload.data){
                 return response.status(401).json('Invalid token payload');
             }
-
-            //on check l'existence du token dans redis
-            console.log(payload.data.id);
+            //check if the token key exists in redis
             const verifiedToken = await verifyToken(payload.data.id, ref_token);
             if (!verifiedToken) {
                 return response.status(401).json('No token found in db');
@@ -81,7 +74,7 @@ module.exports = {
                 "RefreshToken",
             ]);
             response.setHeader("Authorization", access_token);
-            response.setHeader("RefreshToken", refresh_token);
+            response.setHeader("RefreshToken", refresh_token)
 
             response.status(200).json(payload.data);
         } catch(error) {
@@ -111,8 +104,6 @@ module.exports = {
     edit: async (request, response) => {
         try {
             request.body.id = request.userId.id;
-            response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization');
             const offer = await new User(request.body).save();
             response.status(200).json(offer);
         } catch (error) {
@@ -123,9 +114,8 @@ module.exports = {
 
     delete: async (request, response) => {
         try {
-            // pas besoin de renvoyer un nouveau token, on delete juste l'utilisateur connecté
             await User.delete(request.userId.id);
-            response.status(200).json({msg: `L'utilisateur ${request.userId.id} a bien été supprimé !`, logged:false});
+            response.status(200).json({msg: `User ${request.userId.id} deleted !`, logged:false});
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
@@ -135,8 +125,7 @@ module.exports = {
     disconnect: async (request, response) => {
         try {
             deleteToken(request.userId.id);
-            // pas besoin de renvoyer un nouveau token, on logout juste l'utilisateur connecté
-            response.status(200).json({msg: `L'utilisateur ${request.userId.id} a bien été déconnecté !`, logged:false});
+            response.status(200).json({msg: `User ${request.userId.id} disconnected !`, logged:false});
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);

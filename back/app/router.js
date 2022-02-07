@@ -1,34 +1,28 @@
 const {Router} = require('express');
+const {cache, flush} = require('./services/cache');
+const jwtMW = require('./middlewares/jwtMW');
 
 const userController = require('./controllers/userController');
 const offerController = require('./controllers/offerController');
 
-// joi
-// const offerSchema = require('./schemas/offerSchema');
 const userSchema = require('./schemas/userSchema');
 const loginSchema = require('./schemas/loginSchema');
 const signupSchema = require('./schemas/signupSchema');
 const offerSchema = require('./schemas/offerSchema')
 const bookSchema = require('./schemas/bookSchema')
+const filterSchema = require('./schemas/filterSchema')
 const {validateBody} = require('./middlewares/validator');
-const jwtMW = require('./middlewares/jwtMW');
-
-// redis
-const {cache, flush} = require('./services/cache');
-
-const router = Router();
-
-// joi
 const userMiddleware = validateBody(userSchema);
 const loginMiddleware = validateBody(loginSchema);
 const signupMiddleware = validateBody(signupSchema);
 const offerMiddleware = validateBody(offerSchema);
 const bookMiddleware = validateBody(bookSchema);
+const filterMiddleware = validateBody(filterSchema);
 
-router.get('/getUserTest', userController.findOne);
+const router = Router();
 
 /**
- * GET /getAllUsers
+ * GET /getAllUsers (TESTING/ADMIN)
  * @summary Responds with all users in database
  * @route GET /getAllUsers
  * @tags Users
@@ -37,22 +31,31 @@ router.get('/getUserTest', userController.findOne);
 router.get('/getAllUsers', userController.findAll);
 
 /**
- * GET /offers
+ * GET /getAllOffers (TESTING/ADMIN)
  * @summary Responds with all offers in database
+ * @route GET /getAllOffers
+ * @tags Offers
+ * @returns {array<User>} 200 - An array of offers
+ */
+ router.get('/getAllOffers', offerController.findAll);
+
+/**
+ * GET /offers
+ * @summary Responds with all available offers
  * @route GET /offers
  * @tags Offers
  * @returns {array<Offer>} 200 - An array of offers
  */
-router.get('/offers', cache, offerController.findAll);
+router.get('/offers', cache, offerController.findFiltered);
 
 /**
  * POST /offers
- * @summary Responds with offers filtered in database
+ * @summary Responds with offers filtered in database according to user filter inputs
  * @route POST /offers
  * @tags Offers
  * @returns {array<Offer>} 200 - An array of offers
  */
- router.post('/offers', flush, offerController.findFiltered);
+ router.post('/offers', filterMiddleware, flush, offerController.findFiltered);
 
 /**
  * GET /offer/{id}
@@ -65,7 +68,6 @@ router.get('/offers', cache, offerController.findAll);
  * 
  */
 router.get('/offer/:id(\\d+)', offerController.findOne);
-// router.get('/offer/:id(\\d+)', cache, offerController.findOne);
 
 /**
  * GET /offer/{id}
@@ -98,13 +100,11 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  * @property {number} lender_id
  * @property {number} borrower_id
  */
-
-
 /**
  * POST /create
  * @summary Adds a new offer in database
  * @tags Offers
- * @param {OfferJson} request.body.required User info to add in database
+ * @param {OfferJson} request.body.required Offer info to add in database
  * @returns {Offer} 201 - The newly created offer
  * @returns {string} 500 - An error message
  */
@@ -121,7 +121,6 @@ router.post('/create', offerMiddleware, jwtMW, flush, offerController.create);
  * @returns {string} 500 - An error message
  */
 router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, flush, offerController.edit);
-// il faudra lui fournir
 
 
 /**
@@ -138,9 +137,8 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
  * PATCH /dashboard/edit
  * @summary Updates current user infos in database
  * @tags Users
- * @param {number} id.path.required The id of the offer to fetch
  * @param {OfferJson} request.body.required User info to add in database
- * @returns {Offer} 200 - The updated offer
+ * @returns {Offer} 200 - The updated user
  * @returns {string} 500 - An error message
  */
  router.patch('/dashboard/edit', userMiddleware, jwtMW, flush, userController.edit);
@@ -149,7 +147,6 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
   * DELETE /dashboard/delete
   * @summary Deletes the current user in database
   * @tags Users
-  * @param {number} id.path.required The id of the offer to fetch
   * @returns {string} 200 - The deleted user confirmation
   * @returns {string} 500 - An error message
   */
@@ -157,7 +154,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
 
 /**
  * GET /dashboard
- * @summary Responds with a user info in database
+ * @summary Extract the user infos from database
  * @route GET /dashboard
  * @tags User
  * @returns {array<User>} 200 - An array of user info
@@ -173,10 +170,10 @@ router.get('/dashboard', jwtMW, userController.userDashboard);
  * @property {string} firstname
  * @property {string} email
  * @property {string} password
+ * @property {string} passwordConfirm
  * @property {string} address
  * @property {string} zip_code
  */
-
 /**
  * POST /signup
  * @summary Adds a new user in database
@@ -190,9 +187,9 @@ router.post('/signup', signupMiddleware, flush, userController.handleSignup);
 
 /**
  * POST /login
- * @summary Logs in a user in database
+ * @summary Logs in a user if database credential check is ok
  * @tags Users
- * @param {UserJson} request.body.required User login info to add in database
+ * @param {UserJson} request.body.required User login info to verify in database
  * @returns {User} 200 - The logged in user
  * @returns {string} 500 - An error message
  */

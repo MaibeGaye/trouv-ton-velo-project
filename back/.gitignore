@@ -2,3 +2,4 @@ sqitch.conf
 .env
 node_modules
 dump.rdb
+api.http

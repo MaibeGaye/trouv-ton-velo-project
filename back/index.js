@@ -3,17 +3,12 @@ const express = require('express');
 
 const router = require('./app/router');
 const cleaner = require('./app/middlewares/sanitizer');
-
+const expressJSDocSwagger = require('express-jsdoc-swagger');
 const cors = require('cors');
-
 const app = express();
-
 const port = process.env.PORT || 5000;
 
 app.use(cleaner);
-
-
-const expressJSDocSwagger = require('express-jsdoc-swagger');
 
 const options = {
   info: {
@@ -48,22 +43,15 @@ const options = {
   // in the `example/configuration/swaggerOptions.js`
   swaggerUiOptions: {},
 };
+const jsDoc = expressJSDocSwagger(app);
+jsDoc(options);
 
-const firstFunction = expressJSDocSwagger(app);
+app.use(cors({
+  origin: ['https://trouv-ton-velo.surge.sh/',`http://localhost:${port}`]
+  //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
 
-//on ajoute un middleware à notre app express en exécutant cette 1ère fonction qui va prendre en paramètre l'object de config
-firstFunction(options);
-
-
-//pas d'object de config pour régler finement les droits d'entrée
-//on ne met pas de limitation d'accès, welcome everybody
-app.use(cors());
-
-//on prévient express qu'il peut recevoir des infos au format json dans le body de la request
 app.use(express.json({ limit: '50mb' }));
-
-app.use(express.static('assets'));
-
 app.use(express.urlencoded({extended: true}));
 
 app.use(router);

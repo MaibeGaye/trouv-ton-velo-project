@@ -2,16 +2,18 @@
 
 @media screen and (min-width: 1000px) {
     .offer{
+
+
         background-color: vars.$first-color;
-        margin: 1rem;
         width: 300px;
+        height: 400px;
+        margin: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         border-radius: 10px;
-        min-height: 380px;
-        max-height: 380px;
+
         
         &-title{
             font-size: 2rem;
@@ -20,8 +22,9 @@
         }
     
         &-infos{
+            text-align: center;
             font-size: 1.5rem;
-            margin: 1rem;
+            margin: 0.5rem;
         }
         &-link{
             text-align: center;
@@ -29,18 +32,26 @@
             color: vars.$second-color;
             font-weight: bold;
             width: 50%;
-            margin: 1rem;
+            margin: 0.5rem;
     
         }
-    
+
         & img{
-            background-clip: padding-box;
-            width: 300px;
-            max-height: 215px;
-            height: auto;
             border-radius: 10px 10px 0 0;
-            
+            width: 300px;
+            min-height: 250px;
+            max-height: 250px;
+            height: 250px;
         }
+    
+        // & img{
+        //     width: 300px;
+        //     min-width: 300px;
+        //     max-height: 215px;
+        //     height: auto;
+        //     border-radius: 10px 10px 0 0;
+            
+        // }
     }
 }
 

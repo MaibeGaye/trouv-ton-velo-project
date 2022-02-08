@@ -17,7 +17,6 @@ const Profile = () => {
   const [loader, setLoader] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updateInputsValues, setUpdateInputsValues] = useState({});
-  const [offerId, setOfferId] = useState({});
 
   // Axios GET request to display user's infos
 

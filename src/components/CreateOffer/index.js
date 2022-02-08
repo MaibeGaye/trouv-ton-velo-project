@@ -58,6 +58,7 @@ const CreateOffer = () => {
       photo: base64,
     });
   };
+
   // You have to complet 12 inputs and select
   // correctly the dates for submit the form and post a new offer
 

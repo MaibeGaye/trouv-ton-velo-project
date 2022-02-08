@@ -18,5 +18,6 @@ Offer.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   infos: PropTypes.string.isRequired,
+  photo: PropTypes.string.isRequired,
 };
 export default Offer;

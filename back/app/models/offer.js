@@ -95,13 +95,13 @@ class Offer {
      */
      static async filter(filters) {
         try {
-            const baseQuery = "SELECT * FROM offer WHERE borrower_id IS NULL "
+            const baseQuery = "SELECT * FROM offer WHERE borrower_id IS NULL"
             let queryString = "";
             for (const value in filters) {
                 if (typeof filters[value] === 'boolean' || filters[value] instanceof Boolean){
-                    queryString += `${value}=${filters[value]} AND `;
+                    queryString += ` AND ${value}=${filters[value]}`;
                 } else {
-                    queryString += `${value}='${filters[value]}' AND `;
+                    queryString += ` AND ${value}='${filters[value]}'`;
                 }
             }
             let finalQuery = "";

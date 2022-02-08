@@ -58,8 +58,10 @@ jsDoc(options);
 
 app.use(cors({
   origin: "*",
+  allowedHeaders: "Origin, Authorization, RefreshToken, X-Requested-With, Content-Type, Accept",
+  exposedHeaders: "Authorization, RefreshToken",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: true,
+  preflightContinue: false,
   optionsSuccessStatus: 204
   //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }));

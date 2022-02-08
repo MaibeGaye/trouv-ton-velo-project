@@ -17,35 +17,31 @@ const Profile = () => {
   const [loader, setLoader] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updateInputsValues, setUpdateInputsValues] = useState({});
+  const [offerId, setOfferId] = useState({});
 
   // Axios GET request to display user's infos
 
   useEffect(() => {
-    setTimeout(() => {
-      axios({
-        method: 'get',
-        url: 'https://api-apo-velo.herokuapp.com/dashboard',
-        headers: {
-          Authorization: user.token,
-        },
-      })
-        .then((res) => {
-          console.log('J\'ai fais une requete en visitant mon profil et mes infos sont :', res.data);
-          setUpdateInputsValues(res.data.userData);
-          setUser({
-            ...user,
-            infos: res.data.userData,
-            // token: res.headers.authorization, n'est plus valide
-            borrow: res.data.borrowedOffers,
-            lende: res.data.lendedOffers,
-          });
-          // const createBackUpJWT = JSON.stringify(res.headers.authorization);
-          // localStorage.setItem('token', createBackUpJWT);
-        })
-        .catch((err) => {
-          console.log(err.request.responseText);
+    axios({
+      method: 'get',
+      url: 'https://api-apo-velo.herokuapp.com/dashboard',
+      headers: {
+        Authorization: user.token,
+      },
+    })
+      .then((res) => {
+        setUpdateInputsValues(res.data.userData);
+        console.log(res.data);
+        setUser({
+          ...user,
+          infos: res.data.userData,
+          borrow: res.data.borrowedOffers,
+          lende: res.data.lendedOffers,
         });
-    }, 3000);
+      })
+      .catch((err) => {
+        console.log(err.request.responseText);
+      });
   }, []);
 
   // UPDATE FUNCTIONS
@@ -71,7 +67,7 @@ const Profile = () => {
       },
     })
       .then((res) => {
-        console.log(res.headers.authorization);
+        // console.log(res.headers.authorization);
         setUser({
           ...user,
           infos: res.data,
@@ -187,15 +183,15 @@ const Profile = () => {
             <h3 className="right-profile-infos-left-title">Les vélos que j'ai emprunté</h3>
 
             {
-              !user.borrow ? <p>Je n'ai pas encore emprunté de vélos</p> : <Borrow />
+              !user.borrow ? <p className="borrow">Je n'ai pas encore emprunté de vélos</p> : <Borrow />
             }
 
           </div>
           <div className="right-profile-infos-right">
-            <h3 className="right-profile-infos-right-title">Mes vélos en circulation</h3>
+            <h3 className="right-profile-infos-right-title">Mes vélos</h3>
 
             {
-              !user.lende ? <p>Vous n'avez pas encore proposé de vélos ...</p> : <Lended />
+              !user.lende ? <p className="lended">Vous n'avez pas encore proposé de vélos</p> : <Lended />
             }
 
           </div>

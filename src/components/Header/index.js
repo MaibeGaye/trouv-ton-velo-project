@@ -105,19 +105,15 @@ const Header = () => {
           infos: res.data,
           token: res.headers.authorization,
           logged: res.data.logged,
-          refreshToken: res.headers.refreshtoken,
+          // refreshToken: res.headers.refreshtoken,
         });
-        // const decoded = jwt_decode(res.headers.authorization);
-        // console.log(decoded);
-        // console.log(res.headers.authorization);
-        // console.log(res.headers.refreshtoken);
-        localStorage.setItem('token', res.headers.authorization);
-        localStorage.setItem('refresh_token', res.headers.refreshtoken);
-        localStorage.setItem('logged', res.data.logged);
-        // const createBackUpJWT = JSON.stringify(res.headers.authorization);
-        // localStorage.setItem('token', createBackUpJWT);
-        // const createBackUpLOG = JSON.stringify(res.data.logged);
-        // localStorage.setItem('logged', createBackUpLOG);
+        // localStorage.setItem('token', res.headers.authorization);
+        // localStorage.setItem('refresh_token', res.headers.refreshtoken);
+        // localStorage.setItem('logged', res.data.logged);
+        const createBackUpJWT = JSON.stringify(res.headers.authorization);
+        localStorage.setItem('token', createBackUpJWT);
+        const createBackUpLOG = JSON.stringify(res.data.logged);
+        localStorage.setItem('logged', createBackUpLOG);
         handleLoginModal();
       })
 

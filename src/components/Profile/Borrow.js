@@ -10,12 +10,18 @@ const Borrow = () => {
 
       {
                 user.borrow.map(({
-                  title, id, validity_end_date, validity_start_date,
+                  title, id, validity_end_date, validity_start_date, currentLenderInfos,
                 }) => (
                   <div key={id} className="right-profile-borrow">
                     <h1 className="right-profile-borrow-title">Titre : {title}</h1>
                     <p className="right-profile-borrow-id">Réservation n° {id}</p>
                     <p className="right-profile-borrow-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>
+
+                    {
+                      currentLenderInfos.map(({ username }) => (
+                        <p key={username + 1}>Proposé par : {username} </p>
+                      ))
+                    }
                   </div>
                 ))
       }

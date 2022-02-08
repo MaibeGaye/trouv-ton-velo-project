@@ -53,7 +53,7 @@ const OfferDetails = ({ offerDetail }) => {
             <li>Anti-vol fourni : {safety_lock ? 'Oui' : 'Non'}</li>
           </ul>
         </div>
-        <button type="button" onClick={reserve}>Réserver cette offre</button>
+        <button type="button" className="offer-details-button" onClick={reserve}>Réserver cette offre</button>
         <Link to="/offers">Retour aux offres</Link>
       </div>
 

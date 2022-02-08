@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import './style.scss';
 import axios from 'axios';
+import imageToBase64 from 'image-to-base64/browser';
 import { useContext, useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -18,8 +19,10 @@ const CreateOffer = () => {
     validity_end_date: '',
     size: '',
     model: '',
-    lamps: '',
-    safety_lock: '',
+    lamps: false,
+    safety_lock: false,
+    helmet: false,
+    photo: {},
 
   });
   const [errorInputs, setErrorInputs] = useState(false);
@@ -35,6 +38,26 @@ const CreateOffer = () => {
     });
   };
 
+  const convertBase64 = (file) => new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = (() => {
+      resolve(fileReader.result);
+    });
+
+    fileReader.onerror = ((error) => {
+      reject(error);
+    });
+  });
+
+  const base64convert = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setCreateOfferValues({
+      ...createOfferValues,
+      photo: base64,
+    });
+  };
   // You have to complet 12 inputs and select
   // correctly the dates for submit the form and post a new offer
 
@@ -186,7 +209,8 @@ const CreateOffer = () => {
                 type="file"
                 id="photo"
                 name="photo"
-                onChange={handleChangeInputValues}
+                accept=".jpeg, .png, .jpg"
+                onChange={base64convert}
               />
             </div>
           </div>

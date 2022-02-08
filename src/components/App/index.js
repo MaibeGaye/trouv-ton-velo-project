@@ -29,51 +29,53 @@ const App = () => {
 
   // Function useEffect for check if the user is logged and have a token before the first render
 
-  useEffect(() => {
-    axios({
-      method: 'post',
-      url: 'https://api-apo-velo.herokuapp.com/token',
-      headers: {
-        Authorization: user.refreshToken,
-      },
-    })
-      .then((res) => {
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('token');
-        localStorage.setItem('token', res.headers.authorization);
-        localStorage.setItem('refresh_token', res.headers.refreshtoken);
-        setUser({
-          ...user,
-          token: res.headers.authorization,
-          refreshToken: res.headers.refreshtoken,
-        });
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   // useEffect(() => {
-  //   const backUpToken = localStorage.getItem('token');
-  //   const backUpSession = localStorage.getItem('logged');
+  //   if (user.logged) {
+  //     axios({
+  //       method: 'post',
+  //       url: 'https://api-apo-velo.herokuapp.com/token',
+  //       headers: {
+  //         Authorization: user.refreshToken,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         localStorage.removeItem('refresh_token');
+  //         localStorage.removeItem('token');
+  //         localStorage.setItem('token', res.headers.authorization);
+  //         localStorage.setItem('refresh_token', res.headers.refreshtoken);
+  //         setUser({
+  //           ...user,
+  //           token: res.headers.authorization,
+  //           refreshToken: res.headers.refreshtoken,
+  //         });
+  //       })
 
-  //   if (backUpSession && backUpToken) {
-  //     const backUpJWT = JSON.parse(backUpToken);
-  //     const backUpLOG = JSON.parse(backUpSession);
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // });
 
-  //     setUser({
-  //       ...user,
-  //       token: backUpJWT,
-  //       logged: backUpLOG,
-  //     });
-  //   }
-  //   else {
-  //     setUser({
-  //       logged: false,
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    const backUpToken = localStorage.getItem('token');
+    const backUpSession = localStorage.getItem('logged');
+
+    if (backUpSession && backUpToken) {
+      const backUpJWT = JSON.parse(backUpToken);
+      const backUpLOG = JSON.parse(backUpSession);
+
+      setUser({
+        ...user,
+        token: backUpJWT,
+        logged: backUpLOG,
+      });
+    }
+    else {
+      setUser({
+        logged: false,
+      });
+    }
+  }, []);
 
   // Axios POST request to display filtered offers from inputs values
 
@@ -122,7 +124,6 @@ const App = () => {
       ...inputValues,
       [event.target.name]: event.target.value,
     });
-    console.log(inputValues);
   };
   return (
     <div className="app">

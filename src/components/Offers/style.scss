@@ -90,14 +90,13 @@
 }
 
 .offer-form-result{
-    background-color: vars.$third-color;
     width: calc(100vw - 350px);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .spinner {
@@ -126,72 +125,78 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+
+// @media screen and (max-width: 1000px) {
    
-  .offers{
-      display: flex;
-      flex-direction: column;
-      overflow-y: scroll;
-      justify-content: flex-start;
-      align-items: center;
-      background-color: vars.$second-color;
+//   .offers{
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: flex-start;
+//       align-items: center;
+//       background-color: vars.$second-color;
      
       
 
-      &-form{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-          align-items: center;
-          height: 100%;
-          width: 100%;
+//       &-form{
+//           display: flex;
+//           flex-direction: column;
+//           justify-content: space-evenly;
+//           align-items: center;
+//           height: 100%;
+//           width: 100%;
 
-          &-title{
-              font-size: 3rem;
-              margin: 1rem;
-          }
+//           &-title{
+//               font-size: 3rem;
+//               margin: 1rem;
+//           }
 
-          &-input{
-             display: flex;
-             justify-content: space-between;
-             align-items: center;
-              width: 75%;
-              margin: 0.5rem;
+//           &-input{
+//              display: flex;
+//              justify-content: space-between;
+//              align-items: center;
+//               width: 75%;
+//               margin: 0.5rem;
 
-              & h2{
-                  font-size: 1.5rem;
-              }
-              & label{
-                font-size: 1.5rem;
-              }
-              & input{
-                  margin: 0.5rem;
-              }
+//               & h2{
+//                   font-size: 1.5rem;
+//               }
+//               & label{
+//                 font-size: 1.5rem;
+//               }
+//               & input{
+//                   margin: 0.5rem;
+//               }
 
-              &-contain{
+//               &-contain{
 
-              }
-              &-date{
-                  display: flex;
-                  flex-direction: column;
-                  margin: 1rem;
-              }
-          }
+//               }
+//               &-date{
+//                   display: flex;
+//                   flex-direction: column;
+//                   margin: 1rem;
+//               }
+//           }
 
-          &-button{
-            margin: 1rem;
-                        border-radius: 10px;
-                        height: 3rem;
-                        width: 8rem;
-                        border: none;
-                        background-color: vars.$first-color;
-                        color: vars.$four-color;
-                        font-weight: bold;
-          }
+//           &-button{
+//             margin: 1rem;
+//                         border-radius: 10px;
+//                         height: 3rem;
+//                         width: 8rem;
+//                         border: none;
+//                         background-color: vars.$first-color;
+//                         color: vars.$four-color;
+//                         font-weight: bold;
+//           }
 
-          &-result{
-             background-color: black;
-          }
-      }
-  }
-}
+//           &-result{
+//              height: 100%;
+//              display: flex;
+//              flex-direction: row;
+//              flex-wrap: wrap;
+//              justify-content: center;
+//              align-items: center;
+//              overflow-y: auto;
+//           }
+//       }
+//   }
+// }

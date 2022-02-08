@@ -1,5 +1,6 @@
 @use '../../styles/vars';
-.offer-details{
+@media screen and (min-width: 1000px) {
+  .offer-details{
     background-color: vars.$third-color;
     display: flex;
     flex-direction: column;
@@ -46,4 +47,44 @@
       
       margin: 1.4rem 0;
     }
+}
+
+}
+
+@media screen and (max-width: 1000px) {
+
+  .offer-details{
+    background-color: vars.$third-color;
+
+    &-page{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    &-title{
+      font-size: 3rem;
+      color: vars.$first-color;
+    }
+
+    &-infos{
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 1rem;
+    }
+
+    &-button{
+      background-color: vars.$second-color;
+      color: vars.$first-color;
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      border-radius: 10px;
+      border: none;
+      font-family: 'Dongle', sans-serif;
+    }
+    
+  }
+
 }

@@ -121,7 +121,7 @@ const UpdateInfos = ({
             <InputLabel htmlFor="password">
               Mot de passe
             </InputLabel>
-            <p>Nouveau MDP</p>
+            <p>Saisir votre mot de passe</p>
             <Input
               required
               id="password"

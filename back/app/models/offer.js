@@ -104,8 +104,8 @@ class Offer {
                     queryString += ` AND ${value}='${filters[value]}'`;
                 }
             }
-            console.log(finalQuery);
-            const {rows} = await client.query(finalQuery);
+            console.log(queryString);
+            const {rows} = await client.query(queryString);
             if (rows[0]) {
                 console.log(`OK ${rows.length} offers found with these filter values`);
                 return rows.map(row => new Offer(row));

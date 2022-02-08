@@ -104,12 +104,6 @@ class Offer {
                     queryString += ` AND ${value}='${filters[value]}'`;
                 }
             }
-            let finalQuery = "";
-            if (Object.keys(filters).length === 0){
-                finalQuery = baseQuery;
-            } else {
-                finalQuery = baseQuery + queryString.slice(0, -5);
-            }
             console.log(finalQuery);
             const {rows} = await client.query(finalQuery);
             if (rows[0]) {

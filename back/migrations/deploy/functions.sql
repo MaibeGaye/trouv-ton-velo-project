@@ -43,7 +43,7 @@ CREATE FUNCTION add_offer(json) RETURNS offer AS $$
 		$1->>'address',
 		($1->>'zip_code')::int,
 		($1->>'validity_start_date')::timestamptz,
-		($1->>'validity_start_date')::timestamptz,
+		($1->>'validity_end_date')::timestamptz,
 		($1->>'lender_id')::int,
 		($1->>'borrower_id')::int
 	)

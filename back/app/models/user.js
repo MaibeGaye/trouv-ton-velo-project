@@ -211,9 +211,9 @@ class User {
         }
     }
 
-    static async getCurrentBorrowerInfos(id) {
+    static async getCurrentBorrowerInfos(idOffer) {
         try {
-            const {rows} =  await client.query('SELECT "user".username FROM "offer" FULL JOIN "user" ON "user".id=$1 WHERE lender_id=$1', [id]);
+            const {rows} =  await client.query('SELECT username FROM "user" LEFT JOIN "offer" ON "user".id="offer".borrower_id WHERE "offer".id=$1', [idOffer]);
             console.log(rows);
             if (rows[0]) {
                 return rows.map(row => new Offer(row));

@@ -90,7 +90,7 @@ module.exports = {
             data.lendedOffers = await User.getLendedOffers(request.userId.id);
             if (data.lendedOffers) {
                 for (let i = 0; i < data.lendedOffers.length; i++){
-                    data.lendedOffers[i].currentBorrowerInfos = await User.getCurrentBorrowerInfos(request.userId.id);
+                    data.lendedOffers[i].currentBorrowerInfos = await User.getCurrentBorrowerInfos(data.lendedOffers[i].id);
                 }
             }
             data.borrowedOffers = await User.getBorrowedOffers(request.userId.id);

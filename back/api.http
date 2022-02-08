@@ -54,10 +54,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
   "photo": "test",
   "address": "string",
   "zip_code": 85000,
-  "validity_start_date": "2022-01-01",
-  "validity_end_date": "2022-01-01",
+  "validity_start_date": "2022-02-09",
+  "validity_end_date": "2022-02-10",
   "lender_id": null,
-  "borrower_id": 8
+  "borrower_id": null
 }
 
 ### Get filtered offers
@@ -98,8 +98,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 
 ### Get infos of current user
 GET {{host}}/dashboard
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzk4NDU1MSwiZXhwIjoxNjQzOTg0NTcxfQ.kmnrBG3FHKRUEJ5_ZKM0AAaA-zkc9CrATYdJ1uhzVnI
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkRVFUWEt0V0lCbHQwcGxraHVDOWlydU9oOXFqYjRidFpTNnhlQnNMNndya0djV1lzZEQ5dS4iLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0NDMxNTU0OSwiZXhwIjoxNjQ0MzE3MzQ5fQ.i7vegD4eBcIjQL_g_ctw_8Cg8NnDSPogI2hZlAlGzgo
 ### Update an offer
 PATCH {{host}}/dashboard/27/edit
 Content-Type: application/json

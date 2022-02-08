@@ -94,6 +94,11 @@ module.exports = {
                 }
             }
             data.borrowedOffers = await User.getBorrowedOffers(request.userId.id);
+            if (data.borrowedOffers) {
+                for (let i = 0; i < data.borrowedOffers.length; i++){
+                    data.borrowedOffers[i].currentLenderInfos = await User.getCurrentLenderInfos(data.borrowedOffers[i].id);
+                }
+            }
             response.status(200).json(data);
         } catch(error) {
             console.log(error);

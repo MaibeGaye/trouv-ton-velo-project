@@ -218,7 +218,24 @@ class User {
             if (rows[0]) {
                 return rows.map(row => new Offer(row));
             } else {
-                console.log(`No offer found for borrower_id ${id}`);
+                console.log(`No borrower_id found for offer ${idOffer}`);
+                return null;
+            }
+        } catch (error) {
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw error;
+        }
+    }
+
+    static async getCurrentLenderInfos(idOffer) {
+        try {
+            const {rows} =  await client.query('SELECT username FROM "user" LEFT JOIN "offer" ON "user".id="offer".lender_id WHERE "offer".id=$1', [idOffer]);
+            if (rows[0]) {
+                return rows.map(row => new Offer(row));
+            } else {
+                console.log(`No lender_id found for offer ${idOffer}`);
                 return null;
             }
         } catch (error) {

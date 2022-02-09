@@ -141,12 +141,11 @@
     background-color: vars.$second-color;
     justify-content: center;
     align-items: center;
+    border-radius: 10px 0 0 0 ;
     
     &-img{
-        width: 30%;
-
-        border-radius: 10px;
-        margin: 1rem 0;
+        width: 100%;
+        border-radius: 10px 10px 0 0;
     }
 
     &-delete{
@@ -171,7 +170,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         width: 50%;
         height: 100%;
         overflow-y: auto;
@@ -188,7 +187,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         width: 50%;
         height: 100%;
         overflow-y: auto;
@@ -205,20 +204,20 @@
     &-borrow{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         background-color: vars.$first-color;
         border-radius: 10px;
-        padding: 1rem;
-        margin: 1rem;
+        // padding: 1rem;
+        margin: 1rem 2rem;
 
         &-list{
-            background-color: vars.$third-color;
-            border-radius: 10px;
+            margin: 1rem;
+            width: 60%;
         }
 
         &-title{
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         &-id{
@@ -228,16 +227,17 @@
         &-date{
             font-size: 1.5rem;
         }
+        
     }
 
     &-lended{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         background-color: vars.$first-color;
         border-radius: 10px;
-        padding: 1rem;
+        // padding: 1rem;
         margin: 1rem 2rem;
 
         &-list{
@@ -247,7 +247,7 @@
         }
 
         &-title{
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
         
         &-description{

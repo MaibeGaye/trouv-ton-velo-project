@@ -15,7 +15,7 @@ const Lended = () => {
             id, title, validity_start_date, validity_end_date, currentBorrowerInfos, photo,
           }) => (
             <div key={id} className="right-profile-lended">
-              <img className="right-profile-img" src={photo} alt="Photo de velo"/>
+              <img className="right-profile-img" src={photo} alt="petit de velo" />
               <h1 className="right-profile-lended-title">Titre : {title}</h1>
               <p className="right-profile-lended-description">Annonce n° {id}</p>
               <p className="right-profile-lended-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>

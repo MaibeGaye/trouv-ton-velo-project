@@ -71,7 +71,6 @@ const OfferDetails = ({ offerDetail }) => {
         <div className="offer-details-infos">
           <h2 className="offer-details-infos-title">Description</h2>
           <div className="offer-details-description">{infos}</div>
-          <div className="offer-details-modele">{model} / {size}</div>
           <div className="offer-details-address"><p>Adresse : {address} {zip_code}</p></div>
           <div className="offer-details-date"><p>Dates : du  <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p></div>
           <div className="offer-details-accessory-title"><h2>Accessoires</h2></div>

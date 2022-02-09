@@ -11,7 +11,7 @@ const Offer = ({
     <div className="offer-img"><img src={photo} alt="" /></div>
     <h1 className="offer-title">{title}</h1>
     <p className="offer-infos">{infos}</p>
-    <p className="offer-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>
+    {/* <p className="offer-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p> */}
     <p className="offer-link"><Link to={`/offer/${id}/details`}>Details</Link></p>
   </div>
 );

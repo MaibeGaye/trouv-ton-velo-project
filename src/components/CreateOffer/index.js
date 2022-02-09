@@ -132,7 +132,7 @@ const CreateOffer = () => {
       <h1 className="create-offer-title">Créer votre annonce</h1>
       )}
       <Box sx={{ width: '50%', margin: '0 auto' }}>
-        { loader && <LinearProgress sx={{ margin: '5ch' }} />}
+        { loader && <LinearProgress sx={{ margin: '4ch' }} />}
       </Box>
       {
         errorInputs && <p className="create-offer-title-error">Merci de remplir la totalité des champs <i className="fas fa-exclamation-triangle" /></p>

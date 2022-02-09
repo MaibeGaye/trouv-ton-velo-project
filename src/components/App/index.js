@@ -24,37 +24,7 @@ const App = () => {
   const [errorSubmitSearchOffer, setErrorSubmitSearchOffer] = useState(false);
   const { user, setUser } = useContext(UserContext);
 
-  // USEFFECT A REMPLACER AVEC NOUVELLE REQUETE pour
-  // check tt le temps si user.token et good sinon logged false
-
   // Function useEffect for check if the user is logged and have a token before the first render
-
-  // useEffect(() => {
-  //   if (user.logged) {
-  //     axios({
-  //       method: 'post',
-  //       url: 'https://api-apo-velo.herokuapp.com/token',
-  //       headers: {
-  //         Authorization: user.refreshToken,
-  //       },
-  //     })
-  //       .then((res) => {
-  //         localStorage.removeItem('refresh_token');
-  //         localStorage.removeItem('token');
-  //         localStorage.setItem('token', res.headers.authorization);
-  //         localStorage.setItem('refresh_token', res.headers.refreshtoken);
-  //         setUser({
-  //           ...user,
-  //           token: res.headers.authorization,
-  //           refreshToken: res.headers.refreshtoken,
-  //         });
-  //       })
-
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  // });
 
   useEffect(() => {
     const backUpToken = localStorage.getItem('token');
@@ -137,6 +107,7 @@ const App = () => {
           element={(
             <Offers
               offers={resultOffers}
+              setOffers={setResultOffers}
               searchOffers={getOffersFiltered}
               handleChange={handleChangeInputValues}
               displayLoader={loader}
@@ -144,6 +115,7 @@ const App = () => {
               errorSubmitSearchOffer={errorSubmitSearchOffer}
               submitSearchOffer={submitSearchOffer}
               inputValues={inputValues}
+              setInputValues={setInputValues}
             />
           )}
         />

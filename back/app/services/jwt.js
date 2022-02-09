@@ -19,7 +19,7 @@ module.exports = {
         }
     },
 
-    validateToken: token => {
+    validateToken: token => { 
         try {
             return JWT.verify(
                 token,

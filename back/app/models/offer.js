@@ -93,7 +93,7 @@ class Offer {
      * @async
      * @throws {Error} An error
      */
-     static async filter(filters) {
+     static async filter(filters) { 
         try {
             let queryString = "SELECT * FROM offer WHERE borrower_id IS NULL"
             for (const value in filters) {

@@ -19,6 +19,21 @@ Content-Type: application/json
     "zip_code": "67000"
 }
 
+### Add another user
+POST {{host}}/signup
+Content-Type: application/json
+
+{
+    "address": "5 avenue de la liberté",
+    "email": "test@seconduser.com",
+    "firstname": "myfirstname",
+    "lastname": "myname",
+    "password": "testtest",
+    "passwordConfirm": "testtest",
+    "username": "seconduser",
+    "zip_code": "67000"
+}
+
 ### Edit infos of current user
 PATCH {{host}}/dashboard/edit
 Content-Type: application/json
@@ -41,7 +56,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 ### Add an offer
 POST {{host}}/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzg3NzIyNSwiZXhwIjoxNjQzODc5MDI1fQ.P5Jn74UjXEID_GIDEdlKgi2SIv-GOizoj7f-zL-41cc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWXMwNmNXVjhmdU5OODV6SkFjOW1IdUhzQmZTVnIyVnBaNDJNclVuQm13YVRuYVFXNzdva0MiLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0NDMxNjI0NSwiZXhwIjoxNjQ0MzE4MDQ1fQ.hcSWHkgPWmKBMI8Y-w2VSssBvMtifR1LtKQnIKIPbv8
 
 {
   "title": "nouvelle offre test cloudinary",
@@ -78,7 +93,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 
 ### Logout
 POST {{host}}/logout
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0MzkwNzcwNCwiZXhwIjoxNjQzOTA3NzI0fQ.XeBCZfO0U0Z-8HxqtJvjLB0R99u7bgeXcnp6bGE3TZQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEBzZWNvbmR1c2VyLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEp4LlBFY2JCLzRJNFVlWG1NbnhScC51Zm1XRXJGcXlULjNCMG9CY1hadU4uRldiM1BKVGh1IiwiaWQiOjE4LCJsb2dnZWQiOnRydWV9LCJpYXQiOjE2NDQzMTYyODEsImV4cCI6MTY0NDMxODA4MX0.2qjCSU1KgrZSew6_Mfx8e3Gh2zihuVJ6nen5_3YRpxs
 
 ### Login
 POST {{host}}/login
@@ -86,6 +101,15 @@ Content-Type: application/json
 
 {
     "email": "test@testttttz.com",
+    "password": "testtest"
+}
+
+### Login another user
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "email": "test@seconduser.com",
     "password": "testtest"
 }
 
@@ -98,7 +122,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 
 ### Get infos of current user
 GET {{host}}/dashboard
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkRVFUWEt0V0lCbHQwcGxraHVDOWlydU9oOXFqYjRidFpTNnhlQnNMNndya0djV1lzZEQ5dS4iLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0NDMxNTU0OSwiZXhwIjoxNjQ0MzE3MzQ5fQ.i7vegD4eBcIjQL_g_ctw_8Cg8NnDSPogI2hZlAlGzgo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWXMwNmNXVjhmdU5OODV6SkFjOW1IdUhzQmZTVnIyVnBaNDJNclVuQm13YVRuYVFXNzdva0MiLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0NDMxNjM3NSwiZXhwIjoxNjQ0MzE4MTc1fQ.rPZyZ2besomdKMf5PhFS5aSFmMUKnWWD2jAXQ9DxskU
 ### Update an offer
 PATCH {{host}}/dashboard/27/edit
 Content-Type: application/json
@@ -120,23 +144,24 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 }
 
 ### Book an offer
-POST {{host}}/offer/5
+POST {{host}}/offer/34
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMEVXaGp6RldqckxaZmtNL01Oa0QxZW1maTBGbEYyM1N2cDkzUEhGLzYwMmFBaVo2SEhPREMiLCJpZCI6MTEsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0Mzk2OTA2NiwiZXhwIjoxNjQzOTY5MDg2fQ.RGlSHA4ITh20c9uX9YL-an6MrE3pCWaNEFbu1I7iivE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEBzZWNvbmR1c2VyLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEp4LlBFY2JCLzRJNFVlWG1NbnhScC51Zm1XRXJGcXlULjNCMG9CY1hadU4uRldiM1BKVGh1IiwiaWQiOjE4LCJsb2dnZWQiOnRydWV9LCJpYXQiOjE2NDQzMTYyODEsImV4cCI6MTY0NDMxODA4MX0.2qjCSU1KgrZSew6_Mfx8e3Gh2zihuVJ6nen5_3YRpxs
 
 {
-  "title": "string",
+  "id": 34,
+  "title": "nouvelle offre test cloudinary",
   "infos": "string",
   "model": "string",
   "size": "string",
   "helmet": true,
   "lamps": true,
   "safety_lock": true,
-  "photo": "string",
+  "photo": "test",
   "address": "string",
-  "zip_code": 85001,
-  "validity_start_date": "2022-01-01",
-  "validity_end_date": "2022-01-01"
+  "zip_code": 85000,
+  "validity_start_date": "2022-02-09",
+  "validity_end_date": "2022-02-10"
 }
 
 ### Get an offer details

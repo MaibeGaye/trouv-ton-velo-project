@@ -1,9 +1,5 @@
 sqitch.conf
 .env
-<<<<<<< HEAD
 node_modules
 dump.rdb
 api.http
-=======
-node_modules
->>>>>>> develop

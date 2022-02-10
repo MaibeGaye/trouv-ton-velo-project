@@ -1,0 +1,576 @@
+@use '../../styles/vars';
+
+
+
+@media screen and (min-width: 1000px) {
+    
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: vars.$third-color;
+
+    &-title{
+        font-size: 4rem;
+        margin: 1rem;
+        color: vars.$first-color;
+        text-transform: uppercase;
+    }
+    &-user{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+
+        & i {
+           display: none;
+        }
+    }
+    &-lender{
+        margin: 1rem;
+    }
+
+}
+.left-profile{
+    background-color: vars.$third-color;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-title{
+        font-size: 4rem;
+        color: vars.$first-color;
+
+        & i {
+            font-size: 3rem;
+            
+        }
+    }
+
+    &-infos {
+      background-color: vars.$first-color;
+      margin: 2rem;
+      border-radius: 10px;
+      text-align: center;
+
+    }
+    &-info{
+        display: flex;
+        justify-content: space-between;
+    }
+    &-infos p {
+        border-radius: 10px;
+        font-size: 2rem;
+        padding: 1rem;
+        color: vars.$four-color;
+    }
+
+    &-buttons{
+        display: flex;
+    }
+    &-button{
+            font-family: 'Dongle', sans-serif;
+            border: none;
+            background-color: #178ca4;
+            color: #f9f7f0;
+            font-size: 1.9rem;
+            border-radius: 0.7rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+
+    }
+    &-delete {
+        font-size: 2rem;
+        margin: 10rem 2rem;
+        color: vars.$four-color;
+        text-align: center;
+    }
+
+    /* DELETE ACCOUNT BUTTON */
+
+    .confirm-buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2rem;
+        width: 75%;
+
+        &-delete{
+            font-family: 'Dongle', sans-serif;
+            border: none;
+            background-color: #178ca4;
+            color: #f9f7f0;
+            font-size: 1.9rem;
+            border-radius: 0.7rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            width: 50%;
+        }
+        &-delete:hover{
+            background-color: red;
+        }
+
+        &-cancel{
+            font-family: 'Dongle', sans-serif;
+            border: none;
+            background-color: #178ca4;
+            color: #f9f7f0;
+            font-size: 1.9rem;
+            border-radius: 0.7rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            width: 50%;
+        }
+
+        &-cancel:hover{
+            background-color: green;
+        }
+       
+    }
+}
+}
+
+/* RIGHT SIDE */
+
+.right-profile{
+    width: 55%;
+    display: flex;
+    background-color: vars.$second-color;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0 0 0 ;
+    
+    &-buttons{
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    &-delete{
+        font-family: 'Dongle', sans-serif;
+        background-color: vars.$second-color;
+        color: vars.$first-color;
+        border-radius: 10px;
+        font-size: 1.3rem;
+        padding: 0.5rem;
+        border: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        width: 30%;
+        margin: 0.5rem;
+    }
+
+    // &-borrower{
+    //     font-size: 1.5rem;
+
+    //     & i {
+    //         color: black;
+    //         font-size: 1.5rem;
+    //     }
+    // }
+
+    &-infos-left{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
+
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+            color: vars.$first-color;
+            margin: 1rem;
+            text-decoration: underline;
+        }
+    }
+    &-infos-right{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
+
+        &-title{
+            font-size: 2rem;
+            margin: 0.5rem;
+            color: vars.$first-color;
+            margin: 1rem;
+            text-decoration: underline;
+        }
+    }
+
+    &-borrow{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background-color: vars.$first-color;
+        border-radius: 10px;
+        // padding: 1rem;
+        margin: 1rem 2rem;
+
+        &-list{
+            margin: 1rem;
+            width: 60%;
+        }
+
+        &-title{
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 0.5rem;
+        }
+
+        &-id{
+            font-size: 1.5rem;
+            margin: 0.5rem;
+        }
+        
+        &-date{
+            font-size: 1.5rem;
+            margin: 0.5rem;
+        }
+        &-img{
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+        &-user{
+            font-size: 1.5rem;
+            margin: 0.5rem;
+        }
+        
+    }
+
+    &-lended{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background-color: vars.$first-color;
+        border-radius: 10px;
+        // padding: 1rem;
+        margin: 1rem 2rem;
+
+        &-list{
+            margin: 1rem;
+            width: 60%;
+
+        }
+
+        &-title{
+            font-size: 1.5rem;
+            margin: 0.5rem;
+        }
+        
+        &-description{
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 0.5rem;
+        }
+
+        &-date{
+            font-size: 1.5rem;
+            margin: 0.5rem;
+        }
+        &-img{
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+        &-borrower{
+            font-size: 1.5rem;
+            margin: 0.5rem;
+        }
+    }
+
+    .borrow{
+        font-size: 1.5rem;
+    }
+    .lended{
+        font-size: 1.5rem;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    .profile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: vars.$third-color;
+        overflow-y: auto;
+        
+
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+            color: vars.$first-color;
+            display: none;
+        }
+
+        &-user{
+            height: 100%;
+            width: 100%;
+           
+        }
+
+    }
+    .left-profile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 84vh;
+
+        & i {
+            font-size: 1rem;
+            color: vars.$first-color;
+            margin: 1rem;
+        }
+
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+            color: vars.$first-color;
+
+            & i {
+                margin: 1rem;
+                font-size: 2rem;
+                color: vars.$second-color;
+            }
+            
+        }
+        &-infos{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 90%;
+            margin: 1rem;
+
+            & p {
+                margin: 0.5rem;
+                font-size: 1.7rem;
+                color: vars.$four-color;
+                align-self: center;
+                
+                
+            }
+        }
+        &-info{
+            display: flex;
+            justify-content: space-between;
+            background-color: vars.$first-color;
+            border-radius: 10px;
+            margin: 0.2rem 0;
+        }
+
+        &-buttons{
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        &-button{
+            font-family: 'Dongle', sans-serif;
+            border: none;
+            background-color: vars.$second-color;
+            color: vars.$first-color;
+            font-size: 1.5rem;
+            border-radius: 0.7rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
+        &-delete{
+            margin: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: vars.$four-color;
+            text-align: center;
+        }
+
+    }
+
+    .delete-profile{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .confirm-buttons{
+        display: flex;
+        margin: 3rem;
+    }
+    .confirm-buttons-delete{
+        font-family: 'Dongle', sans-serif;
+        border: none;
+        background-color: vars.$second-color;
+        color: vars.$first-color;
+        font-size: 1.5rem;
+        border-radius: 0.7rem;
+        margin: 1rem;
+        padding: 0.5rem;
+        width: 150px;
+    }
+    .confirm-buttons-cancel{
+        font-family: 'Dongle', sans-serif;
+        border: none;
+        background-color: vars.$second-color;
+        color: vars.$first-color;
+        font-size: 1.5rem;
+        border-radius: 0.7rem;
+        margin: 1rem;
+        padding: 0.5rem;
+        width: 150px;
+    }
+
+    .right-profile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        &-infos-left{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height:84vh;
+            width: 100%;
+            margin: 1rem;
+            
+            background-color: vars.$second-color;
+
+            &-title{
+                color: vars.$first-color;
+                margin: 1rem;
+                font-size: 2rem;
+                text-decoration: underline;
+            }
+        }
+
+        &-borrow-list{
+            overflow-y: auto;
+        }
+        &-borrow{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: vars.$first-color;
+            margin: 1rem;
+            border-radius: 10px;
+            
+
+            &-img{
+                width: 100%;
+                height: 125px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            &-title{
+                font-size: 1.2rem;
+                margin: 0.2rem;
+            }
+            &-date{
+                font-size: 1.2rem;
+                margin: 0.2rem;
+            }
+            &-user{
+                font-size: 1.2rem;
+                margin: 0.2rem;
+            }
+        }
+        .borrow{
+            color: vars.$first-color;
+            margin: 15rem 0;
+            font-size: 2rem;
+        }
+
+        &-infos-right{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height:84vh;
+            width: 100%;
+            margin: 0.5rem;
+
+            &-title{
+                color: vars.$first-color;
+                margin: 1rem;
+                font-size: 2rem;
+                text-decoration: underline;
+            }
+        }
+
+        .lended{
+            color: vars.$first-color;
+            margin: 15rem 0;
+            font-size: 2rem;
+        }
+
+        &-lended-list{
+                overflow-y: auto
+        }
+
+        &-lended{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: vars.$first-color;
+            margin: 1rem;
+            border-radius: 10px;
+
+            &-img{
+                width: 100%;
+                height: 125px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            &-title{
+                font-size: 1.2rem;
+                margin: 0.2rem;
+            }
+            &-date{
+                font-size: 1.2rem;
+                margin: 0.2rem;
+            }
+            &-borrower{
+                font-size: 1.2rem;
+                margin: 0.2rem;
+            }
+
+           
+        }
+
+        &-buttons{
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 0.2rem;
+        }
+        &-delete{
+            font-family: 'Dongle', sans-serif;
+                    background-color: vars.$second-color;
+                    color: vars.$first-color;
+                    border-radius: 10px;
+                    font-size: 1.1rem;
+                    padding: 0.2rem;
+                    border: none;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    width: 45%;
+        }
+    }
+
+}

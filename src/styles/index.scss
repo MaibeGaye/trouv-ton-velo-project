@@ -1,0 +1,18 @@
+@use 'reset';
+@use 'vars';
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap');
+
+body {
+  font-family: 'Dongle', sans-serif;
+}
+
+.container {
+  height: 86vh;
+}
+
+@media screen and (max-width: 1000px) {
+  .container{
+    height: 84vh;
+  }
+
+}

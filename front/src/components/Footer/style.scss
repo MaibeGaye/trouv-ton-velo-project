@@ -1,0 +1,34 @@
+@use '../../styles/vars';
+
+.footer{
+
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: vars.$second-color;
+    
+    &-links{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-link{
+        color: vars.$first-color;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        margin: 0 2rem;
+
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .footer{
+        
+        &-link{
+            font-size: 1.3rem;
+        }
+    }
+}

@@ -19,12 +19,17 @@ module.exports = {
         }
     },
 
+<<<<<<< HEAD
     validateToken: token => {  
+=======
+    validateToken: token => {
+>>>>>>> develop
         try {
             return JWT.verify(
                 token,
                 process.env.JWT_SECRET,
                 {
+<<<<<<< HEAD
                     algorithm: 'HS256'
                 }
             )
@@ -59,6 +64,9 @@ module.exports = {
                 process.env.JWT_REFRESH_SECRET,
                 {
                     algorithm: ['HS256']
+=======
+                    algorithms: ['HS256']
+>>>>>>> develop
                 }
             )
         } catch (error) {

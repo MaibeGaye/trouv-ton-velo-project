@@ -1,20 +1,28 @@
 @host=http://localhost:5555
 
+<<<<<<< HEAD
 ###getalloffers
 GET {{host}}/getalloffers
 
 
+=======
+>>>>>>> develop
 ### Add a user
 POST {{host}}/signup
 Content-Type: application/json
 
 {
     "address": "5 avenue de la liberté",
+<<<<<<< HEAD
     "email": "test@testttttz.com",
+=======
+    "email": "test@test.com",
+>>>>>>> develop
     "firstname": "myfirstname",
     "lastname": "myname",
     "password": "testtest",
     "passwordConfirm": "testtest",
+<<<<<<< HEAD
     "username": "mypttttseudo",
     "zip_code": "67000"
 }
@@ -95,11 +103,18 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 POST {{host}}/logout
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEBzZWNvbmR1c2VyLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEp4LlBFY2JCLzRJNFVlWG1NbnhScC51Zm1XRXJGcXlULjNCMG9CY1hadU4uRldiM1BKVGh1IiwiaWQiOjE4LCJsb2dnZWQiOnRydWV9LCJpYXQiOjE2NDQzMTYyODEsImV4cCI6MTY0NDMxODA4MX0.2qjCSU1KgrZSew6_Mfx8e3Gh2zihuVJ6nen5_3YRpxs
 
+=======
+    "username": "mypseudo",
+    "zip_code": "67000"
+}
+
+>>>>>>> develop
 ### Login
 POST {{host}}/login
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
     "email": "test@testttttz.com",
     "password": "testtest"
 }
@@ -127,6 +142,20 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 PATCH {{host}}/dashboard/27/edit
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRULnhlcS5BT0t1R3NxbFNTeE8xS2x1Z1lkQW4xdGpYSlZGbFR6ZTB3T29tN2UuNmJSbGljYSIsImlkIjoyNSwibG9nZ2VkIjp0cnVlfSwiaWF0IjoxNjQzMzk3MTAxLCJleHAiOjE2NDMzOTg5MDF9.vCJ1QwDpIa7TxYFxcDcJytmUBVrbV_siRfcm9yVZmdk
+=======
+    "email": "test@test.com",
+    "password": "testtest"
+}
+
+### Get infos
+GET {{host}}/infos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGFYSS93SU1pMEF1VWF4SE0vdW4wZ09lNE9kaG5Ld2dXRG5sWUFQMnRGd1RPanQzNHlQNXBTIiwiaWQiOjIzfSwiaWF0IjoxNjQzMzYxMDg0LCJleHAiOjE2NDMzNjI4ODR9.MmWYR7nk8LWGnd13_x5L1Z-I0d808sTsjUY2mSj7dXI
+
+### Add an offer
+POST {{host}}/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyMSwiaWF0IjoxNjQzMjc4MjU1LCJleHAiOjE2NDMyNzg1NTV9.YHW_L49App6knMuLqeHOWkR4-vJwfACdJkVc8I6ihbw
+>>>>>>> develop
 
 {
   "title": "string",
@@ -138,6 +167,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
   "safety_lock": true,
   "photo": "string",
   "address": "string",
+<<<<<<< HEAD
   "zip_code": 85001,
   "validity_start_date": "2022-01-01",
   "validity_end_date": "2022-01-01"
@@ -166,3 +196,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 
 ### Get an offer details
 GET {{host}}/offer/5
+=======
+  "zip_code": 85000,
+  "validity_start_date": "2022-01-01",
+  "validity_end_date": "2022-01-01",
+  "lender_id": null,
+  "borrower_id": null
+}
+>>>>>>> develop

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const client = require('../db-pg.js');
+=======
+const client = require('../database');
+>>>>>>> develop
 
 /**
  * An entity representing an offer
@@ -14,8 +18,13 @@ const client = require('../db-pg.js');
  * @property {string} photo
  * @property {string} address
  * @property {number} zip_code
+<<<<<<< HEAD
  * @property {Date} validity_start_date
  * @property {Date} validity_end_date
+=======
+ * @property {string} validity_start_date
+ * @property {string} validity_end_date
+>>>>>>> develop
  * @property {number} lender_id
  * @property {number} borrower_id
  */
@@ -69,9 +78,12 @@ class Offer {
         try {
             const {rows} = await client.query('SELECT * FROM offer WHERE id=$1', [id]);
             if (rows[0]) {
+<<<<<<< HEAD
                 const lenderId = rows[0].lender_id;
                 const lenderUsername = await client.query('SELECT username FROM "user" WHERE id=$1', [lenderId]);
                 rows[0].lenderUsername = lenderUsername.rows[0].username;
+=======
+>>>>>>> develop
                 return new Offer(rows[0]);
             } else {
                 console.log(`No offer found for id ${id}`);
@@ -84,6 +96,7 @@ class Offer {
             throw error;
         }
     }
+<<<<<<< HEAD
 
     /**
      * Filters offer from the database
@@ -120,6 +133,8 @@ class Offer {
         }
     }
 
+=======
+>>>>>>> develop
     /**
      * Updates and adds an offer to the database
      * @returns {Offer} the newly created offer
@@ -130,7 +145,10 @@ class Offer {
         try {
             if (this.id) {
                 await client.query('SELECT * FROM update_offer($1)', [this]);
+<<<<<<< HEAD
                 return this;
+=======
+>>>>>>> develop
             } else {
                 const {rows} = await client.query('SELECT * FROM add_offer($1)', [this]);
                 this.id = rows[0].id;
@@ -139,7 +157,11 @@ class Offer {
         } catch (error) {
                 console.log(error);
                 if (error.detail) {
+<<<<<<< HEAD
                     throw new Error('SQL Error : ' + error.detail);
+=======
+                    throw new Error('On a une erreur SQL : ' + error.detail);
+>>>>>>> develop
                 }
                 throw error;
             }
@@ -150,10 +172,16 @@ class Offer {
      * Deletes an offer from the database
      * @returns {void} Nothing to return
      * @async
+<<<<<<< HEAD
      * @static
      * @throws {Error} a potential SQL error
      */
     static async delete(id) {
+=======
+     * @throws {Error} a potential SQL error
+     */
+    async delete(id) {
+>>>>>>> develop
         try {
             await client.query('DELETE FROM offer WHERE id=$1', [id]);
         } catch (error) {
@@ -163,6 +191,7 @@ class Offer {
             throw error;
         }
     }
+<<<<<<< HEAD
 
     /**
      * Returns an offer's lender id value
@@ -213,6 +242,8 @@ class Offer {
             throw error;
         }
     }
+=======
+>>>>>>> develop
 }
 
 module.exports = Offer;

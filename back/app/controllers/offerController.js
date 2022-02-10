@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 const Offer = require('../models/offer');
 const jwt = require('../services/jwt');
 const cloudinary = require('../services/cloudinary');
+=======
+const { request } = require('express');
+const Offer = require('../models/offer');
+// const cache = require('../services/cache');
+>>>>>>> develop
 
 
 module.exports = {
@@ -21,6 +27,7 @@ module.exports = {
         
     },
 
+<<<<<<< HEAD
     findFiltered: async (request, response) => {
         try {
             const filteredOffers = await Offer.filter(request.body);
@@ -40,6 +47,12 @@ module.exports = {
             // const uploadResponse = await cloudinary.uploader.upload(fileStr, {});
             // request.body.photo = uploadResponse.url;
 
+=======
+    create: async (request, response) => {
+        try {
+            //on ajoute au contenu de la requête l'id de l'utilisateur ayant effectué la requête
+            request.body.lender_id = request.userId.id;
+>>>>>>> develop
             const offer = await new Offer(request.body).save();
             response.status(201).json(offer);   
         } catch (error) {
@@ -48,6 +61,7 @@ module.exports = {
         }
     },
 
+<<<<<<< HEAD
     edit: async (request, response) => {
         try {
             const id = parseInt(request.params.offerId, 10);
@@ -94,6 +108,13 @@ module.exports = {
                     bookable:false
                 });
             }
+=======
+    update: async (request, response) => {
+        try {
+            const id = parseInt(request.params.id, 10);
+            const offer = await Offer(request.body).save(id);
+            response.status(200).json(offer);   
+>>>>>>> develop
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);   
@@ -102,6 +123,7 @@ module.exports = {
 
     delete: async (request, response) => {
         try {
+<<<<<<< HEAD
             const id = parseInt(request.params.offerId, 10);
             const borrowerId = await Offer.returnBorrowerId(id);
             if (!borrowerId) {
@@ -114,6 +136,11 @@ module.exports = {
                     editable:false
                 });
             }
+=======
+            const id = parseInt(request.params.id, 10);
+            await Offer.delete(id);
+            response.status(200).json({msg: "L'annonce a bien été supprimée !"});
+>>>>>>> develop
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);

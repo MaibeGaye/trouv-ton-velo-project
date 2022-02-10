@@ -12,6 +12,7 @@ const About = () => (
         <div className="groupe-card" key={id}>
           <h1 className="groupe-name">{name}</h1>
           <div className="groupe-title">{title}</div>
+          <p>Linkedin</p>
         </div>
       ))}
 

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import axios from 'axios';
 import DayJS from 'react-dayjs';
 import { useContext, useState } from 'react';

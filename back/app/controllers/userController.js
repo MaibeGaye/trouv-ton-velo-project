@@ -1,21 +1,10 @@
 const User = require('../models/user');
 const jwt = require('../services/jwt');
-<<<<<<< HEAD
 const {cache, verifyToken, deleteToken} = require('../services/tokenCache');
 
 module.exports = {
     findAll: async (_, response) => {
         const users = await User.findAll();
-=======
-// const cache = require('../services/cache');
-
-
-module.exports = {
-    findAll: async (_, response) => {
-        console.log('Data depuis Postgres');
-        const users = await User.findAll();
-        console.log('Appel de response.json');
->>>>>>> develop
         response.json(users);
     },
     findOne: async (_, response) => {
@@ -26,12 +15,6 @@ module.exports = {
     handleSignup: async (request, response) => {
         try {
             const user = await new User(request.body).save();
-<<<<<<< HEAD
-=======
-            const token = jwt.makeToken(user);
-            response.setHeader('Authorization', token)
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
->>>>>>> develop
             response.status(201).json(user);
         } catch(error) {
             console.log(error);
@@ -41,7 +24,6 @@ module.exports = {
     handleLogin: async (request, response) => {
         try {
             const user = await new User(request.body).getByEmail();
-<<<<<<< HEAD
             deleteToken(user.id);
             const access_token = await jwt.makeToken(user);
             const refresh_token = await jwt.generateRefreshToken(user);
@@ -61,18 +43,12 @@ module.exports = {
             response.setHeader("Authorization", access_token);
             response.setHeader("RefreshToken", refresh_token)
 
-=======
-            const token = jwt.makeToken(user);
-            response.setHeader('Authorization', token)
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
->>>>>>> develop
             response.status(200).json(user);
         } catch(error) {
             console.log(error);
             response.status(500).json(error.message);
         }
     },
-<<<<<<< HEAD
 
     refreshToken: async (request, response) => {
         try {
@@ -124,21 +100,12 @@ module.exports = {
                 }
             }
             response.status(200).json(data);
-=======
-    getInfos: async (request, response) => {
-        try {
-            const user = await new User(request.body).getUserData(request.userId.id);
-            response.setHeader('Authorization', jwt.makeToken(request.userId));
-            response.setHeader('Access-Control-Expose-Headers', 'Authorization')
-            response.status(200).json(user);
->>>>>>> develop
         } catch(error) {
             console.log(error);
             response.status(500).json(error.message);
         } 
     },
 
-<<<<<<< HEAD
     edit: async (request, response) => {
         try {
             request.body.id = request.userId.id;
@@ -167,13 +134,6 @@ module.exports = {
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
-=======
-    userDashboard: async (request, response) => {
-        try {
-            
-        } catch (error) {
-            
->>>>>>> develop
         }
     }
 

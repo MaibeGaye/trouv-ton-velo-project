@@ -6,10 +6,13 @@ body {
   font-family: 'Dongle', sans-serif;
 }
 
-.app{
-
-}
-
 .container {
   height: 86vh;
+}
+
+@media screen and (max-width: 1000px) {
+  .container{
+    height: 84vh;
+  }
+
 }

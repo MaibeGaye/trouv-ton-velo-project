@@ -1,5 +1,9 @@
 @use '../../styles/vars';
-
+.legals{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .legals{
     display: flex;
     flex-direction: column;
@@ -31,4 +35,28 @@
     font-size: 2rem;
     
    }
+}
+
+@media screen and (max-width: 768px) {
+    
+    .legals{
+        overflow-y: auto;
+        background-color: vars.$third-color;
+        &-title{
+            font-size: 2rem;
+            margin: 1rem;
+        }
+        &-one{
+            font-size: 1.4rem;
+            margin: 0.5rem;
+            text-align: center;
+            width: 90%;
+        }
+        &-three{
+            font-size: 1.4rem;
+            margin: 0.5rem;
+            width: 90%;
+            text-align: center;
+        }
+    }
 }

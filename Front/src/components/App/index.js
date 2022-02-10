@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../Header';
 import Home from '../Home';
@@ -11,48 +11,87 @@ import About from '../About';
 import Legals from '../Legals';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
-import '../../styles/index.scss';
+
 import { UserContext } from '../Context';
 
+import '../../styles/index.scss';
+
 const App = () => {
-  const { user } = useContext(UserContext);
-  const [offers, setOffers] = useState([]);
-  // const [loader, setLoader] = useState(false);
-  const [filteredOffer, setfilteredOffer] = useState([]);
-  const [spinner, setSpinner] = useState(false);
+  const [inputValues, setInputValues] = useState({});
+  const [resultOffers, setResultOffers] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [submitSearchOffer, setSubmitSearchOffer] = useState(false);
+  const [errorSubmitSearchOffer, setErrorSubmitSearchOffer] = useState(false);
+  const { user, setUser } = useContext(UserContext);
 
-  // const handleModal = () => {
-  //   setSpinner(!modal);
-  // };
+  // Function useEffect for check if the user is logged and have a token before the first render
 
-  const GetOffersFiltered = (event) => {
+  useEffect(() => {
+    const backUpToken = localStorage.getItem('token');
+    const backUpSession = localStorage.getItem('logged');
+
+    if (backUpSession && backUpToken) {
+      const backUpJWT = JSON.parse(backUpToken);
+      const backUpLOG = JSON.parse(backUpSession);
+
+      setUser({
+        ...user,
+        token: backUpJWT,
+        logged: backUpLOG,
+      });
+    }
+    else {
+      setUser({
+        logged: false,
+      });
+    }
+  }, []);
+
+  // Axios POST request to display filtered offers from inputs values
+
+  const getOffersFiltered = (event) => {
     event.preventDefault();
-    setSpinner(true);
+    setResultOffers([]);
+    setLoader(true);
     axios({
-      method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/getAllOffers/',
+      method: 'post',
+      url: 'https://api-apo-velo.herokuapp.com/offers',
+      data: inputValues,
     })
       .then((res) => {
+        console.log(res.data);
         setTimeout(() => {
-          console.log('Options choisies :', filteredOffer);
-          setOffers(res.data);
-          setSpinner(false);
+          setResultOffers(res.data);
+          setSubmitSearchOffer(!submitSearchOffer);
         }, 2000);
       })
       .catch((err) => {
         console.log(err);
+        setTimeout(() => {
+          setErrorSubmitSearchOffer(!errorSubmitSearchOffer);
+        }, 2000);
       })
       .finally(() => {
-        setSpinner(false);
+        setTimeout(() => {
+          setLoader(false);
+        }, 2000);
       });
   };
 
+  // Function to reset offers from state
+
   const resetOffers = () => {
-    setOffers([]);
+    setInputValues({});
+    setResultOffers([]);
+    setSubmitSearchOffer(false);
+    setErrorSubmitSearchOffer(false);
   };
-  const handleChange = (event) => {
-    setfilteredOffer({
-      ...filteredOffer,
+
+  // Function to change inputs values
+
+  const handleChangeInputValues = (event) => {
+    setInputValues({
+      ...inputValues,
       [event.target.name]: event.target.value,
     });
   };
@@ -67,15 +106,20 @@ const App = () => {
           path="/offers"
           element={(
             <Offers
-              offers={offers}
-              searchOffers={GetOffersFiltered}
-              handleChange={handleChange}
-              displayLoader={spinner}
+              offers={resultOffers}
+              setOffers={setResultOffers}
+              searchOffers={getOffersFiltered}
+              handleChange={handleChangeInputValues}
+              displayLoader={loader}
               reset={resetOffers}
+              errorSubmitSearchOffer={errorSubmitSearchOffer}
+              submitSearchOffer={submitSearchOffer}
+              inputValues={inputValues}
+              setInputValues={setInputValues}
             />
-)}
+          )}
         />
-        <Route path="/offer/:id/details" element={<OfferDetails offerDetail={offers} />} />
+        <Route path="/offer/:id/details" element={<OfferDetails offerDetail={resultOffers} />} />
         <Route path="/about" element={<About />} />
         <Route path="/legals" element={<Legals />} />
         <Route path="*" element={<NotFound />} />

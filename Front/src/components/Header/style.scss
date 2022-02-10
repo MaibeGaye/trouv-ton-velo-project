@@ -1,59 +1,43 @@
 @use '../../styles/vars';
 
-.header{
+
+
+.header {
     height: 8vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     background-color: vars.$first-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     &-logo{
+
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0 1rem;
 
+        &-title {
+            font-size: 2rem;
+            color: vars.$second-color;
+            margin: 0 1rem;
+        }
         & i {
             font-size: 2rem;
             color: vars.$four-color;
         }
-
-        &-title{
-            font-size: 2rem;
-            color: vars.$second-color;
-            margin: 0.5rem;
-        }
+        
     }
 
     &-nav{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin: 0 1rem;
         height: 100%;
+        display: flex;
+        align-items: center;
 
-        &-links{
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
         &-link{
-            font-size: 1.9rem;
-            margin: 0 1rem;
+            margin: 1rem;
+            font-size: 2rem;
             color: vars.$four-color;
-        }
-        &-buttons{
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-        }
-
-        &-buttons{
-            display: flex;
         }
         &-button{
             font-family: 'Dongle', sans-serif;
@@ -65,23 +49,94 @@
             padding: 0.5rem;
         }
     }
-
 }
 
+.register{
+    background: transparent;
+    color: vars.$four-color;
+    font-size: 2rem;
+}
 .loggin{
     background-color: vars.$second-color;
     color: vars.$first-color;
-    font-size: 1.5rem;
-   
+    font-size: 1.8rem;
 }
 .logout{
     background-color:  vars.$second-color;
     color: vars.$first-color;
-    font-size: 1.5rem;
-    
+    font-size: 1.8rem;
 }
 
 .active{
     text-decoration: underline;
 }
 
+.inputs-errors{
+    font-size: 1.1rem;
+    color: red;
+}
+
+@media screen and (max-width: 768px) {
+
+    .header{
+        height: 10vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        
+
+        &-logo{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 1rem;
+
+            & i {
+                font-size: 1.5rem;
+            }
+            &-title {
+                display: none;
+            }
+        }
+
+        &-nav{
+            display: flex;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+
+            &-link{
+                font-size: 1.6rem;
+                margin: 0.5rem;
+            }
+
+            &-button{
+                font-family: 'Dongle', sans-serif;
+                font-size: 1rem;
+                margin: 0.5rem;
+                padding: 0.5rem;
+                background-color: transparent;
+                border: none;
+                border-radius: 0.7rem;
+            }
+        }
+    }
+    
+    .loggin{
+            background-color: vars.$second-color;
+            color: vars.$first-color;
+            font-size: 1.5rem;
+    }
+    .register{
+            background: transparent;
+            color: vars.$four-color;
+            font-size: 1.5rem;
+    }
+    .logout{
+        background-color:  vars.$second-color;
+        color: vars.$first-color;
+        font-size: 1.4rem;
+    }
+}

@@ -1,20 +1,29 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
 import './style.scss';
-import Offer from '../Offer';
+import { useEffect } from 'react';
+import OffersDisplay from './OffersDisplay';
 
 const Offers = ({
-  offers, handleChange, searchOffers, reset, displayLoader,
+  offers, handleChange,
+  searchOffers, reset,
+  displayLoader,
+  errorSubmitSearchOffer,
+  submitSearchOffer,
+  setOffers,
+  setInputValues,
 }) => {
-  console.log('j\'accède aux offres');
+  useEffect(() => {
+    setOffers([]);
+    setInputValues({});
+  }, []);
 
   return (
     <section className="container offers">
       <div className="offers-form">
         <h1 className="offers-form-title">Recherche</h1>
-        {/* <div className="offers-form-inputs"> */}
         <div className="offers-form-input">
-          <label htmlFor="option1">Ville</label>
+          <label htmlFor="option1">CP</label>
           <input
             type="tel"
             maxLength={5}
@@ -26,7 +35,7 @@ const Offers = ({
         </div>
         <div className="offers-form-input">
           <h2>Modèle</h2>
-          <div className="test">
+          <div className="offers-form-input-contain">
             <input
               type="radio"
               id="option2"
@@ -47,7 +56,7 @@ const Offers = ({
         </div>
         <div className="offers-form-input">
           <h2>Type</h2>
-          <div className="test">
+          <div className="offers-form-input-contain">
             <input
               type="radio"
               id="ville"
@@ -68,7 +77,7 @@ const Offers = ({
         </div>
         <div className="offers-form-input">
           <h2>Lumières</h2>
-          <div className="test">
+          <div className="offers-form-input-contain">
             <input
               type="radio"
               id="option4"
@@ -89,7 +98,7 @@ const Offers = ({
         </div>
         <div className="offers-form-input">
           <h2>Anti vol</h2>
-          <div className="test">
+          <div className="offers-form-input-contain">
             <input
               type="radio"
               id="option6"
@@ -111,7 +120,7 @@ const Offers = ({
 
         <div className="offers-form-input">
           <h2>Casque</h2>
-          <div className="test">
+          <div className="offers-form-input-contain">
             <input
               type="radio"
               id="option8"
@@ -146,10 +155,7 @@ const Offers = ({
             onChange={handleChange}
           />
         </div>
-        {/*
 
-           */}
-        {/* </div> */}
         <div className="offers-form-buttons">
           <button className="offers-form-button" type="submit" onClick={reset}>Reset</button>
           <button className="offers-form-button" type="submit" onClick={searchOffers}>GO !</button>
@@ -160,17 +166,17 @@ const Offers = ({
         && (
         <div className="spinner" />
         )}
-        {!displayLoader
-        && offers.map((offer) => (
-          <div className="test-div" key={offer.id}>
-            <Offer {...offer} />
-          </div>
-        ))}
+
+        { !offers ? <p className="offer-form-result-error">Désolé aucune offre ne correspond </p> : <OffersDisplay offers={offers} />}
+
+        { !submitSearchOffer && errorSubmitSearchOffer && (
+        <h1 className="offer-form-result-error">Oups nous avons un problème <br />avec votre demande ...</h1>
+        )}
+
       </div>
     </section>
   );
 };
-
 Offers.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -179,5 +185,9 @@ Offers.propTypes = {
   searchOffers: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   displayLoader: PropTypes.bool.isRequired,
+  submitSearchOffer: PropTypes.bool.isRequired,
+  errorSubmitSearchOffer: PropTypes.bool.isRequired,
+  setOffers: PropTypes.func.isRequired,
+  setInputValues: PropTypes.func.isRequired,
 };
 export default Offers;

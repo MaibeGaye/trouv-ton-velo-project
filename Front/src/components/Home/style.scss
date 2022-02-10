@@ -1,10 +1,51 @@
+@use '../../styles/vars';
+
 .home{
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     background-image: url("../../assets/bike.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 
+    // &-title{
+    //     font-size: 5rem;
+    //     margin: 4rem;
+    //     color: vars.$second-color;
+    //     background-color: white;
+    //     padding: 1rem;
+    //     border-radius: 10px;
+    // }
+
+    // & h2{
+    //     font-size: 3rem;
+    //     color: vars.$four-color;
+    //     background-color: white;
+    //     padding: 1rem;
+    //     border-radius: 10px;
+    // }
 }
+
+// @media screen and (max-width: 1000px) {
+//     .home{
+//         &-title{
+//             font-size: 3rem;
+//             margin: 3rem;
+//             color: vars.$second-color;
+//             background-color: vars.$first-color;
+//             padding: 1rem;
+//             border-radius: 10px;
+//         }
+    
+//         & h2{
+//             font-size: 1.5rem;
+//             color: vars.$four-color;
+//             background-color: vars.$first-color;
+//             padding: 1rem;
+//             border-radius: 10px;
+//         }
+//     }
+    
+// }

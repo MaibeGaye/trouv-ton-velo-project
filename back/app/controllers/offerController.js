@@ -3,7 +3,7 @@ const jwt = require('../services/jwt');
 const cloudinary = require('../services/cloudinary');
 
 
-module.exports = {
+module.exports = { 
     findAll: async (_, response) => {
         const offers = await Offer.findAll();
         response.json(offers);

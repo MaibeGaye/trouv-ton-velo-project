@@ -103,7 +103,6 @@ const CreateOffer = () => {
         })
         .finally(() => {
           setTimeout(() => {
-            console.log(user.token)
             setLoader(false);
           }, 2000);
         });

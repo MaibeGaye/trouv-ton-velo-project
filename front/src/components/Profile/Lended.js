@@ -23,6 +23,7 @@ const Lended = () => {
 
       })
       .catch((err) => {
+        alert('Désolé mais vous ne pouvez pas supprimer votre annonce pour le moment')
         console.log(err)
       })
   };
@@ -40,12 +41,19 @@ const Lended = () => {
               <p className="right-profile-lended-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>
               {
                 !currentBorrowerInfos ? <p className="right-profile-lended-borrower">Disponible à la location</p>
-                  : currentBorrowerInfos.map(({ username }) => (
-                    <p key={username} className="right-profile-borrower">Emprunté par : {username}</p>
+                  : currentBorrowerInfos.map(({ username, email }) => (
+                    <div key={id + 1}>
+                    <p className="right-profile-borrower">Emprunté par : {username}</p>
+                    <p  className="right-profile-borrower">Contact : {email}</p>
+                    </div>
+
                   ))
               }
-              <div className="right-profile-buttons">
-                <button type="button" className="right-profile-delete">Modifier</button>
+
+              {
+                !currentBorrowerInfos && (
+                  <div className="right-profile-buttons">
+                    <button type="button" className="right-profile-delete">Modifier</button>
                 <button
                   className="right-profile-delete"
                   type="button"
@@ -55,6 +63,9 @@ const Lended = () => {
                 >Supprimer
                 </button>
               </div>
+                )
+              }
+              
             </div>
           ))
           

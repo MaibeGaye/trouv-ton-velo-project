@@ -17,8 +17,12 @@ const Borrow = () => {
                     <h1 className="right-profile-borrow-title">Titre : {title}</h1>
                     <p className="right-profile-borrow-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>
                     {
-                      currentLenderInfos.map(({ username }) => (
-                        <p key={username + 1} className="right-profile-borrow-user">Proposé par : {username} </p>
+                      currentLenderInfos.map(({ username, email }) => (
+                        <div key={id + 1}>
+                        <p className="right-profile-borrow-user">Proposé par : {username}</p>
+                        <p className="right-profile-borrow-user">Contact : {email}</p>
+                        </div>
+
                       ))
                     }
                   </div>

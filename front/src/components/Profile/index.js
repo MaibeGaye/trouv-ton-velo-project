@@ -55,7 +55,6 @@ const Profile = () => {
   // Axios PATCH request to update user's infos
 
   const updateInfos = () => {
-    console.log('Je fais une requete PATCH pour modifier ces champs :', updateInputsValues);
     axios({
       method: 'patch',
       url: 'https://api-apo-velo.herokuapp.com/dashboard/edit',

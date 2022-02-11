@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [{
     "username":"isalabelle08",
     "lastname":"Kouggloff",
@@ -145,15 +144,3 @@
       "address":"60, avenue d'Ivry",
       "zip_code":"75013"
      }]
-=======
-[{"username":"itordoff0","lastname":"Tordoff","firstname":"Isidro","email":"itordoff0@exblog.jp","password":"ZRxhNeO","address":"05 Chinook Park","zip_code":"77777"},
-{"username":"mdionsetti1","lastname":"Dionsetti","firstname":"Marita","email":"mdionsetti1@163.com","password":"DweT1jNx","address":"04 Evergreen Court","zip_code":"77777"},
-{"username":"mmatyugin2","lastname":"Matyugin","firstname":"Maisey","email":"mmatyugin2@salon.com","password":"1sj55Pd4uwR","address":"5 Claremont Alley","zip_code":"77777"},
-{"username":"clampens3","lastname":"Lampens","firstname":"Carlota","email":"clampens3@blogs.com","password":"bVYoD1g","address":"21806 Dottie Crossing","zip_code":"77777"},
-{"username":"lserfati4","lastname":"Serfati","firstname":"Lenee","email":"lserfati4@altervista.org","password":"dFryez4S","address":"69515 Charing Cross Park","zip_code":"77777"},
-{"username":"wsleath5","lastname":"Sleath","firstname":"Westley","email":"wsleath5@wix.com","password":"GtK6aEaeC","address":"7 Melvin Trail","zip_code":"77777"},
-{"username":"gwillimont6","lastname":"Willimont","firstname":"Gerda","email":"gwillimont6@webmd.com","password":"1LrAjxGy","address":"50078 Derek Place","zip_code":"77777"},
-{"username":"aleopold7","lastname":"Leopold","firstname":"Arlyn","email":"aleopold7@mtv.com","password":"w682q9iEz","address":"41 Veith Parkway","zip_code":"77777"},
-{"username":"jteodori8","lastname":"Teodori","firstname":"Jessie","email":"jteodori8@eepurl.com","password":"WwmQZB8t","address":"578 Debs Alley","zip_code":"77777"},
-{"username":"jloughran9","lastname":"Loughran","firstname":"Joletta","email":"jloughran9@army.mil","password":"R9MYjkDHOK","address":"3 Rutledge Point","zip_code":"77777"}]
->>>>>>> develop

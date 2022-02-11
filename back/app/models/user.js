@@ -213,7 +213,7 @@ class User {
 
     static async getCurrentBorrowerInfos(idOffer) {
         try {
-            const {rows} =  await client.query('SELECT username FROM "user" LEFT JOIN "offer" ON "user".id="offer".borrower_id WHERE "offer".id=$1', [idOffer]);
+            const {rows} =  await client.query('SELECT username, email FROM "user" LEFT JOIN "offer" ON "user".id="offer".borrower_id WHERE "offer".id=$1', [idOffer]);
             console.log(rows);
             if (rows[0]) {
                 return rows.map(row => new Offer(row));
@@ -231,7 +231,7 @@ class User {
 
     static async getCurrentLenderInfos(idOffer) {
         try {
-            const {rows} =  await client.query('SELECT username FROM "user" LEFT JOIN "offer" ON "user".id="offer".lender_id WHERE "offer".id=$1', [idOffer]);
+            const {rows} =  await client.query('SELECT username, email FROM "user" LEFT JOIN "offer" ON "user".id="offer".lender_id WHERE "offer".id=$1', [idOffer]);
             if (rows[0]) {
                 return rows.map(row => new Offer(row));
             } else {

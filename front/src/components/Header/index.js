@@ -99,17 +99,13 @@ const Header = () => {
       data: loginModalValue,
     })
       .then((res) => {
-        // console.log('Je viens de me connecter, mes infos de la bdd:', res.data);
         setUser({
           ...user,
           infos: res.data,
           token: res.headers.authorization,
           logged: res.data.logged,
-          // refreshToken: res.headers.refreshtoken,
+
         });
-        // localStorage.setItem('token', res.headers.authorization);
-        // localStorage.setItem('refresh_token', res.headers.refreshtoken);
-        // localStorage.setItem('logged', res.data.logged);
         const createBackUpJWT = JSON.stringify(res.headers.authorization);
         localStorage.setItem('token', createBackUpJWT);
         const createBackUpLOG = JSON.stringify(res.data.logged);

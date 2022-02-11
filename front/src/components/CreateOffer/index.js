@@ -88,6 +88,7 @@ const CreateOffer = () => {
         },
       })
         .then((res) => {
+          
           // console.log(res);
           setTimeout(() => {
             setLoader(false);
@@ -102,6 +103,7 @@ const CreateOffer = () => {
         })
         .finally(() => {
           setTimeout(() => {
+            console.log(user.token)
             setLoader(false);
           }, 2000);
         });

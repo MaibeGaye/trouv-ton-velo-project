@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import DayJS from 'react-dayjs';
 import axios from 'axios';
 import { useContext, useState } from 'react';
@@ -20,14 +19,12 @@ const Lended = () => {
       },
     })
       .then((res) => {
+        // console.log(res)
 
       })
       .catch((err) => {
-
+        console.log(err)
       })
-      .finally(() => {
-
-      });
   };
 
   return (
@@ -40,7 +37,6 @@ const Lended = () => {
             <div key={id} className="right-profile-lended">
               <img className="right-profile-lended-img" src={photo} alt="petit de velo" />
               <h1 className="right-profile-lended-title">Titre : {title}</h1>
-              {/* <p className="right-profile-lended-description">Annonce n° {id}</p> */}
               <p className="right-profile-lended-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>
               {
                 !currentBorrowerInfos ? <p className="right-profile-lended-borrower">Disponible à la location</p>
@@ -61,7 +57,9 @@ const Lended = () => {
               </div>
             </div>
           ))
+          
         }
+        
     </div>
   );
 };

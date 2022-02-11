@@ -11,9 +11,7 @@ import About from '../About';
 import Legals from '../Legals';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
-
 import { UserContext } from '../Context';
-
 import '../../styles/index.scss';
 
 const App = () => {

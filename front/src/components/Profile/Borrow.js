@@ -15,7 +15,6 @@ const Borrow = () => {
                   <div key={id} className="right-profile-borrow">
                     <img className="right-profile-borrow-img" src={photo} alt="" />
                     <h1 className="right-profile-borrow-title">Titre : {title}</h1>
-                    {/* <p className="right-profile-borrow-id">Réservation n° {id}</p> */}
                     <p className="right-profile-borrow-date">Du <DayJS format="DD-MM-YYYY">{validity_start_date}</DayJS> au <DayJS format="DD-MM-YYYY">{validity_end_date}</DayJS></p>
                     {
                       currentLenderInfos.map(({ username }) => (

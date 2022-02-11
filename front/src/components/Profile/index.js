@@ -30,7 +30,6 @@ const Profile = () => {
     })
       .then((res) => {
         setUpdateInputsValues(res.data.userData);
-        console.log(res.data);
         setUser({
           ...user,
           infos: res.data.userData,
@@ -39,7 +38,7 @@ const Profile = () => {
         });
       })
       .catch((err) => {
-        console.log(err.request.responseText);
+        console.log(err);
       });
   }, []);
 
@@ -66,11 +65,9 @@ const Profile = () => {
       },
     })
       .then((res) => {
-        // console.log(res.headers.authorization);
         setUser({
           ...user,
           infos: res.data,
-          token: res.headers.authorization,
         });
       })
       .catch((err) => {

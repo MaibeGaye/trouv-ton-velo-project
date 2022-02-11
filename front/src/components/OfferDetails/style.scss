@@ -12,7 +12,7 @@
     &-page{
       background-color: vars.$first-color;
       border-radius: 10px;
-      width: 700px;
+      width: 500px;
       height: auto;
       display: flex;
       flex-direction: column;
@@ -22,8 +22,8 @@
 
     &-img{
       border-radius: 10px 10px 0 0;
-      width: 700px;
-      height: 500px;
+      width: 500px;
+      height: 320px;
     }
 
     &-title{

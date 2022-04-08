@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "node-dev index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node data/importJson.js; node index.js"
   },
@@ -19,6 +20,7 @@
     "joi": "^17.5.0",
     "joi-postalcode": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
+    "node-dev": "^7.1.0",
     "pg": "^8.7.1",
     "redis": "^4.0.3",
     "sanitizer": "^0.1.3"

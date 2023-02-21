@@ -1,7 +1,6 @@
 import './style.scss';
 import groupe from './dataAbout';
 
-
 const About = () => (
   <div className="container about">
     <div className=" about-group">

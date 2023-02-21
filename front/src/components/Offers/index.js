@@ -4,7 +4,6 @@ import './style.scss';
 import { useEffect } from 'react';
 import OffersDisplay from './OffersDisplay';
 
-
 const Offers = ({
   offers, handleChange,
   searchOffers, reset,
@@ -14,7 +13,6 @@ const Offers = ({
   setOffers,
   setInputValues,
 }) => {
-
   useEffect(() => {
     setOffers([]);
     setInputValues({});

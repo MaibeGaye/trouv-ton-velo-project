@@ -53,7 +53,7 @@ const App = () => {
     setLoader(true);
     axios({
       method: 'post',
-      url: 'https://api-apo-velo.herokuapp.com/offers',
+      url: 'https://trtvelo.herokuapp.com/offers',
       data: inputValues,
     })
       .then((res) => {

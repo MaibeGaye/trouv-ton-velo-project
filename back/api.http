@@ -56,7 +56,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 ### Add an offer
 POST {{host}}/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWXMwNmNXVjhmdU5OODV6SkFjOW1IdUhzQmZTVnIyVnBaNDJNclVuQm13YVRuYVFXNzdva0MiLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0NDMxNjI0NSwiZXhwIjoxNjQ0MzE4MDQ1fQ.hcSWHkgPWmKBMI8Y-w2VSssBvMtifR1LtKQnIKIPbv8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUkEuNExvNURCVE1BVW1xVm1CNno2T0ZOamlvV3c5cmI5SWZMdVRaV2NhSVR1eDhkSUZKSkMiLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY3NTE2NDAxMywiZXhwIjoxNjc1MTY1ODEzfQ.DpO3espKtgZmit0MStj9dZ4RYoqVz5iM0OlFdvwQYI4
 
 {
   "title": "nouvelle offre test cloudinary",
@@ -68,10 +68,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
   "safety_lock": true,
   "photo": "test",
   "address": "string",
-  "zip_code": 85000,
-  "validity_start_date": "2022-02-09",
-  "validity_end_date": "2022-02-10",
-  "lender_id": null,
+  "zip_code": "85000",
+  "validity_start_date": "2023-12-09",
+  "validity_end_date": "2023-12-10",
+  "lender_id": 17,
   "borrower_id": null
 }
 
@@ -93,7 +93,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 
 ### Logout
 POST {{host}}/logout
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEBzZWNvbmR1c2VyLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEp4LlBFY2JCLzRJNFVlWG1NbnhScC51Zm1XRXJGcXlULjNCMG9CY1hadU4uRldiM1BKVGh1IiwiaWQiOjE4LCJsb2dnZWQiOnRydWV9LCJpYXQiOjE2NDQzMTYyODEsImV4cCI6MTY0NDMxODA4MX0.2qjCSU1KgrZSew6_Mfx8e3Gh2zihuVJ6nen5_3YRpxs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUkEuNExvNURCVE1BVW1xVm1CNno2T0ZOamlvV3c5cmI5SWZMdVRaV2NhSVR1eDhkSUZKSkMiLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY3NTE2NDAxMywiZXhwIjoxNjc1MTY1ODEzfQ.DpO3espKtgZmit0MStj9dZ4RYoqVz5iM0OlFdvwQYI4
 
 ### Login
 POST {{host}}/login
@@ -122,7 +122,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
 
 ### Get infos of current user
 GET {{host}}/dashboard
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWXMwNmNXVjhmdU5OODV6SkFjOW1IdUhzQmZTVnIyVnBaNDJNclVuQm13YVRuYVFXNzdva0MiLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY0NDMxNjM3NSwiZXhwIjoxNjQ0MzE4MTc1fQ.rPZyZ2besomdKMf5PhFS5aSFmMUKnWWD2jAXQ9DxskU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVzdEB0ZXN0dHR0dHouY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUkEuNExvNURCVE1BVW1xVm1CNno2T0ZOamlvV3c5cmI5SWZMdVRaV2NhSVR1eDhkSUZKSkMiLCJpZCI6MTcsImxvZ2dlZCI6dHJ1ZX0sImlhdCI6MTY3NTE2NDAxMywiZXhwIjoxNjc1MTY1ODEzfQ.DpO3espKtgZmit0MStj9dZ4RYoqVz5iM0OlFdvwQYI4
 ### Update an offer
 PATCH {{host}}/dashboard/27/edit
 Content-Type: application/json
@@ -160,7 +160,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidGVz
   "photo": "test",
   "address": "string",
   "zip_code": 85000,
-  "validity_start_date": "2022-02-09",
+  "validity_start_date": "2023-02-09",
   "validity_end_date": "2022-02-10"
 }
 

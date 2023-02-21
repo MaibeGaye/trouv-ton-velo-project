@@ -1,3 +1,4 @@
+
 const Offer = require('../models/offer');
 const jwt = require('../services/jwt');
 const cloudinary = require('../services/cloudinary');
@@ -36,9 +37,9 @@ module.exports = {
         try {
             request.body.lender_id = request.userId.id;
 
-            // const fileStr = request.body.photo;
-            // const uploadResponse = await cloudinary.uploader.upload(fileStr, {});
-            // request.body.photo = uploadResponse.url;
+            const fileStr = request.body.photo;
+            const uploadResponse = await cloudinary.uploader.upload(fileStr, {});
+            request.body.photo = uploadResponse.url;
 
             const offer = await new Offer(request.body).save();
             response.status(201).json(offer);   

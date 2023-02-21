@@ -65,7 +65,7 @@ const Lended = () => {
               </div>
                 )
               }
-              
+
             </div>
           ))
           

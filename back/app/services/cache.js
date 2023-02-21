@@ -39,8 +39,8 @@ const cache = async (request, response, next) => {
 const flush = async (request, response, next) => {
     console.log('Flushing cache');
 
-    while(key=keys.shift()) {
-        await db.del(key);
+    while(cache.key=keys.shift()) {
+        await db.del(cache.key);
     }
     next();
 }

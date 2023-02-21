@@ -51,7 +51,6 @@ jsDoc(options);
 //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 //   preflightContinue: true,
 //   optionsSuccessStatus: 204
-//   //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }));
 
 // app.use(cors());
@@ -62,8 +61,7 @@ app.use(cors({
   exposedHeaders: "Authorization, RefreshToken",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
-  optionsSuccessStatus: 204
-  //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200
 }));
 
 

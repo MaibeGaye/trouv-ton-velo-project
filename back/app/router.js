@@ -61,7 +61,7 @@ router.get('/offers', cache, offerController.findFiltered);
  * GET /offer/{id}
  * @summary Responds with one offer from database
  * @route GET /offer/{id}
- * @tags Offers
+ * @tags Offer
  * @param {number} id.path.required The id of the offer to fetch
  * @returns {Offer} 200 - A single offer identified by its id
  * @returns {string} 404 - An error message
@@ -73,7 +73,7 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  * GET /offer/{id}
  * @summary Responds with one offer from database
  * @route GET /offer/{id}
- * @tags Offers
+ * @tags Offer
  * @param {number} id.path.required The id of the offer to fetch
  * @returns {Offer} 200 - A single offer identified by its id
  * @returns {string} 404 - An error message
@@ -103,7 +103,7 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
 /**
  * POST /create
  * @summary Adds a new offer in database
- * @tags Offers
+ * @tags Offer
  * @param {OfferJson} request.body.required Offer info to add in database
  * @returns {Offer} 201 - The newly created offer
  * @returns {string} 500 - An error message
@@ -114,7 +114,7 @@ router.post('/create', offerMiddleware, jwtMW, flush, offerController.create);
 /**
  * PATCH /dashboard/{offerId}/edit
  * @summary Updates an existing offer in database
- * @tags Offers
+ * @tags Offer
  * @param {number} id.path.required The id of the offer to fetch
  * @param {OfferJson} request.body.required Offer info to add in database
  * @returns {Offer} 200 - The updated offer
@@ -126,7 +126,7 @@ router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, flush, offerController.edi
 /**
  * DELETE /dashboard/{offerId}/delete
  * @summary Deletes an existing offer in database
- * @tags Offers
+ * @tags Offer
  * @param {number} id.path.required The id of the offer to delete
  * @returns {string} 200 - The deleted offer confirmation
  * @returns {string} 500 - An error message
@@ -136,7 +136,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
 /**
  * PATCH /dashboard/edit
  * @summary Updates current user infos in database
- * @tags Users
+ * @tags User
  * @param {OfferJson} request.body.required User info to add in database
  * @returns {Offer} 200 - The updated user
  * @returns {string} 500 - An error message
@@ -146,7 +146,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
  /**
   * DELETE /dashboard/delete
   * @summary Deletes the current user in database
-  * @tags Users
+  * @tags User
   * @returns {string} 200 - The deleted user confirmation
   * @returns {string} 500 - An error message
   */
@@ -177,7 +177,7 @@ router.get('/dashboard', jwtMW, userController.userDashboard);
 /**
  * POST /signup
  * @summary Adds a new user in database
- * @tags Users
+ * @tags User
  * @param {UserJson} request.body.required User info to add in database
  * @returns {User} 201 - The newly created user
  * @returns {string} 500 - An error message
@@ -188,7 +188,7 @@ router.post('/signup', signupMiddleware, flush, userController.handleSignup);
 /**
  * POST /login
  * @summary Logs in a user if database credential check is ok
- * @tags Users
+ * @tags User
  * @param {UserJson} request.body.required User login info to verify in database
  * @returns {User} 200 - The logged in user
  * @returns {string} 500 - An error message

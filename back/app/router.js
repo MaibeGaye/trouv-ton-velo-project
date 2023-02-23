@@ -1,5 +1,4 @@
 const {Router} = require('express');
-const {cache, flush} = require('./services/cache');
 const jwtMW = require('./middlewares/jwtMW');
 
 const userController = require('./controllers/userController');
@@ -46,7 +45,7 @@ router.get('/getAllUsers', userController.findAll);
  * @tags Offers
  * @returns {array<Offer>} 200 - An array of offers
  */
-router.get('/offers', cache, offerController.findFiltered);
+router.get('/offers', offerController.findFiltered);
 
 /**
  * POST /offers
@@ -55,7 +54,7 @@ router.get('/offers', cache, offerController.findFiltered);
  * @tags Offers
  * @returns {array<Offer>} 200 - An array of offers
  */
- router.post('/offers', filterMiddleware, flush, offerController.findFiltered);
+ router.post('/offers', filterMiddleware, offerController.findFiltered);
 
 /**
  * GET /offer/{id}
@@ -79,7 +78,7 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  * @returns {string} 404 - An error message
  * 
  */
- router.post('/offer/:offerId(\\d+)', bookMiddleware, jwtMW, flush, offerController.bookOne);
+ router.post('/offer/:offerId(\\d+)', bookMiddleware, jwtMW, offerController.bookOne);
 
 /**
  * Expected json object in request.body
@@ -108,7 +107,7 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  * @returns {Offer} 201 - The newly created offer
  * @returns {string} 500 - An error message
  */
-router.post('/create', offerMiddleware, jwtMW, flush, offerController.create);
+router.post('/create', offerMiddleware, jwtMW, offerController.create);
 
 
 /**
@@ -120,7 +119,7 @@ router.post('/create', offerMiddleware, jwtMW, flush, offerController.create);
  * @returns {Offer} 200 - The updated offer
  * @returns {string} 500 - An error message
  */
-router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, flush, offerController.edit);
+router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, offerController.edit);
 
 
 /**
@@ -131,7 +130,7 @@ router.patch('/dashboard/:offerId(\\d+)/edit', jwtMW, flush, offerController.edi
  * @returns {string} 200 - The deleted offer confirmation
  * @returns {string} 500 - An error message
  */
-router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.delete);
+router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete);
 
 /**
  * PATCH /dashboard/edit
@@ -141,7 +140,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
  * @returns {Offer} 200 - The updated user
  * @returns {string} 500 - An error message
  */
- router.patch('/dashboard/edit', userMiddleware, jwtMW, flush, userController.edit);
+ router.patch('/dashboard/edit', userMiddleware, jwtMW, userController.edit);
 
  /**
   * DELETE /dashboard/delete
@@ -150,7 +149,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, flush, offerController.
   * @returns {string} 200 - The deleted user confirmation
   * @returns {string} 500 - An error message
   */
- router.delete('/dashboard/delete', jwtMW, flush, userController.delete);
+ router.delete('/dashboard/delete', jwtMW, userController.delete);
 
 /**
  * GET /dashboard
@@ -182,7 +181,7 @@ router.get('/dashboard', jwtMW, userController.userDashboard);
  * @returns {User} 201 - The newly created user
  * @returns {string} 500 - An error message
  */
-router.post('/signup', signupMiddleware, flush, userController.handleSignup);
+router.post('/signup', signupMiddleware, userController.handleSignup);
 
 
 /**

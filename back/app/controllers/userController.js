@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const jwt = require('../services/jwt');
-const {cache, verifyToken, deleteToken} = require('../services/tokenCache');
 
 module.exports = {
     findAll: async (_, response) => {
@@ -34,8 +33,7 @@ module.exports = {
             console.log(user.id);
             console.log('refresh_token');
             console.log(refresh_token);
-            cache(user.id, refresh_token);
-
+            
             response.setHeader("Access-Control-Expose-Headers", [
                 "Authorization",
                 "RefreshToken",

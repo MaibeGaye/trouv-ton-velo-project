@@ -1,5 +1,4 @@
 const jwt = require('../services/jwt');
-const {verifyToken} = require('../services/tokenCache');
 
 module.exports = (request, response, next) => {
     try {

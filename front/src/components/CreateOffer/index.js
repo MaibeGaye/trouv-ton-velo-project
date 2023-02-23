@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import './style.scss';
 import axios from 'axios';
-import imageToBase64 from 'image-to-base64/browser';
+// import imageToBase64 from 'image-to-base64/browser';
 import { useContext, useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -81,15 +81,14 @@ const CreateOffer = () => {
     else if (Object.keys(createOfferValues).length === 12) {
       axios({
         method: 'post',
-        url: 'https://api-apo-velo.herokuapp.com/create',
+        url: 'https://trouv-ton-velo-api.onrender.com/create',
         data: createOfferValues,
         headers: {
           Authorization: user.token,
         },
       })
         .then((res) => {
-          
-          // console.log(res);
+          console.log(res);
           setTimeout(() => {
             setLoader(false);
             setSubmitOffer(!submitOffer);
@@ -121,7 +120,7 @@ const CreateOffer = () => {
     setErrorDate(false);
   };
 
-  // If user are not logged redirect to homePage
+  // If user not logged redirect to homePage
 
   if (!user.logged) {
     return <Navigate to="/" />;

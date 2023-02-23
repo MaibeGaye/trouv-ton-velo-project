@@ -53,7 +53,7 @@ const App = () => {
     setLoader(true);
     axios({
       method: 'post',
-      url: 'https://trtvelo.herokuapp.com/offers',
+      url: 'https://trouv-ton-velo-api.onrender.com/offers',
       data: inputValues,
     })
       .then((res) => {

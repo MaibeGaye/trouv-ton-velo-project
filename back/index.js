@@ -57,9 +57,9 @@ jsDoc(options);
 
 app.use(cors({
   origin: "*",
-  allowedHeaders: "Origin, Authorization, RefreshToken, X-Requested-With, Content-Type, Accept",
-  exposedHeaders: "Authorization, RefreshToken",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Origin", "Authorization", "RefreshToken", "X-Requested-With", "Content-Type", "Accept"],
+  exposedHeaders: ["Authorization", "RefreshToken"],
+  methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
   preflightContinue: false,
   optionsSuccessStatus: 200
 }));

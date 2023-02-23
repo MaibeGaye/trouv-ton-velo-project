@@ -95,7 +95,7 @@ const Header = () => {
     setLoader(true);
     axios({
       method: 'post',
-      url: 'https://api-apo-velo.herokuapp.com/login',
+      url: 'https://trouv-ton-velo-api.onrender.com/login',
       data: loginModalValue,
     })
       .then((res) => {
@@ -133,7 +133,7 @@ const Header = () => {
     setLoader(true);
     axios({
       method: 'post',
-      url: 'https://api-apo-velo.herokuapp.com/signup',
+      url: 'https://trouv-ton-velo-api.onrender.com/signup',
       data: registerModalValue,
     })
       .then((res) => {
@@ -159,7 +159,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-logo">
-        <Link to="/"><i className="fas fa-biking" /></Link>
+        <Link to="/"><i className="fa-solid fa-person-biking" /></Link>
         <h3 className="header-logo-title">Trouv ton vélo</h3>
       </div>
 

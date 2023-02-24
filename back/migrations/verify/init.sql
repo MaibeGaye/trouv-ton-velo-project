@@ -2,7 +2,7 @@
 
 BEGIN;
 
-SELECT * FROM user WHERE false;
+SELECT * FROM "user" WHERE false;
 SELECT * FROM offer WHERE false;
 
 ROLLBACK;

@@ -8,7 +8,7 @@ const client = require('../app/db-pg');
 const importData = async () => {
     //on supprime les événtuels enregistrements présents
     // et on reset la numéroation des ids afin que le 1er rec soit d'id 1, le 2nd d'id 2, etc...
-    await client.query('TRUNCATE "offer", "user" RESTART IDENTITY');
+    await client.query('TRUNCATE offer, "user" RESTART IDENTITY');
     //on va stocker l'id des catégories au fur et à mesure des insertions
     //on en a besoin pour créer les offers ensuite, ce sera plus efficace que de refaire une requête pour récupérer l'id en base
     // const usersIds = {};

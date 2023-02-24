@@ -127,7 +127,7 @@ module.exports = {
 
     disconnect: async (request, response) => {
         try {
-            deleteToken(request.userId.id);
+            await deleteToken(request.userId.id);
             response.status(200).json({msg: `User ${request.userId.id} disconnected !`, logged:false});
         } catch (error) {
             console.log(error);

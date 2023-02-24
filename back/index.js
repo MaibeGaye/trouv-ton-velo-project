@@ -21,7 +21,7 @@ const options = {
   },
   security: {
     BasicAuth: {
-      type: 'http',
+      type: 'https',
       scheme: 'basic',
     },
   },

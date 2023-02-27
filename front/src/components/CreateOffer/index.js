@@ -138,7 +138,7 @@ const CreateOffer = () => {
         errorInputs && <p className="create-offer-title-error">Merci de remplir la totalité des champs <i className="fas fa-exclamation-triangle" /></p>
       }
       {
-        errorDate && <p className="create-offer-title-error">La date de fin ne doit pas être inférieur à celle du début <i className="fas fa-exclamation-triangle" /></p>
+        errorDate && <p className="create-offer-title-error">La date de fin ne doit pas être antérieure à celle du début <i className="fas fa-exclamation-triangle" /></p>
       }
       { !submitOffer && !errorSubmitOffer && (
         <div className="create-offer-form">

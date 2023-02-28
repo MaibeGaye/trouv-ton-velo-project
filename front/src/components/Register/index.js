@@ -10,7 +10,7 @@ import Input from '@mui/material/Input';
 import { InputLabel, FormControl } from '@mui/material';
 import axios from 'axios';
 
-const Register = () => {
+function Register() {
   // Create states from all inputs by default empty
 
   const [firstname, setFirstName] = useState('');
@@ -44,7 +44,7 @@ const Register = () => {
   const submitRegister = () => {
     axios({
       method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/getAllOffers',
+      url: 'https://trouv-ton-velo-api.onrender.com/getalloffers',
     })
       .then((res) => {
         console.log(res.data);
@@ -169,5 +169,5 @@ const Register = () => {
       </Box>
     </div>
   );
-};
+}
 export default Register;

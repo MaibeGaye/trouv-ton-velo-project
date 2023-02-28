@@ -11,7 +11,7 @@ import Lended from './Lended';
 import Borrow from './Borrow';
 import { UserContext } from '../Context';
 
-const Profile = () => {
+function Profile() {
   const { user, setUser } = useContext(UserContext);
   const [displayInfos, setDisplayInfos] = useState(true);
   const [loader, setLoader] = useState(false);
@@ -23,7 +23,7 @@ const Profile = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'https://api-apo-velo.herokuapp.com/dashboard',
+      url: 'https://trouv-ton-velo-api.onrender.com/dashboard',
       headers: {
         Authorization: user.token,
       },
@@ -34,7 +34,7 @@ const Profile = () => {
           ...user,
           infos: res.data.userData,
           borrow: res.data.borrowedOffers,
-          lende: res.data.lendedOffers,
+          lend: res.data.lendedOffers,
         });
       })
       .catch((err) => {
@@ -57,7 +57,7 @@ const Profile = () => {
   const updateInfos = () => {
     axios({
       method: 'patch',
-      url: 'https://api-apo-velo.herokuapp.com/dashboard/edit',
+      url: 'https://trouv-ton-velo-api.onrender.com/dashboard/edit',
       data: updateInputsValues,
       headers: {
         Authorization: user.token,
@@ -96,7 +96,7 @@ const Profile = () => {
   const confirmDelete = () => {
     axios({
       method: 'delete',
-      url: 'https://api-apo-velo.herokuapp.com/dashboard/delete',
+      url: 'https://trouv-ton-velo-api.onrender.com/dashboard/delete',
       headers: {
         Authorization: user.token,
       },
@@ -164,7 +164,7 @@ const Profile = () => {
           {
             !displayInfos && (
               <div className="delete-profile">
-                <h3 className="left-profile-delete">Êtes vous sûrs de <br /> vouloir supprimer votre compte ?</h3>
+                <h3 className="left-profile-delete">Êtes-vous sûr de <br /> vouloir supprimer votre compte ?</h3>
                 <div className="confirm-buttons">
                   <button type="button" className="confirm-buttons-delete" onClick={confirmDelete}>Oui</button>
                   <button type="button" className="confirm-buttons-cancel" onClick={cancelDelete}>Non</button>
@@ -175,7 +175,7 @@ const Profile = () => {
         </div>
         <div className="right-profile">
           <div className="right-profile-infos-left">
-            <h3 className="right-profile-infos-left-title">Les vélos que j'ai emprunté</h3>
+            <h3 className="right-profile-infos-left-title">Vélos empruntés</h3>
 
             {
               !user.borrow ? <p className="borrow">Je n'ai pas encore emprunté de vélos</p> : <Borrow />
@@ -186,7 +186,7 @@ const Profile = () => {
             <h3 className="right-profile-infos-right-title">Mes vélos</h3>
 
             {
-              !user.lende ? <p className="lended">Vous n'avez pas encore proposé de vélos</p> : <Lended />
+              !user.lend ? <p className="lended">Vous n'avez pas encore proposé de vélos</p> : <Lended />
             }
 
           </div>
@@ -195,6 +195,6 @@ const Profile = () => {
       )}
     </section>
   );
-};
+}
 
 export default Profile;

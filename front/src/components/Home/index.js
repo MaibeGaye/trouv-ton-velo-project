@@ -1,9 +1,11 @@
 import './style.scss';
 
-const Home = () => (
+function Home() {
+  return (
 
-  <div className="container home" />
+    <div className="container home" />
 
-);
+  );
+}
 
 export default Home;

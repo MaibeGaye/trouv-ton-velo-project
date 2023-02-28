@@ -14,7 +14,7 @@ import NotFound from '../NotFound';
 import { UserContext } from '../Context';
 import '../../styles/index.scss';
 
-const App = () => {
+function App() {
   const [inputValues, setInputValues] = useState({});
   const [resultOffers, setResultOffers] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -125,6 +125,6 @@ const App = () => {
       <Footer />
     </div>
   );
-};
+}
 
 export default App;

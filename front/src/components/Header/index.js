@@ -8,7 +8,7 @@ import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import { UserContext } from '../Context';
 
-const Header = () => {
+function Header() {
   // Import context
 
   const { user, logout, setUser } = useContext(UserContext);
@@ -213,6 +213,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

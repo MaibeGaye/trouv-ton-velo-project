@@ -9,7 +9,7 @@ import { LinearProgress } from '@mui/material';
 
 import { UserContext } from '../Context';
 
-const CreateOffer = () => {
+function CreateOffer() {
   const { user } = useContext(UserContext);
 
   const [createOfferValues, setCreateOfferValues] = useState({
@@ -354,5 +354,5 @@ const CreateOffer = () => {
       )}
     </section>
   );
-};
+}
 export default CreateOffer;

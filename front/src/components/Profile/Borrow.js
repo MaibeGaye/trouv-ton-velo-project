@@ -3,7 +3,7 @@ import DayJS from 'react-dayjs';
 import { useContext } from 'react';
 import { UserContext } from '../Context';
 
-const Borrow = () => {
+function Borrow() {
   const { user } = useContext(UserContext);
   return (
     <div className="right-profile-borrow-list">
@@ -19,8 +19,8 @@ const Borrow = () => {
                     {
                       currentLenderInfos.map(({ username, email }) => (
                         <div key={id + 1}>
-                        <p className="right-profile-borrow-user">Proposé par : {username}</p>
-                        <p className="right-profile-borrow-user">Contact : {email}</p>
+                          <p className="right-profile-borrow-user">Proposé par : {username}</p>
+                          <p className="right-profile-borrow-user">Contact : {email}</p>
                         </div>
 
                       ))
@@ -31,6 +31,6 @@ const Borrow = () => {
 
     </div>
   );
-};
+}
 
 export default Borrow;

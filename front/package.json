@@ -57,7 +57,7 @@
     "dayjs": "^1.10.7",
     "image-to-base64": "^2.2.0",
     "prop-types": "*",
-    "react": "^17.0.0",
+    "react": "^18.2.0",
     "react-dayjs": "^0.3.2",
     "react-dom": "*",
     "react-router-dom": "^6.2.1"

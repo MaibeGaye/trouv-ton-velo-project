@@ -23,16 +23,16 @@ module.exports = {
     handleLogin: async (request, response) => {
         try {
             const user = await new User(request.body).getByEmail();
-            deleteToken(user.id);
+            // await deleteToken(user.id);
             const access_token = await jwt.makeToken(user);
             const refresh_token = await jwt.generateRefreshToken(user);
-            console.log(`caching user.id "${user.id}" & refresh token "${refresh_token}"`);
+            // console.log(`caching user.id "${user.id}" & refresh token "${refresh_token}"`);
 
             // on enregistre le token dans redis
-            console.log('user id :');
-            console.log(user.id);
-            console.log('refresh_token');
-            console.log(refresh_token);
+            // console.log('user id :');
+            // console.log(user.id);
+            // console.log('refresh_token');
+            // console.log(refresh_token);
             
             response.setHeader("Access-Control-Expose-Headers", [
                 "Authorization",
@@ -127,7 +127,7 @@ module.exports = {
 
     disconnect: async (request, response) => {
         try {
-            await deleteToken(request.userId.id);
+            // await deleteToken(request.userId.id);
             response.status(200).json({msg: `User ${request.userId.id} disconnected !`, logged:false});
         } catch (error) {
             console.log(error);

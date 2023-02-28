@@ -16,7 +16,7 @@ const options = {
     title: 'Trouv ton velo',
     description: 'A bike renting app REST API',
     license: {
-      name: 'MIT',
+      name: 'ISC',
     },
   },
   security: {

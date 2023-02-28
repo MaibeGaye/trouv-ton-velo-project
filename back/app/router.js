@@ -109,6 +109,14 @@ router.get('/offer/:id(\\d+)', offerController.findOne);
  */
 router.post('/create', offerMiddleware, jwtMW, offerController.create);
 
+/**
+ * GET /dashboard
+ * @summary Extract the user infos from database
+ * @route GET /dashboard
+ * @tags User
+ * @returns {array<User>} 200 - An array of user info
+ */
+router.get('/dashboard', jwtMW, userController.userDashboard);
 
 /**
  * PATCH /dashboard/{offerId}/edit
@@ -151,14 +159,7 @@ router.delete('/dashboard/:offerId(\\d+)/delete', jwtMW, offerController.delete)
   */
  router.delete('/dashboard/delete', jwtMW, userController.delete);
 
-/**
- * GET /dashboard
- * @summary Extract the user infos from database
- * @route GET /dashboard
- * @tags User
- * @returns {array<User>} 200 - An array of user info
- */
-router.get('/dashboard', jwtMW, userController.userDashboard);
+
 
 /**
  * Expected json object in request.body

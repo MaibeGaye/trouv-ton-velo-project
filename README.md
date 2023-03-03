@@ -1,1 +1,1 @@
-Trouv' ton Vélo is a marketplace allowing visitors to borrow and lend bikes to others. You can visit the site following this link : [include link here]
+Trouv' ton Vélo is a marketplace allowing visitors to borrow and lend bikes to others. You can visit the site [here](https://trouvtonvelo.surge.sh/) and the API with documentation [here](https://trouv-ton-velo-api.onrender.com/api-docs)
